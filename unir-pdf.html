@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unir PDF Gratis — ToolSpark</title>
+<meta name="description" content="Une varios archivos PDF en uno solo gratis, sin registro, de forma segura.">
+<link rel="stylesheet" href="style.css">
+<style>
+.pdf-item{display:flex;align-items:center;gap:12px;padding:13px 16px;background:#fff;border:1.5px solid var(--border);border-radius:var(--rs);margin-bottom:8px;cursor:grab;transition:all .18s;}
+.pdf-item:hover{border-color:rgba(0,77,152,.3);}
+.pdf-item.drag-over{border-color:var(--blue);background:rgba(0,77,152,.04);}
+.pdf-handle{color:var(--muted);font-size:20px;cursor:grab;flex-shrink:0;}
+.pdf-num{font-size:12px;font-weight:800;color:var(--blue);min-width:22px;flex-shrink:0;}
+.pdf-icon{font-size:22px;flex-shrink:0;}
+.pdf-name{font-size:13px;font-weight:600;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.pdf-size{font-size:12px;color:var(--muted);flex-shrink:0;}
+.pdf-rm{background:none;border:none;cursor:pointer;color:var(--muted);font-size:15px;padding:4px 8px;border-radius:6px;}
+.pdf-rm:hover{background:rgba(165,0,68,.1);color:var(--red);}
+.info-bar{background:rgba(0,77,152,.06);border:1px solid rgba(0,77,152,.14);border-radius:var(--rs);padding:12px 16px;display:flex;gap:20px;flex-wrap:wrap;font-size:14px;margin-bottom:16px;}
+.info-bar strong{color:var(--blue);}
+.hint{font-size:12.5px;color:var(--muted);text-align:center;padding:8px;background:var(--bg);border-radius:var(--rs);margin-bottom:12px;}
+</style>
+</head>
+<body>
+<div id="adminBox"><h6>⚙ Panel Admin</h6>
+  <div class="adm-row"><span>Visitas hoy</span><span class="adm-val" id="adm-today">0</span></div>
+  <div class="adm-row"><span>Total</span><span class="adm-val" id="adm-total">0</span></div>
+  <div class="adm-row"><span>Última visita</span><span class="adm-val" id="adm-last">—</span></div>
+  <div class="adm-row"><span>Mensajes</span><span class="adm-val" id="adm-msgs">0</span></div>
+</div>
+<div class="topbar">⚡ Herramientas <span>100% gratuitas</span> — Sin registro</div>
+<header><nav>
+  <a href="index.html" class="logo"><div class="logo-mark">TS</div><div class="logo-name">Tool<em>Spark</em></div></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Herramientas</a></li>
+    <li><a href="comprimir-imagenes.html">Imágenes</a></li>
+    <li><a href="unir-pdf.html" class="active">Unir PDF</a></li>
+    <li><a href="dividir-pdf.html">Dividir PDF</a></li>
+    <li><a href="contar-palabras.html">Texto</a></li>
+    <li><a href="index.html#contacto" class="nav-cta">Contacto</a></li>
+  </ul>
+</nav></header>
+<div class="stripe"></div>
+
+<section class="tool-hero">
+  <div class="breadcrumb"><a href="index.html">Inicio</a> › Unir PDF</div>
+  <h1>📄 Unir PDF</h1>
+  <p>Combina varios archivos PDF en uno solo — arrastra las filas para reordenar</p>
+</section>
+
+<div class="tool-wrap">
+  <a href="index.html" class="back-link">← Volver a todas las herramientas</a>
+
+  <div class="card">
+    <div class="card-title">📁 Selecciona los archivos PDF</div>
+    <div class="upload-zone" id="dropZone">
+      <input type="file" id="fileInput" accept=".pdf,application/pdf" multiple>
+      <span class="upload-icon">📄</span>
+      <h3>Arrastra tus PDFs aquí</h3>
+      <p>Selecciona múltiples archivos — se unirán en el orden que elijas</p>
+    </div>
+  </div>
+
+  <div id="listWrap" style="display:none;">
+    <div class="card">
+      <div class="card-title">📋 Archivos a unir — <span id="fcnt" style="color:var(--muted);font-weight:400;"></span></div>
+      <div class="hint">⇅ Arrastra las filas para cambiar el orden de unión</div>
+      <div class="info-bar" id="infoBar"></div>
+      <div id="pdfList"></div>
+      <div style="margin-top:10px;">
+        <label class="btn btn-ghost" style="cursor:pointer;">
+          <input type="file" accept=".pdf" multiple style="display:none;" id="addMore" onchange="addMore(this.files)">
+          ➕ Añadir más PDFs
+        </label>
+      </div>
+    </div>
+    <div class="card" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+      <button class="btn btn-blue" id="mergeBtn" onclick="mergePDFs()">📄 Unir PDFs ahora</button>
+      <button class="btn btn-ghost" onclick="clearAll()">🗑 Limpiar todo</button>
+    </div>
+    <div class="progress-wrap" id="pw" style="display:none;">
+      <div class="slider-label"><span id="pwLbl">Procesando...</span></div>
+      <div class="progress-bar"><div class="progress-fill" id="pf"></div></div>
+    </div>
+  </div>
+
+  <div class="result-box" id="resultBox">
+    <div class="result-success">
+      <div class="result-icon">🎉</div>
+      <div class="result-info"><h4>¡PDFs unidos correctamente!</h4><p id="rInfo">Descarga iniciada.</p></div>
+    </div>
+  </div>
+
+  <div class="ad-slot" style="margin-top:24px;"><strong>Espacio publicitario</strong>Google AdSense 728×90</div>
+</div>
+
+<section class="related-section">
+  <div style="max-width:1200px;margin:0 auto;">
+    <h3 style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px;">Otras herramientas</h3>
+    <p style="font-size:13px;color:var(--muted);">Descubre más herramientas gratuitas de ToolSpark</p>
+  </div>
+  <div class="related-grid" id="relatedGrid"></div>
+</section>
+
+<footer><div class="footer-in">
+  <div class="footer-top">
+    <div class="footer-brand"><div class="fn">Tool<em>Spark</em></div><p>Herramientas gratuitas para PDF e imágenes.</p></div>
+    <div class="footer-col"><h5>Herramientas</h5><ul>
+      <li><a href="comprimir-imagenes.html">Comprimir imágenes</a></li>
+      <li><a href="convertir-imagen.html">Convertir imagen</a></li>
+      <li><a href="recortar-imagen.html">Recortar imagen</a></li>
+      <li><a href="unir-pdf.html">Unir PDF</a></li>
+      <li><a href="dividir-pdf.html">Dividir PDF</a></li>
+      <li><a href="contar-palabras.html">Contador de palabras</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Sitio</h5><ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="index.html#contacto">Contacto</a></li>
+      <li><a href="#">Privacidad</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 ToolSpark</span><a href="index.html">← Volver al inicio</a></div>
+</div></footer>
+
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="shared.js"></script>
+<script>
+initPage('unir-pdf');
+let files=[]; let dragSrc=null;
+
+setupDrop('dropZone','fileInput',addFiles);
+function addFiles(fl){
+  files=[...files,...[...fl].filter(f=>f.name.endsWith('.pdf')||f.type==='application/pdf')];
+  if(files.length)document.getElementById('listWrap').style.display='block';
+  renderList();
+}
+function addMore(fl){addFiles(fl);}
+
+function renderList(){
+  const total=files.reduce((a,f)=>a+f.size,0);
+  document.getElementById('fcnt').textContent=files.length+' archivo(s)';
+  document.getElementById('infoBar').innerHTML=`<span>Archivos: <strong>${files.length}</strong></span><span>Tamaño total: <strong>${fmtSize(total)}</strong></span>`;
+  document.getElementById('pdfList').innerHTML=files.map((f,i)=>`
+    <div class="pdf-item" draggable="true" data-i="${i}" ondragstart="ds(event,${i})" ondragover="dov(event,${i})" ondrop="dd(event,${i})" ondragend="de()">
+      <span class="pdf-handle">⠿</span>
+      <span class="pdf-icon">📄</span>
+      <span class="pdf-num">${i+1}.</span>
+      <span class="pdf-name">${f.name}</span>
+      <span class="pdf-size">${fmtSize(f.size)}</span>
+      <button class="pdf-rm" onclick="removeFile(${i})">✕</button>
+    </div>`).join('');
+}
+
+function removeFile(i){files.splice(i,1);if(!files.length){clearAll();return;}renderList();}
+function clearAll(){files=[];document.getElementById('listWrap').style.display='none';document.getElementById('resultBox').classList.remove('show');document.getElementById('pw').style.display='none';document.getElementById('fileInput').value='';}
+
+function ds(e,i){dragSrc=i;e.dataTransfer.effectAllowed='move';}
+function dov(e,i){e.preventDefault();e.dataTransfer.dropEffect='move';}
+function dd(e,i){e.preventDefault();if(dragSrc===null||dragSrc===i)return;const m=files.splice(dragSrc,1)[0];files.splice(i,0,m);dragSrc=null;renderList();}
+function de(){dragSrc=null;}
+
+async function mergePDFs(){
+  if(files.length<2){alert('Selecciona al menos 2 archivos PDF.');return;}
+  if(typeof PDFLib==='undefined'){alert('Error: librería PDF no cargada. Comprueba tu conexión.');return;}
+  const btn=document.getElementById('mergeBtn');
+  btn.disabled=true;btn.textContent='⏳ Procesando...';
+  const pw=document.getElementById('pw');pw.style.display='block';
+  const pf=document.getElementById('pf');pf.style.width='0%';
+  try{
+    const merged=await PDFLib.PDFDocument.create();
+    for(let i=0;i<files.length;i++){
+      document.getElementById('pwLbl').textContent=`Procesando archivo ${i+1} de ${files.length}...`;
+      pf.style.width=((i+1)/files.length*90)+'%';
+      const bytes=await files[i].arrayBuffer();
+      const doc=await PDFLib.PDFDocument.load(bytes,{ignoreEncryption:true});
+      const pages=await merged.copyPages(doc,doc.getPageIndices());
+      pages.forEach(p=>merged.addPage(p));
+      await new Promise(r=>setTimeout(r,20));
+    }
+    pf.style.width='100%';
+    const out=await merged.save();
+    const blob=new Blob([out],{type:'application/pdf'});
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='toolspark_unido.pdf';a.click();
+    document.getElementById('resultBox').classList.add('show');
+    document.getElementById('rInfo').textContent=`${files.length} archivos · ${merged.getPageCount()} páginas · ${fmtSize(blob.size)}`;
+  }catch(err){
+    console.error(err);
+    alert('Error al procesar los PDFs. Algunos archivos pueden estar protegidos.');
+  }
+  btn.disabled=false;btn.textContent='📄 Unir PDFs ahora';
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Numerar páginas PDF — ToolSpark</title>
+<meta name="description" content="Añade números de página a cualquier PDF al instante, con posición personalizable.">
+<link rel="stylesheet" href="style.css">
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+</head>
+<body>
+<div id="adminBox"><h6>⚙ Panel Admin</h6>
+  <div class="adm-row"><span>Visitas hoy</span><span class="adm-val" id="adm-today">0</span></div>
+  <div class="adm-row"><span>Total</span><span class="adm-val" id="adm-total">0</span></div>
+  <div class="adm-row"><span>Última visita</span><span class="adm-val" id="adm-last">—</span></div>
+  <div class="adm-row"><span>Mensajes</span><span class="adm-val" id="adm-msgs">0</span></div>
+</div>
+<div class="topbar">⚡ Herramientas <span>100% gratuitas</span> — Sin registro</div>
+<header>
+  <nav>
+    <a href="index.html" class="logo"><div class="logo-mark">TS</div><div class="logo-name">Tool<em>Spark</em></div></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Herramientas</a></li>
+      <li><a href="index.html?cat=imagen">Imágenes</a></li>
+      <li><a href="index.html?cat=pdf">PDF</a></li>
+      <li><a href="index.html?cat=texto">Texto</a></li>
+      <li><a href="index.html?cat=util">Utilidades</a></li>
+      <li><a href="index.html#contacto" class="nav-cta">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+<div class="stripe"></div>
+<section class="tool-hero">
+  <div class="breadcrumb"><a href="index.html">Inicio</a> › Numerar páginas PDF</div>
+  <h1>🔢 Numerar páginas PDF</h1>
+  <p>Añade números de página a cualquier PDF al instante, con posición personalizable.</p>
+</section>
+<div class="tool-wrap">
+  <a href="index.html" class="back-link">← Volver a todas las herramientas</a>
+  
+<div class="card">
+  <div class="card-title">📁 Selecciona un PDF</div>
+  <div class="upload-zone" id="dropZone"><input type="file" id="fileInput" accept=".pdf,application/pdf">
+    <span class="upload-icon">🔢</span><h3>Arrastra tu PDF aquí</h3><p>Los números se añaden directamente sobre las páginas</p>
+  </div>
+</div>
+<div class="card" id="optCard" style="display:none">
+  <div class="card-title">⚙️ Configuración de numeración</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+    <div><label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">Posición</label>
+      <select id="numPos" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:Inter,sans-serif;font-size:14px;outline:none;background:#fff;">
+        <option value="bc">Abajo centro</option><option value="br">Abajo derecha</option>
+        <option value="bl">Abajo izquierda</option><option value="tc">Arriba centro</option>
+      </select>
+    </div>
+    <div><label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">Empezar desde</label>
+      <input type="number" id="numStart" value="1" min="0" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:Inter,sans-serif;font-size:14px;outline:none;">
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+    <div><label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">Tamaño de fuente</label>
+      <input type="number" id="numSize" value="12" min="8" max="36" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:Inter,sans-serif;font-size:14px;outline:none;">
+    </div>
+    <div><label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">Formato</label>
+      <select id="numFmt" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:Inter,sans-serif;font-size:14px;outline:none;background:#fff;">
+        <option value="n">Solo número (1)</option>
+        <option value="pn">Página N</option>
+        <option value="nt">N / Total (1/10)</option>
+      </select>
+    </div>
+  </div>
+  <button class="btn btn-blue btn-lg" onclick="numerarPDF()">🔢 Numerar y descargar</button>
+</div>
+<div class="progress-wrap" id="pw" style="display:none"><div class="progress-bar"><div class="progress-fill" id="pf"></div></div></div>
+<div class="result-box" id="resultBox">
+  <div class="result-success"><div class="result-icon">✅</div>
+    <div class="result-info"><h4>¡Páginas numeradas!</h4><p id="rMeta">Descarga iniciada.</p></div>
+  </div>
+</div>
+  <div class="ad-slot" style="margin-top:24px;"><strong>Espacio publicitario</strong>Google AdSense 728×90</div>
+</div>
+<section class="related-section">
+  <div style="max-width:1200px;margin:0 auto;">
+    <h3 style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px;">Otras herramientas</h3>
+    <p style="font-size:13px;color:var(--muted);">Descubre más herramientas gratuitas de ToolSpark</p>
+  </div>
+  <div class="related-grid" id="relatedGrid"></div>
+</section>
+<footer>
+  <div class="footer-in">
+    <div class="footer-top">
+      <div class="footer-brand"><div class="fn">Tool<em>Spark</em></div><p>30 herramientas gratuitas para PDF, imágenes y más.</p></div>
+      <div class="footer-col"><h5>Herramientas populares</h5><ul>
+        <li><a href="comprimir-imagenes.html">Comprimir imágenes</a></li>
+        <li><a href="unir-pdf.html">Unir PDF</a></li>
+        <li><a href="generador-qr.html">Generador de QR</a></li>
+        <li><a href="contar-palabras.html">Contador de palabras</a></li>
+        <li><a href="generador-contrasena.html">Generador contraseña</a></li>
+        <li><a href="color-picker.html">Selector de color</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Sitio</h5><ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
+        <li><a href="#">Privacidad</a></li>
+        <li><a href="#">Términos</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 ToolSpark — Todos los derechos reservados</span>
+      <a href="index.html">← Volver al inicio</a>
+    </div>
+  </div>
+</footer>
+<script src="shared.js"></script>
+<script>
+initPage('numerar-pdf');
+
+let pdfFile=null;
+setupDrop('dropZone','fileInput',fl=>{pdfFile=fl[0];if(pdfFile)document.getElementById('optCard').style.display='block';});
+async function numerarPDF(){
+  if(!pdfFile)return;
+  if(typeof PDFLib==='undefined'){alert('Cargando librería...');return;}
+  document.getElementById('pw').style.display='block';document.getElementById('pf').style.width='20%';
+  try{
+    const bytes=await pdfFile.arrayBuffer();
+    const doc=await PDFLib.PDFDocument.load(bytes,{ignoreEncryption:true});
+    const font=await doc.embedFont(PDFLib.StandardFonts.Helvetica);
+    const pages=doc.getPages();const total=pages.length;
+    const pos=document.getElementById('numPos').value;
+    const start=parseInt(document.getElementById('numStart').value)||1;
+    const size=parseInt(document.getElementById('numSize').value)||12;
+    const fmt=document.getElementById('numFmt').value;
+    document.getElementById('pf').style.width='50%';
+    pages.forEach((page,i)=>{
+      const{width,height}=page.getSize();
+      const num=start+i;
+      let txt=fmt==='n'?String(num):fmt==='pn'?`Página ${num}`:`${num} / ${total}`;
+      const tw=font.widthOfTextAtSize(txt,size);
+      const pad=20;
+      let x,y;
+      if(pos==='bc'){x=(width-tw)/2;y=pad;}
+      else if(pos==='br'){x=width-tw-pad;y=pad;}
+      else if(pos==='bl'){x=pad;y=pad;}
+      else{x=(width-tw)/2;y=height-pad-size;}
+      page.drawText(txt,{x,y,size,font,color:PDFLib.rgb(0.2,0.2,0.2)});
+    });
+    document.getElementById('pf').style.width='90%';
+    const out=await doc.save();document.getElementById('pf').style.width='100%';
+    const blob=new Blob([out],{type:'application/pdf'});
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='numerado.pdf';a.click();
+    document.getElementById('resultBox').classList.add('show');
+    document.getElementById('rMeta').textContent=`${total} páginas numeradas — descarga iniciada.`;
+  }catch(e){console.error(e);alert('Error al procesar el PDF.');}
+  document.getElementById('pw').style.display='none';
+}
+
+</script>
+</body>
+</html>

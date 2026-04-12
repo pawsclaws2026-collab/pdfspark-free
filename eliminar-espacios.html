@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eliminar espacios extra — ToolSpark</title>
+<meta name="description" content="Limpia tu texto eliminando espacios dobles, saltos de línea extra y espacios al inicio/final.">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<div id="adminBox"><h6>⚙ Panel Admin</h6>
+  <div class="adm-row"><span>Visitas hoy</span><span class="adm-val" id="adm-today">0</span></div>
+  <div class="adm-row"><span>Total</span><span class="adm-val" id="adm-total">0</span></div>
+  <div class="adm-row"><span>Última visita</span><span class="adm-val" id="adm-last">—</span></div>
+  <div class="adm-row"><span>Mensajes</span><span class="adm-val" id="adm-msgs">0</span></div>
+</div>
+<div class="topbar">⚡ Herramientas <span>100% gratuitas</span> — Sin registro</div>
+<header>
+  <nav>
+    <a href="index.html" class="logo"><div class="logo-mark">TS</div><div class="logo-name">Tool<em>Spark</em></div></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Herramientas</a></li>
+      <li><a href="index.html?cat=imagen">Imágenes</a></li>
+      <li><a href="index.html?cat=pdf">PDF</a></li>
+      <li><a href="index.html?cat=texto">Texto</a></li>
+      <li><a href="index.html?cat=util">Utilidades</a></li>
+      <li><a href="index.html#contacto" class="nav-cta">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+<div class="stripe"></div>
+<section class="tool-hero">
+  <div class="breadcrumb"><a href="index.html">Inicio</a> › Eliminar espacios extra</div>
+  <h1>⎵ Eliminar espacios extra</h1>
+  <p>Limpia tu texto eliminando espacios dobles, saltos de línea extra y espacios al inicio/final.</p>
+</section>
+<div class="tool-wrap">
+  <a href="index.html" class="back-link">← Volver a todas las herramientas</a>
+  
+<div class="card">
+  <div class="card-title">📝 Texto a limpiar</div>
+  <textarea id="taIn" class="tool-textarea" placeholder="Pega aquí el texto con espacios extra..." style="min-height:180px;width:100%;padding:14px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:Inter,sans-serif;font-size:14px;resize:vertical;outline:none;"></textarea>
+</div>
+<div class="card">
+  <div class="card-title">⚙️ Opciones de limpieza</div>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px;">
+    <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;"><input type="checkbox" id="opt1" checked> Eliminar espacios dobles</label>
+    <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;"><input type="checkbox" id="opt2" checked> Eliminar espacios al inicio y final de líneas</label>
+    <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;"><input type="checkbox" id="opt3"> Eliminar líneas en blanco extra</label>
+    <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;"><input type="checkbox" id="opt4"> Eliminar todas las líneas en blanco</label>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;">
+    <button class="btn btn-blue" onclick="cleanText()">⎵ Limpiar texto</button>
+    <button class="btn btn-ghost" onclick="document.getElementById('taIn').value='';document.getElementById('taOut').value='';">🗑 Limpiar todo</button>
+  </div>
+</div>
+<div class="card" id="outCard" style="display:none">
+  <div class="card-title">✅ Resultado</div>
+  <textarea id="taOut" style="min-height:150px;width:100%;padding:14px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:Inter,sans-serif;font-size:14px;resize:vertical;outline:none;background:var(--bg);" readonly></textarea>
+  <div style="margin-top:10px;"><button class="btn btn-gold" onclick="copyOut()">📋 Copiar resultado</button></div>
+</div>
+  <div class="ad-slot" style="margin-top:24px;"><strong>Espacio publicitario</strong>Google AdSense 728×90</div>
+</div>
+<section class="related-section">
+  <div style="max-width:1200px;margin:0 auto;">
+    <h3 style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px;">Otras herramientas</h3>
+    <p style="font-size:13px;color:var(--muted);">Descubre más herramientas gratuitas de ToolSpark</p>
+  </div>
+  <div class="related-grid" id="relatedGrid"></div>
+</section>
+<footer>
+  <div class="footer-in">
+    <div class="footer-top">
+      <div class="footer-brand"><div class="fn">Tool<em>Spark</em></div><p>30 herramientas gratuitas para PDF, imágenes y más.</p></div>
+      <div class="footer-col"><h5>Herramientas populares</h5><ul>
+        <li><a href="comprimir-imagenes.html">Comprimir imágenes</a></li>
+        <li><a href="unir-pdf.html">Unir PDF</a></li>
+        <li><a href="generador-qr.html">Generador de QR</a></li>
+        <li><a href="contar-palabras.html">Contador de palabras</a></li>
+        <li><a href="generador-contrasena.html">Generador contraseña</a></li>
+        <li><a href="color-picker.html">Selector de color</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Sitio</h5><ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
+        <li><a href="#">Privacidad</a></li>
+        <li><a href="#">Términos</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 ToolSpark — Todos los derechos reservados</span>
+      <a href="index.html">← Volver al inicio</a>
+    </div>
+  </div>
+</footer>
+<script src="shared.js"></script>
+<script>
+initPage('eliminar-espacios');
+
+function cleanText(){
+  let v=document.getElementById('taIn').value;
+  if(document.getElementById('opt1').checked)v=v.replace(/ +/g,' ');
+  if(document.getElementById('opt2').checked)v=v.split('\n').map(l=>l.trim()).join('\n');
+  if(document.getElementById('opt4').checked)v=v.split('\n').filter(l=>l.trim()).join('\n');
+  else if(document.getElementById('opt3').checked)v=v.replace(/\n{3,}/g,'\n\n');
+  document.getElementById('taOut').value=v;
+  document.getElementById('outCard').style.display='block';
+}
+async function copyOut(){try{await navigator.clipboard.writeText(document.getElementById('taOut').value);alert('¡Copiado!');}catch{}}
+
+</script>
+</body>
+</html>

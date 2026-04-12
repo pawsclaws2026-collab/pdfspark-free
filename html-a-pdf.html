@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML a PDF Gratis — ToolSpark</title>
+<meta name="description" content="Convierte código HTML a PDF gratis online sin registro.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="adminBox"><h6>⚙ Panel Admin</h6>
+  <div class="adm-row"><span>Visitas hoy</span><span class="adm-val" id="adm-today">0</span></div>
+  <div class="adm-row"><span>Total</span><span class="adm-val" id="adm-total">0</span></div>
+  <div class="adm-row"><span>Última visita</span><span class="adm-val" id="adm-last">—</span></div>
+  <div class="adm-row"><span>Mensajes</span><span class="adm-val" id="adm-msgs">0</span></div>
+</div>
+<div class="topbar">⚡ Herramientas <span>100% gratuitas</span> — Sin registro</div>
+<header><nav>
+  <a href="index.html" class="logo"><div class="logo-mark">TS</div><div class="logo-name">Tool<em>Spark</em></div></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Todas</a></li>
+    <li><a href="index.html#imagenes">Imágenes</a></li>
+    <li><a href="index.html#pdf">PDF</a></li>
+    <li><a href="index.html#conversion" class="active">Conversión</a></li>
+    <li><a href="index.html#texto">Texto</a></li>
+    <li><a href="index.html#contacto" class="nav-cta">Contacto</a></li>
+  </ul>
+</nav></header>
+<div class="stripe"></div>
+<section class="tool-hero">
+  <div class="breadcrumb"><a href="index.html">Inicio</a> › <a href="index.html#conversion">Conversión</a> › HTML a PDF</div>
+  <h1>🌐 HTML a PDF</h1>
+  <p>Convierte código HTML en un archivo PDF con vista previa en tiempo real</p>
+</section>
+<div class="tool-wrap" style="max-width:960px;">
+  <a href="index.html" class="back-link">← Volver a todas las herramientas</a>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
+    <div class="card" style="margin-bottom:0;">
+      <div class="card-title">📝 Código HTML</div>
+      <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
+        <button class="btn btn-ghost" style="font-size:12px;padding:6px 12px;" onclick="insertSample()">📄 Ejemplo</button>
+        <button class="btn btn-ghost" style="font-size:12px;padding:6px 12px;" onclick="clearHTML()">🗑 Limpiar</button>
+      </div>
+      <textarea id="htmlInput" style="width:100%;height:380px;padding:12px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:monospace;font-size:12.5px;resize:none;outline:none;line-height:1.6;" placeholder="&lt;h1&gt;Mi documento&lt;/h1&gt;&#10;&lt;p&gt;Contenido aquí...&lt;/p&gt;" oninput="updatePreview()"></textarea>
+    </div>
+    <div class="card" style="margin-bottom:0;">
+      <div class="card-title">👁️ Vista previa</div>
+      <iframe id="preview" style="width:100%;height:380px;border:1px solid var(--border);border-radius:var(--rs);background:#fff;" sandbox="allow-same-origin"></iframe>
+    </div>
+  </div>
+  <div class="card" style="margin-top:18px;">
+    <div class="card-title">⚙️ Configuración del PDF</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px;">
+      <div>
+        <label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">Tamaño de página</label>
+        <select id="pdfSize" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:Inter,sans-serif;font-size:13px;outline:none;background:#fff;">
+          <option value="a4">A4</option><option value="letter">Letter</option><option value="a3">A3</option>
+        </select>
+      </div>
+      <div>
+        <label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">Nombre del archivo</label>
+        <input type="text" id="fileName" value="documento" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:Inter,sans-serif;font-size:13px;outline:none;">
+      </div>
+      <div style="display:flex;align-items:flex-end;">
+        <button class="btn btn-blue btn-lg" onclick="generatePDF()">🌐 Exportar como PDF</button>
+      </div>
+    </div>
+  </div>
+  <div class="result-box" id="resultBox">
+    <div class="result-success"><div class="result-icon">✅</div>
+      <div class="result-info"><h4>¡PDF generado!</h4><p>Descarga iniciada.</p></div>
+    </div>
+  </div>
+  <div class="ad-slot" style="margin-top:24px;"><strong>Espacio publicitario</strong>Google AdSense 728×90</div>
+</div>
+<section class="related-section">
+  <div style="max-width:1200px;margin:0 auto;">
+    <h3 style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px;">Herramientas relacionadas</h3>
+    <p style="font-size:13px;color:var(--muted);">Más herramientas de conversión</p>
+  </div>
+  <div class="related-grid" id="relatedGrid"></div>
+</section>
+<footer><div class="footer-in">
+  <div class="footer-top">
+    <div class="footer-brand"><div class="fn">Tool<em>Spark</em></div><p>37 herramientas gratuitas.</p></div>
+    <div class="footer-col"><h5>Conversión</h5><ul>
+      <li><a href="word-a-pdf.html">Word a PDF</a></li><li><a href="pdf-a-word.html">PDF a Word</a></li>
+      <li><a href="excel-a-pdf.html">Excel a PDF</a></li><li><a href="html-a-pdf.html">HTML a PDF</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Sitio</h5><ul>
+      <li><a href="index.html">Inicio</a></li><li><a href="index.html#contacto">Contacto</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 ToolSpark</span><a href="index.html">← Inicio</a></div>
+</div></footer>
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="shared.js"></script>
+<script>
+initPage('html-a-pdf');
+function updatePreview(){
+  const html=document.getElementById('htmlInput').value;
+  const frame=document.getElementById('preview');
+  const doc=frame.contentDocument||frame.contentWindow.document;
+  doc.open();doc.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{font-family:Georgia,serif;padding:20px;line-height:1.7;color:#1a1a1a;font-size:14px;}h1,h2,h3{color:#004D98;}a{color:#004D98;}table{border-collapse:collapse;width:100%;}td,th{border:1px solid #ccc;padding:6px 10px;}th{background:#f0f6ff;}</style></head><body>${html}</body></html>`);
+  doc.close();
+}
+function insertSample(){
+  document.getElementById('htmlInput').value=`<!DOCTYPE html>
+<html>
+<head><title>Mi Documento</title></head>
+<body>
+<h1>Título Principal del Documento</h1>
+<p>Este es un ejemplo de documento HTML convertido a PDF con <strong>ToolSpark</strong>.</p>
+<h2>Sección 1</h2>
+<p>Puedes incluir <em>texto con formato</em>, listas, tablas y más.</p>
+<ul>
+  <li>Elemento de lista uno</li>
+  <li>Elemento de lista dos</li>
+  <li>Elemento de lista tres</li>
+</ul>
+<h2>Tabla de ejemplo</h2>
+<table>
+  <tr><th>Nombre</th><th>Valor</th><th>Estado</th></tr>
+  <tr><td>Elemento A</td><td>100</td><td>Activo</td></tr>
+  <tr><td>Elemento B</td><td>250</td><td>Activo</td></tr>
+</table>
+<p>Pie de página del documento generado con ToolSpark.</p>
+</body>
+</html>`;
+  updatePreview();
+}
+function clearHTML(){document.getElementById('htmlInput').value='';updatePreview();}
+
+async function generatePDF(){
+  const html=document.getElementById('htmlInput').value.trim();
+  if(!html){alert('Introduce código HTML primero.');return;}
+  if(typeof PDFLib==='undefined'){alert('Cargando librería...');return;}
+
+  const sizes={a4:[595.28,841.89],letter:[612,792],a3:[841.89,1190.55]};
+  const [pageW,pageH]=sizes[document.getElementById('pdfSize').value]||sizes.a4;
+  const margin=50,lineH=16,maxW=pageW-margin*2;
+
+  const pdfDoc=await PDFLib.PDFDocument.create();
+  const font=await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
+  const fontB=await pdfDoc.embedFont(PDFLib.StandardFonts.HelveticaBold);
+  const fontI=await pdfDoc.embedFont(PDFLib.StandardFonts.HelveticaOblique);
+
+  // Parse HTML to extract text with basic tags
+  const tmp=document.createElement('div');
+  tmp.innerHTML=html;
+  const rawText=tmp.innerText||tmp.textContent||'';
+  const lines=rawText.split('\n');
+
+  let page=pdfDoc.addPage([pageW,pageH]);
+  let y=pageH-margin;
+
+  const newPage=()=>{page=pdfDoc.addPage([pageW,pageH]);y=pageH-margin;};
+  const drawText=(txt,sz,f,color)=>{
+    if(!txt.trim()){y-=sz*0.5;if(y<margin+sz)newPage();return;}
+    const words=txt.split(' ');let line='';
+    words.forEach(w=>{
+      const test=line?line+' '+w:w;
+      if(f.widthOfTextAtSize(test,sz)>maxW){
+        if(y<margin+sz)newPage();
+        page.drawText(line,{x:margin,y,size:sz,font:f,color:color||PDFLib.rgb(0.1,0.1,0.1)});
+        y-=sz*1.5;line=w;
+      }else line=test;
+    });
+    if(line){if(y<margin+sz)newPage();page.drawText(line,{x:margin,y,size:sz,font:f,color:color||PDFLib.rgb(0.1,0.1,0.1)});y-=sz*1.5;}
+  };
+
+  // Get structured content from DOM
+  const processNode=(node)=>{
+    if(node.nodeType===3){const t=node.textContent.replace(/\s+/g,' ').trim();if(t)drawText(t,11,font);}
+    else if(node.nodeType===1){
+      const tag=node.tagName.toLowerCase();
+      if(tag==='h1'){y-=4;drawText(node.textContent.trim(),18,fontB,PDFLib.rgb(0,0.3,0.6));y-=4;}
+      else if(tag==='h2'){y-=2;drawText(node.textContent.trim(),15,fontB,PDFLib.rgb(0,0.3,0.6));y-=2;}
+      else if(tag==='h3'){drawText(node.textContent.trim(),13,fontB,PDFLib.rgb(0,0.3,0.6));}
+      else if(['p','div','li'].includes(tag)){drawText(node.textContent.trim(),11,font);y-=2;}
+      else if(['ul','ol'].includes(tag)){node.childNodes.forEach(processNode);}
+      else if(tag==='br'){y-=lineH;}
+      else if(tag==='table'){
+        node.querySelectorAll('tr').forEach(row=>{
+          const cells=[...row.cells].map(c=>c.textContent.trim()).join(' | ');
+          drawText(cells,10,font);
+        });
+      }
+      else node.childNodes.forEach(processNode);
+    }
+  };
+  const body=tmp.querySelector('body')||tmp;
+  body.childNodes.forEach(processNode);
+
+  const pdfBytes=await pdfDoc.save();
+  const blob=new Blob([pdfBytes],{type:'application/pdf'});
+  const name=(document.getElementById('fileName').value||'documento').replace(/\.pdf$/,'')+'.pdf';
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();
+  document.getElementById('resultBox').classList.add('show');
+}
+// init preview with sample
+insertSample();
+</script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dividir PDF Gratis — ToolSpark</title>
+<meta name="description" content="Divide un PDF en páginas individuales o extrae rangos. Gratis y sin registro.">
+<link rel="stylesheet" href="style.css">
+<style>
+.mode-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;}
+.mode-btn{padding:18px 10px;border:2px solid var(--border);border-radius:var(--rs);background:#fff;cursor:pointer;text-align:center;transition:all .18s;font-family:'Inter',sans-serif;}
+.mode-btn:hover{border-color:var(--blue);}
+.mode-btn.on{border-color:var(--blue);background:rgba(0,77,152,.05);}
+.mode-btn .mi{font-size:26px;display:block;margin-bottom:8px;}
+.mode-btn .mn{font-size:13px;font-weight:700;color:var(--text);}
+.mode-btn .md{font-size:11px;color:var(--muted);margin-top:3px;}
+.info-bar{background:rgba(0,77,152,.06);border:1px solid rgba(0,77,152,.14);border-radius:var(--rs);padding:12px 16px;display:flex;gap:20px;flex-wrap:wrap;font-size:14px;margin-bottom:16px;}
+.info-bar strong{color:var(--blue);}
+.range-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:8px;}
+.range-row input{padding:9px 12px;border:1.5px solid var(--border);border-radius:var(--rs);font-size:14px;font-family:'Inter',sans-serif;outline:none;width:80px;text-align:center;}
+.range-row input:focus{border-color:var(--blue);}
+.page-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(58px,1fr));gap:7px;margin-top:12px;max-height:260px;overflow-y:auto;}
+.page-chip{padding:8px 4px;border:1.5px solid var(--border);border-radius:var(--rs);background:#fff;cursor:pointer;text-align:center;font-size:12px;font-weight:600;transition:all .15s;color:var(--muted);}
+.page-chip:hover{border-color:var(--blue);color:var(--blue);}
+.page-chip.sel{background:var(--blue);border-color:var(--blue);color:#fff;}
+.rf-item{display:flex;align-items:center;gap:12px;padding:11px 14px;background:#fff;border:1px solid var(--border);border-radius:var(--rs);margin-bottom:8px;}
+.rf-icon{font-size:20px;flex-shrink:0;}
+.rf-name{flex:1;font-size:13px;font-weight:600;}
+.rf-sz{font-size:12px;color:var(--muted);}
+.rf-dl{padding:6px 14px;background:var(--blue);color:#fff;border:none;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;}
+.rf-dl:hover{background:var(--blue-dk);}
+</style>
+</head>
+<body>
+<div id="adminBox"><h6>⚙ Panel Admin</h6>
+  <div class="adm-row"><span>Visitas hoy</span><span class="adm-val" id="adm-today">0</span></div>
+  <div class="adm-row"><span>Total</span><span class="adm-val" id="adm-total">0</span></div>
+  <div class="adm-row"><span>Última visita</span><span class="adm-val" id="adm-last">—</span></div>
+  <div class="adm-row"><span>Mensajes</span><span class="adm-val" id="adm-msgs">0</span></div>
+</div>
+<div class="topbar">⚡ Herramientas <span>100% gratuitas</span> — Sin registro</div>
+<header><nav>
+  <a href="index.html" class="logo"><div class="logo-mark">TS</div><div class="logo-name">Tool<em>Spark</em></div></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Herramientas</a></li>
+    <li><a href="comprimir-imagenes.html">Imágenes</a></li>
+    <li><a href="unir-pdf.html">Unir PDF</a></li>
+    <li><a href="dividir-pdf.html" class="active">Dividir PDF</a></li>
+    <li><a href="contar-palabras.html">Texto</a></li>
+    <li><a href="index.html#contacto" class="nav-cta">Contacto</a></li>
+  </ul>
+</nav></header>
+<div class="stripe"></div>
+
+<section class="tool-hero">
+  <div class="breadcrumb"><a href="index.html">Inicio</a> › Dividir PDF</div>
+  <h1>📑 Dividir PDF</h1>
+  <p>Extrae páginas específicas o divide un PDF completo en archivos individuales</p>
+</section>
+
+<div class="tool-wrap">
+  <a href="index.html" class="back-link">← Volver a todas las herramientas</a>
+
+  <div class="card" id="uploadCard">
+    <div class="card-title">📁 Selecciona un archivo PDF</div>
+    <div class="upload-zone" id="dropZone">
+      <input type="file" id="fileInput" accept=".pdf,application/pdf">
+      <span class="upload-icon">📑</span>
+      <h3>Arrastra tu PDF aquí</h3>
+      <p>Un archivo PDF — sin límite de páginas</p>
+    </div>
+  </div>
+
+  <div id="splitWrap" style="display:none;">
+    <div class="card">
+      <div class="card-title">📊 Información del archivo</div>
+      <div class="info-bar" id="infoBar"></div>
+      <div class="card-title">🎯 Modo de división</div>
+      <div class="mode-grid">
+        <div class="mode-btn on" onclick="setMode('all',this)"><span class="mi">📑</span><div class="mn">Todas las páginas</div><div class="md">Un PDF por página</div></div>
+        <div class="mode-btn" onclick="setMode('range',this)"><span class="mi">📐</span><div class="mn">Rango de páginas</div><div class="md">Extrae un rango</div></div>
+        <div class="mode-btn" onclick="setMode('select',this)"><span class="mi">🔖</span><div class="mn">Selección manual</div><div class="md">Páginas concretas</div></div>
+      </div>
+
+      <div id="mAll" style="padding:4px 0;"><p style="font-size:14px;color:var(--muted);">Se creará un archivo PDF separado por cada página del documento.</p></div>
+
+      <div id="mRange" style="display:none;">
+        <p style="font-size:14px;color:var(--mid);margin-bottom:10px;">Extrae las páginas dentro del rango en un único archivo PDF.</p>
+        <div class="range-row">
+          <span style="font-size:14px;">Desde página</span>
+          <input type="number" id="rFrom" min="1" value="1">
+          <span style="font-size:14px;">hasta</span>
+          <input type="number" id="rTo" min="1" value="1">
+        </div>
+      </div>
+
+      <div id="mSelect" style="display:none;">
+        <p style="font-size:14px;color:var(--mid);margin-bottom:8px;">Haz clic en las páginas que quieres extraer (se unirán en un solo PDF).</p>
+        <div class="page-grid" id="pageGrid"></div>
+        <p style="font-size:12px;color:var(--muted);margin-top:8px;" id="selCount">0 páginas seleccionadas</p>
+      </div>
+    </div>
+
+    <div class="card" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+      <button class="btn btn-blue" id="splitBtn" onclick="splitPDF()">✂️ Dividir PDF ahora</button>
+      <button class="btn btn-ghost" onclick="changeFile()">📁 Cambiar archivo</button>
+    </div>
+    <div class="progress-wrap" id="pw" style="display:none;">
+      <div class="slider-label"><span id="pwLbl">Procesando...</span></div>
+      <div class="progress-bar"><div class="progress-fill" id="pf"></div></div>
+    </div>
+  </div>
+
+  <div id="resultArea"></div>
+
+  <div class="ad-slot" style="margin-top:24px;"><strong>Espacio publicitario</strong>Google AdSense 728×90</div>
+</div>
+
+<section class="related-section">
+  <div style="max-width:1200px;margin:0 auto;">
+    <h3 style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px;">Otras herramientas</h3>
+    <p style="font-size:13px;color:var(--muted);">Descubre más herramientas gratuitas de ToolSpark</p>
+  </div>
+  <div class="related-grid" id="relatedGrid"></div>
+</section>
+
+<footer><div class="footer-in">
+  <div class="footer-top">
+    <div class="footer-brand"><div class="fn">Tool<em>Spark</em></div><p>Herramientas gratuitas para PDF e imágenes.</p></div>
+    <div class="footer-col"><h5>Herramientas</h5><ul>
+      <li><a href="comprimir-imagenes.html">Comprimir imágenes</a></li>
+      <li><a href="convertir-imagen.html">Convertir imagen</a></li>
+      <li><a href="recortar-imagen.html">Recortar imagen</a></li>
+      <li><a href="unir-pdf.html">Unir PDF</a></li>
+      <li><a href="dividir-pdf.html">Dividir PDF</a></li>
+      <li><a href="contar-palabras.html">Contador de palabras</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Sitio</h5><ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="index.html#contacto">Contacto</a></li>
+      <li><a href="#">Privacidad</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 ToolSpark</span><a href="index.html">← Volver al inicio</a></div>
+</div></footer>
+
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="shared.js"></script>
+<script>
+initPage('dividir-pdf');
+let pdfDoc=null,totalPages=0,splitMode='all',selPages=new Set(),origName='documento';
+
+setupDrop('dropZone','fileInput',fl=>loadFile(fl[0]));
+
+async function loadFile(file){
+  if(!file)return;
+  origName=file.name.replace('.pdf','');
+  try{
+    const bytes=await file.arrayBuffer();
+    pdfDoc=await PDFLib.PDFDocument.load(bytes,{ignoreEncryption:true});
+    totalPages=pdfDoc.getPageCount();
+    document.getElementById('uploadCard').style.display='none';
+    document.getElementById('splitWrap').style.display='block';
+    document.getElementById('infoBar').innerHTML=`<span>📄 <strong>${file.name}</strong></span><span>Páginas: <strong>${totalPages}</strong></span><span>Tamaño: <strong>${fmtSize(file.size)}</strong></span>`;
+    document.getElementById('rTo').max=totalPages;document.getElementById('rTo').value=totalPages;
+    document.getElementById('rFrom').max=totalPages;
+    buildPageGrid();
+  }catch(e){alert('Error al leer el PDF. Puede estar protegido o dañado.');}
+}
+
+function buildPageGrid(){
+  const g=document.getElementById('pageGrid'); g.innerHTML='';
+  for(let i=1;i<=totalPages;i++){
+    const c=document.createElement('div'); c.className='page-chip'; c.textContent='Pág '+i;
+    c.onclick=()=>{if(selPages.has(i)){selPages.delete(i);c.classList.remove('sel');}else{selPages.add(i);c.classList.add('sel');}document.getElementById('selCount').textContent=selPages.size+' páginas seleccionadas';};
+    g.appendChild(c);
+  }
+}
+
+function setMode(m,el){
+  splitMode=m;
+  document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('on'));el.classList.add('on');
+  document.getElementById('mAll').style.display=m==='all'?'block':'none';
+  document.getElementById('mRange').style.display=m==='range'?'block':'none';
+  document.getElementById('mSelect').style.display=m==='select'?'block':'none';
+}
+
+async function splitPDF(){
+  if(!pdfDoc)return;
+  const btn=document.getElementById('splitBtn');
+  btn.disabled=true;btn.textContent='⏳ Procesando...';
+  document.getElementById('pw').style.display='block';
+  document.getElementById('pf').style.width='0%';
+  try{
+    let results=[];
+    if(splitMode==='all'){
+      for(let i=0;i<totalPages;i++){
+        document.getElementById('pwLbl').textContent=`Procesando página ${i+1} de ${totalPages}...`;
+        document.getElementById('pf').style.width=((i+1)/totalPages*100)+'%';
+        const d=await PDFLib.PDFDocument.create();
+        const [p]=await d.copyPages(pdfDoc,[i]);d.addPage(p);
+        const b=await d.save();
+        results.push({bytes:b,name:`${origName}_pag${i+1}.pdf`});
+        await new Promise(r=>setTimeout(r,10));
+      }
+    }else if(splitMode==='range'){
+      const from=Math.max(1,parseInt(document.getElementById('rFrom').value)||1);
+      const to=Math.min(totalPages,parseInt(document.getElementById('rTo').value)||totalPages);
+      if(from>to){alert('Rango no válido.');btn.disabled=false;btn.textContent='✂️ Dividir PDF ahora';return;}
+      const d=await PDFLib.PDFDocument.create();
+      const idx=Array.from({length:to-from+1},(_,i)=>from-1+i);
+      const pages=await d.copyPages(pdfDoc,idx);pages.forEach(p=>d.addPage(p));
+      document.getElementById('pf').style.width='100%';
+      const b=await d.save();
+      results.push({bytes:b,name:`${origName}_pags${from}-${to}.pdf`});
+    }else{
+      if(!selPages.size){alert('Selecciona al menos una página.');btn.disabled=false;btn.textContent='✂️ Dividir PDF ahora';return;}
+      const sorted=[...selPages].sort((a,b)=>a-b);
+      const d=await PDFLib.PDFDocument.create();
+      const pages=await d.copyPages(pdfDoc,sorted.map(p=>p-1));pages.forEach(p=>d.addPage(p));
+      document.getElementById('pf').style.width='100%';
+      const b=await d.save();
+      results.push({bytes:b,name:`${origName}_seleccion.pdf`});
+    }
+    renderResults(results);
+  }catch(e){console.error(e);alert('Error al dividir el PDF.');}
+  btn.disabled=false;btn.textContent='✂️ Dividir PDF ahora';
+}
+
+function renderResults(results){
+  window._splitR=results;
+  let html=`<div class="card"><div class="card-title">✅ División completada — ${results.length} archivo(s)</div>`;
+  results.forEach((r,i)=>{
+    html+=`<div class="rf-item"><span class="rf-icon">📄</span><span class="rf-name">${r.name}</span><span class="rf-sz">${fmtSize(r.bytes.length)}</span><button class="rf-dl" onclick="dlOne(${i})">⬇ Descargar</button></div>`;
+  });
+  if(results.length>1) html+=`<div style="margin-top:12px;"><button class="btn btn-blue btn-lg" onclick="dlAll()">⬇ Descargar todos</button></div>`;
+  html+=`</div><div style="margin-top:12px;"><button class="btn btn-ghost" onclick="changeFile()">🔄 Dividir otro PDF</button></div>`;
+  document.getElementById('resultArea').innerHTML=html;
+  document.getElementById('pw').style.display='none';
+}
+
+function dlOne(i){
+  const r=window._splitR[i];
+  const blob=new Blob([r.bytes],{type:'application/pdf'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=r.name;a.click();
+}
+function dlAll(){window._splitR.forEach((_,i)=>setTimeout(()=>dlOne(i),i*500));}
+function changeFile(){
+  pdfDoc=null;selPages.clear();
+  document.getElementById('uploadCard').style.display='block';
+  document.getElementById('splitWrap').style.display='none';
+  document.getElementById('resultArea').innerHTML='';
+  document.getElementById('pw').style.display='none';
+  document.getElementById('fileInput').value='';
+}
+</script>
+</body>
+</html>

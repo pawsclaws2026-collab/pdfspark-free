@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDF a Word Gratis — ToolSpark</title>
+<meta name="description" content="Extrae el texto de un PDF en formato editable compatible con Word.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="adminBox"><h6>⚙ Panel Admin</h6>
+  <div class="adm-row"><span>Visitas hoy</span><span class="adm-val" id="adm-today">0</span></div>
+  <div class="adm-row"><span>Total</span><span class="adm-val" id="adm-total">0</span></div>
+  <div class="adm-row"><span>Última visita</span><span class="adm-val" id="adm-last">—</span></div>
+  <div class="adm-row"><span>Mensajes</span><span class="adm-val" id="adm-msgs">0</span></div>
+</div>
+<div class="topbar">⚡ Herramientas <span>100% gratuitas</span> — Sin registro</div>
+<header><nav>
+  <a href="index.html" class="logo"><div class="logo-mark">TS</div><div class="logo-name">Tool<em>Spark</em></div></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Todas</a></li>
+    <li><a href="index.html#imagenes">Imágenes</a></li>
+    <li><a href="index.html#pdf">PDF</a></li>
+    <li><a href="index.html#conversion" class="active">Conversión</a></li>
+    <li><a href="index.html#texto">Texto</a></li>
+    <li><a href="index.html#contacto" class="nav-cta">Contacto</a></li>
+  </ul>
+</nav></header>
+<div class="stripe"></div>
+<section class="tool-hero">
+  <div class="breadcrumb"><a href="index.html">Inicio</a> › <a href="index.html#conversion">Conversión</a> › PDF a Word</div>
+  <h1>📄 PDF a Word</h1>
+  <p>Extrae el texto de un PDF en formato editable compatible con Word.</p>
+</section>
+<div class="tool-wrap">
+  <a href="index.html" class="back-link">← Volver a todas las herramientas</a>
+  
+<div style="background:rgba(0,77,152,.06);border:1px solid rgba(0,77,152,.18);border-radius:var(--rs);padding:14px 18px;font-size:13.5px;color:var(--mid);margin-bottom:16px;line-height:1.7;">
+  ℹ️ <strong>Esta herramienta</strong> extrae el texto de tu PDF y lo descarga como archivo <strong>.txt</strong> editable que puedes abrir en Word, Google Docs o cualquier editor. Para PDFs escaneados (imágenes), el resultado puede variar.
+</div>
+<div class="card">
+  <div class="card-title">📁 Selecciona un PDF</div>
+  <div class="upload-zone" id="dropZone"><input type="file" id="fileInput" accept=".pdf,application/pdf">
+    <span class="upload-icon">📄</span><h3>Arrastra tu PDF aquí</h3><p>El texto se extrae y se descarga como archivo editable</p>
+  </div>
+</div>
+<div class="card" id="optCard" style="display:none">
+  <div class="card-title">⚙️ Opciones de extracción</div>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px;">
+    <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;"><input type="checkbox" id="keepLines" checked> Mantener saltos de línea originales</label>
+    <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;"><input type="checkbox" id="addPageBreaks" checked> Añadir separadores de página</label>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;">
+    <button class="btn btn-blue" onclick="extractText()">📄 Extraer texto y descargar</button>
+    <button class="btn btn-ghost" onclick="resetTool()">🗑 Limpiar</button>
+  </div>
+</div>
+<div class="progress-wrap" id="pw" style="display:none">
+  <div class="slider-label"><span id="pwLbl">Extrayendo texto...</span></div>
+  <div class="progress-bar"><div class="progress-fill" id="pf"></div></div>
+</div>
+<div class="result-box" id="resultBox">
+  <div class="result-success"><div class="result-icon">✅</div>
+    <div class="result-info"><h4>¡Texto extraído y descargado!</h4>
+    <p id="rMeta">Abre el archivo .txt con Word o Google Docs para editarlo.</p></div>
+  </div>
+</div>
+  <div class="ad-slot" style="margin-top:24px;"><strong>Espacio publicitario</strong>Google AdSense 728×90</div>
+</div>
+<section class="related-section">
+  <div style="max-width:1200px;margin:0 auto;"><h3 style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px;">Herramientas relacionadas</h3>
+  <p style="font-size:13px;color:var(--muted);">Más herramientas de conversión</p></div>
+  <div class="related-grid" id="relatedGrid"></div>
+</section>
+<footer><div class="footer-in">
+  <div class="footer-top">
+    <div class="footer-brand"><div class="fn">Tool<em>Spark</em></div><p>37 herramientas gratuitas.</p></div>
+    <div class="footer-col"><h5>Conversión</h5><ul>
+      <li><a href="word-a-pdf.html">Word a PDF</a></li><li><a href="pdf-a-word.html">PDF a Word</a></li>
+      <li><a href="excel-a-pdf.html">Excel a PDF</a></li><li><a href="pdf-a-excel.html">PDF a Excel</a></li>
+      <li><a href="ppt-a-pdf.html">PowerPoint a PDF</a></li><li><a href="pdf-a-ppt.html">PDF a PowerPoint</a></li>
+      <li><a href="html-a-pdf.html">HTML a PDF</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Sitio</h5><ul>
+      <li><a href="index.html">Inicio</a></li><li><a href="index.html#contacto">Contacto</a></li><li><a href="#">Privacidad</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 ToolSpark</span><a href="index.html">← Inicio</a></div>
+</div></footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="shared.js"></script>
+<script>
+initPage('pdf-a-word');
+
+let pdfFile=null;
+setupDrop('dropZone','fileInput',fl=>{pdfFile=fl[0];if(pdfFile)document.getElementById('optCard').style.display='block';});
+async function extractText(){
+  if(!pdfFile)return;
+  if(typeof pdfjsLib==='undefined'){alert('Cargando librería...');return;}
+  pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  document.getElementById('pw').style.display='block';document.getElementById('pf').style.width='10%';
+  const keepLines=document.getElementById('keepLines').checked;
+  const addBreaks=document.getElementById('addPageBreaks').checked;
+  try{
+    const bytes=await pdfFile.arrayBuffer();
+    const pdf=await pdfjsLib.getDocument({data:bytes}).promise;
+    const total=pdf.numPages;let fullText='';
+    for(let i=1;i<=total;i++){
+      document.getElementById('pwLbl').textContent=`Procesando página ${i} de ${total}...`;
+      document.getElementById('pf').style.width=((i/total)*90)+'%';
+      const page=await pdf.getPage(i);
+      const tc=await page.getTextContent();
+      const pageText=tc.items.map(item=>item.str).join(keepLines?'
+':' ');
+      if(addBreaks&&i>1)fullText+='
+
+--- Página '+i+' ---
+
+';
+      fullText+=pageText+'
+';
+      await new Promise(r=>setTimeout(r,20));
+    }
+    document.getElementById('pf').style.width='100%';
+    const blob=new Blob([fullText],{type:'text/plain;charset=utf-8'});
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+    a.download=pdfFile.name.replace('.pdf','.txt');a.click();
+    document.getElementById('resultBox').classList.add('show');
+    document.getElementById('rMeta').textContent=`${total} páginas · ${fullText.length.toLocaleString('es')} caracteres extraídos.`;
+  }catch(e){console.error(e);alert('Error al procesar el PDF.');}
+  document.getElementById('pw').style.display='none';
+}
+function resetTool(){pdfFile=null;document.getElementById('fileInput').value='';document.getElementById('optCard').style.display='none';document.getElementById('resultBox').classList.remove('show');document.getElementById('pw').style.display='none';}
+
+</script>
+</body>
+</html>

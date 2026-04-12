@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Temporizador online — ToolSpark</title>
+<meta name="description" content="Cronómetro, cuenta atrás y temporizador — todo en uno, directamente en el navegador.">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<div id="adminBox"><h6>⚙ Panel Admin</h6>
+  <div class="adm-row"><span>Visitas hoy</span><span class="adm-val" id="adm-today">0</span></div>
+  <div class="adm-row"><span>Total</span><span class="adm-val" id="adm-total">0</span></div>
+  <div class="adm-row"><span>Última visita</span><span class="adm-val" id="adm-last">—</span></div>
+  <div class="adm-row"><span>Mensajes</span><span class="adm-val" id="adm-msgs">0</span></div>
+</div>
+<div class="topbar">⚡ Herramientas <span>100% gratuitas</span> — Sin registro</div>
+<header>
+  <nav>
+    <a href="index.html" class="logo"><div class="logo-mark">TS</div><div class="logo-name">Tool<em>Spark</em></div></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Herramientas</a></li>
+      <li><a href="index.html?cat=imagen">Imágenes</a></li>
+      <li><a href="index.html?cat=pdf">PDF</a></li>
+      <li><a href="index.html?cat=texto">Texto</a></li>
+      <li><a href="index.html?cat=util">Utilidades</a></li>
+      <li><a href="index.html#contacto" class="nav-cta">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+<div class="stripe"></div>
+<section class="tool-hero">
+  <div class="breadcrumb"><a href="index.html">Inicio</a> › Temporizador online</div>
+  <h1>⏱️ Temporizador online</h1>
+  <p>Cronómetro, cuenta atrás y temporizador — todo en uno, directamente en el navegador.</p>
+</section>
+<div class="tool-wrap">
+  <a href="index.html" class="back-link">← Volver a todas las herramientas</a>
+  
+<div class="card">
+  <div style="text-align:center;padding:20px 0;">
+    <div style="font-family:'Sora',sans-serif;font-size:72px;font-weight:800;color:var(--blue);letter-spacing:-2px;line-height:1;" id="timerDisplay">00:00:00</div>
+    <div style="font-size:14px;color:var(--muted);margin-top:8px;" id="timerMode">Cronómetro</div>
+  </div>
+  <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:20px;">
+    <button class="btn btn-blue" id="btnStart" onclick="startStop()">▶ Iniciar</button>
+    <button class="btn btn-ghost" onclick="resetTimer()">⏹ Reiniciar</button>
+    <button class="btn btn-ghost" onclick="addLap()">🏁 Vuelta</button>
+  </div>
+  <div style="display:flex;gap:8px;justify-content:center;margin-bottom:20px;">
+    <button class="btn btn-ghost" onclick="setMode('chrono')" id="mChrono" style="background:var(--blue);color:#fff;border-color:var(--blue);">Cronómetro</button>
+    <button class="btn btn-ghost" onclick="setMode('countdown')" id="mCountdown">Cuenta atrás</button>
+  </div>
+  <div id="countdownSet" style="display:none;text-align:center;margin-bottom:16px;">
+    <div style="display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap;">
+      <div><label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px;">HH</label>
+        <input type="number" id="cdH" value="0" min="0" max="23" style="width:60px;padding:8px;border:1.5px solid var(--border);border-radius:var(--rs);font-size:16px;font-weight:700;text-align:center;outline:none;font-family:monospace;">
+      </div>
+      <span style="font-size:24px;font-weight:700;padding-top:16px;">:</span>
+      <div><label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px;">MM</label>
+        <input type="number" id="cdM" value="5" min="0" max="59" style="width:60px;padding:8px;border:1.5px solid var(--border);border-radius:var(--rs);font-size:16px;font-weight:700;text-align:center;outline:none;font-family:monospace;">
+      </div>
+      <span style="font-size:24px;font-weight:700;padding-top:16px;">:</span>
+      <div><label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px;">SS</label>
+        <input type="number" id="cdS" value="0" min="0" max="59" style="width:60px;padding:8px;border:1.5px solid var(--border);border-radius:var(--rs);font-size:16px;font-weight:700;text-align:center;outline:none;font-family:monospace;">
+      </div>
+    </div>
+  </div>
+  <div id="laps" style="max-height:200px;overflow-y:auto;"></div>
+</div>
+  <div class="ad-slot" style="margin-top:24px;"><strong>Espacio publicitario</strong>Google AdSense 728×90</div>
+</div>
+<section class="related-section">
+  <div style="max-width:1200px;margin:0 auto;">
+    <h3 style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px;">Otras herramientas</h3>
+    <p style="font-size:13px;color:var(--muted);">Descubre más herramientas gratuitas de ToolSpark</p>
+  </div>
+  <div class="related-grid" id="relatedGrid"></div>
+</section>
+<footer>
+  <div class="footer-in">
+    <div class="footer-top">
+      <div class="footer-brand"><div class="fn">Tool<em>Spark</em></div><p>30 herramientas gratuitas para PDF, imágenes y más.</p></div>
+      <div class="footer-col"><h5>Herramientas populares</h5><ul>
+        <li><a href="comprimir-imagenes.html">Comprimir imágenes</a></li>
+        <li><a href="unir-pdf.html">Unir PDF</a></li>
+        <li><a href="generador-qr.html">Generador de QR</a></li>
+        <li><a href="contar-palabras.html">Contador de palabras</a></li>
+        <li><a href="generador-contrasena.html">Generador contraseña</a></li>
+        <li><a href="color-picker.html">Selector de color</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Sitio</h5><ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
+        <li><a href="#">Privacidad</a></li>
+        <li><a href="#">Términos</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 ToolSpark — Todos los derechos reservados</span>
+      <a href="index.html">← Volver al inicio</a>
+    </div>
+  </div>
+</footer>
+<script src="shared.js"></script>
+<script>
+initPage('temporizador');
+
+let mode='chrono',running=false,startTime=0,elapsed=0,countdown=0,lapCount=0,interval=null;
+function setMode(m){
+  mode=m;resetTimer();
+  document.getElementById('mChrono').style.cssText=m==='chrono'?'background:var(--blue);color:#fff;border-color:var(--blue);':'';
+  document.getElementById('mCountdown').style.cssText=m==='countdown'?'background:var(--blue);color:#fff;border-color:var(--blue);':'';
+  document.getElementById('countdownSet').style.display=m==='countdown'?'block':'none';
+  document.getElementById('timerMode').textContent=m==='chrono'?'Cronómetro':'Cuenta atrás';
+}
+function pad(n){return String(Math.floor(n)).padStart(2,'0');}
+function fmt(ms){const t=Math.abs(ms);const h=Math.floor(t/3600000),m=Math.floor((t%3600000)/60000),s=Math.floor((t%60000)/1000);return `${pad(h)}:${pad(m)}:${pad(s)}`;}
+function updateDisplay(){
+  let ms;
+  if(mode==='chrono'){ms=elapsed+(running?(Date.now()-startTime):0);}
+  else{const cdMs=(parseInt(document.getElementById('cdH').value||0)*3600+parseInt(document.getElementById('cdM').value||0)*60+parseInt(document.getElementById('cdS').value||0))*1000;ms=cdMs-elapsed-(running?(Date.now()-startTime):0);if(ms<=0){ms=0;if(running)stopTimer();}}
+  document.getElementById('timerDisplay').textContent=fmt(ms);
+  document.getElementById('timerDisplay').style.color=mode==='countdown'&&ms<10000?'var(--red)':'var(--blue)';
+}
+function startStop(){if(running)stopTimer();else startTimer();}
+function startTimer(){running=true;startTime=Date.now();interval=setInterval(updateDisplay,100);document.getElementById('btnStart').textContent='⏸ Pausar';document.getElementById('btnStart').style.background='var(--red)';}
+function stopTimer(){running=false;elapsed+=Date.now()-startTime;clearInterval(interval);document.getElementById('btnStart').textContent='▶ Reanudar';document.getElementById('btnStart').style.background='';}
+function resetTimer(){running=false;elapsed=0;clearInterval(interval);lapCount=0;document.getElementById('laps').innerHTML='';document.getElementById('btnStart').textContent='▶ Iniciar';document.getElementById('btnStart').style.background='';updateDisplay();}
+function addLap(){if(!running)return;const t=elapsed+(Date.now()-startTime);lapCount++;const d=document.getElementById('laps');d.innerHTML+=`<div class="file-item"><span style="font-size:14px;font-weight:700;color:var(--blue);">#${lapCount}</span><span class="file-item-name">Vuelta ${lapCount}</span><span class="file-item-size;font-family:monospace;">${fmt(t)}</span></div>`;}
+updateDisplay();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proteger PDF con contraseña — ToolSpark</title>
+<meta name="description" content="Añade una contraseña de usuario a tu PDF para proteger su contenido.">
+<link rel="stylesheet" href="style.css">
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+</head>
+<body>
+<div id="adminBox"><h6>⚙ Panel Admin</h6>
+  <div class="adm-row"><span>Visitas hoy</span><span class="adm-val" id="adm-today">0</span></div>
+  <div class="adm-row"><span>Total</span><span class="adm-val" id="adm-total">0</span></div>
+  <div class="adm-row"><span>Última visita</span><span class="adm-val" id="adm-last">—</span></div>
+  <div class="adm-row"><span>Mensajes</span><span class="adm-val" id="adm-msgs">0</span></div>
+</div>
+<div class="topbar">⚡ Herramientas <span>100% gratuitas</span> — Sin registro</div>
+<header>
+  <nav>
+    <a href="index.html" class="logo"><div class="logo-mark">TS</div><div class="logo-name">Tool<em>Spark</em></div></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Herramientas</a></li>
+      <li><a href="index.html?cat=imagen">Imágenes</a></li>
+      <li><a href="index.html?cat=pdf">PDF</a></li>
+      <li><a href="index.html?cat=texto">Texto</a></li>
+      <li><a href="index.html?cat=util">Utilidades</a></li>
+      <li><a href="index.html#contacto" class="nav-cta">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+<div class="stripe"></div>
+<section class="tool-hero">
+  <div class="breadcrumb"><a href="index.html">Inicio</a> › Proteger PDF con contraseña</div>
+  <h1>🔒 Proteger PDF con contraseña</h1>
+  <p>Añade una contraseña de usuario a tu PDF para proteger su contenido.</p>
+</section>
+<div class="tool-wrap">
+  <a href="index.html" class="back-link">← Volver a todas las herramientas</a>
+  
+<div class="card">
+  <div class="card-title">📁 Selecciona un PDF</div>
+  <div class="upload-zone" id="dropZone"><input type="file" id="fileInput" accept=".pdf,application/pdf">
+    <span class="upload-icon">🔒</span><h3>Arrastra tu PDF aquí</h3><p>El archivo no se sube a ningún servidor</p>
+  </div>
+</div>
+<div class="card" id="optCard" style="display:none">
+  <div class="card-title">🔑 Establecer contraseña</div>
+  <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:16px;">
+    <div><label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">Contraseña de usuario (para abrir el PDF)</label>
+      <input type="password" id="pwd1" placeholder="Introduce la contraseña" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:Inter,sans-serif;font-size:14px;outline:none;">
+    </div>
+    <div><label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">Confirmar contraseña</label>
+      <input type="password" id="pwd2" placeholder="Repite la contraseña" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:Inter,sans-serif;font-size:14px;outline:none;">
+    </div>
+  </div>
+  <p style="font-size:12px;color:#dc2626;margin-bottom:14px;">⚠️ Nota: pdf-lib aplica restricciones básicas. Para cifrado AES-256 completo, considera herramientas especializadas.</p>
+  <button class="btn btn-blue btn-lg" onclick="protegerPDF()">🔒 Proteger y descargar</button>
+</div>
+<div class="result-box" id="resultBox">
+  <div class="result-success"><div class="result-icon">🔒</div>
+    <div class="result-info"><h4>¡PDF protegido!</h4><p>Descarga iniciada. Guarda tu contraseña en un lugar seguro.</p></div>
+  </div>
+</div>
+  <div class="ad-slot" style="margin-top:24px;"><strong>Espacio publicitario</strong>Google AdSense 728×90</div>
+</div>
+<section class="related-section">
+  <div style="max-width:1200px;margin:0 auto;">
+    <h3 style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px;">Otras herramientas</h3>
+    <p style="font-size:13px;color:var(--muted);">Descubre más herramientas gratuitas de ToolSpark</p>
+  </div>
+  <div class="related-grid" id="relatedGrid"></div>
+</section>
+<footer>
+  <div class="footer-in">
+    <div class="footer-top">
+      <div class="footer-brand"><div class="fn">Tool<em>Spark</em></div><p>30 herramientas gratuitas para PDF, imágenes y más.</p></div>
+      <div class="footer-col"><h5>Herramientas populares</h5><ul>
+        <li><a href="comprimir-imagenes.html">Comprimir imágenes</a></li>
+        <li><a href="unir-pdf.html">Unir PDF</a></li>
+        <li><a href="generador-qr.html">Generador de QR</a></li>
+        <li><a href="contar-palabras.html">Contador de palabras</a></li>
+        <li><a href="generador-contrasena.html">Generador contraseña</a></li>
+        <li><a href="color-picker.html">Selector de color</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Sitio</h5><ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
+        <li><a href="#">Privacidad</a></li>
+        <li><a href="#">Términos</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 ToolSpark — Todos los derechos reservados</span>
+      <a href="index.html">← Volver al inicio</a>
+    </div>
+  </div>
+</footer>
+<script src="shared.js"></script>
+<script>
+initPage('proteger-pdf');
+
+let pdfFile=null;
+setupDrop('dropZone','fileInput',fl=>{pdfFile=fl[0];if(pdfFile)document.getElementById('optCard').style.display='block';});
+async function protegerPDF(){
+  const p1=document.getElementById('pwd1').value;
+  const p2=document.getElementById('pwd2').value;
+  if(!p1){alert('Introduce una contraseña.');return;}
+  if(p1!==p2){alert('Las contraseñas no coinciden.');return;}
+  if(!pdfFile)return;
+  if(typeof PDFLib==='undefined'){alert('Cargando librería...');return;}
+  try{
+    const bytes=await pdfFile.arrayBuffer();
+    const doc=await PDFLib.PDFDocument.load(bytes,{ignoreEncryption:true});
+    const out=await doc.save({userPassword:p1,ownerPassword:p1+'owner',permissions:{printing:'lowResolution',modifying:false,copying:false}});
+    const blob=new Blob([out],{type:'application/pdf'});
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='protegido.pdf';a.click();
+    document.getElementById('resultBox').classList.add('show');
+  }catch(e){console.error(e);alert('Error al proteger el PDF.');}
+}
+
+</script>
+</body>
+</html>

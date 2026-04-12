@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDFSpark — 37 Herramientas Gratuitas Online</title>
+<meta name="description" content="37 herramientas gratuitas para PDF, imágenes, conversión y texto. Sin registro, 100% online.">
+<link rel="stylesheet" href="style.css">
+<style>
+/* ── HERO ── */
+.hero{background:linear-gradient(140deg,var(--blue-dk) 0%,var(--blue) 55%,#1a2a6c 100%);padding:88px 24px 96px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-80px;left:-60px;width:360px;height:360px;background:radial-gradient(circle,rgba(237,187,0,.12),transparent 70%);}
+.hero::after{content:'';position:absolute;bottom:-60px;right:-40px;width:280px;height:280px;background:radial-gradient(circle,rgba(165,0,68,.15),transparent 70%);}
+.hero-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(237,187,0,.15);border:1px solid rgba(237,187,0,.35);color:var(--gold);font-size:13px;font-weight:600;padding:7px 20px;border-radius:50px;margin-bottom:22px;position:relative;z-index:1;}
+.hero h1{font-family:'Sora',sans-serif;font-size:clamp(28px,5.5vw,56px);font-weight:800;color:#fff;line-height:1.15;margin-bottom:18px;letter-spacing:-1px;position:relative;z-index:1;}
+.hero h1 .ac{color:var(--gold);}
+.hero-sub{font-size:17px;color:rgba(255,255,255,.75);max-width:540px;margin:0 auto 38px;line-height:1.7;position:relative;z-index:1;}
+.hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:52px;position:relative;z-index:1;}
+.btn-primary{padding:14px 30px;background:var(--gold);color:var(--blue-dk);border-radius:10px;font-weight:700;font-size:15px;text-decoration:none;transition:all .2s;display:inline-block;}
+.btn-primary:hover{background:#f5c800;transform:translateY(-2px);}
+.btn-ghost-h{padding:14px 30px;background:rgba(255,255,255,.1);color:#fff;border-radius:10px;font-weight:600;font-size:15px;text-decoration:none;border:1.5px solid rgba(255,255,255,.25);transition:all .2s;display:inline-block;}
+.btn-ghost-h:hover{background:rgba(255,255,255,.18);}
+.hero-stats{display:flex;justify-content:center;gap:48px;flex-wrap:wrap;position:relative;z-index:1;}
+.h-sn{display:block;font-family:'Sora',sans-serif;font-size:30px;font-weight:800;color:var(--gold);line-height:1;margin-bottom:5px;}
+.h-sl{font-size:13px;color:rgba(255,255,255,.6);}
+/* HOW */
+.how-section{background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:56px 24px;}
+.how-center{text-align:center;margin-bottom:36px;}
+.how-center p{font-size:12px;font-weight:700;letter-spacing:1.5px;color:var(--blue);text-transform:uppercase;margin-bottom:8px;}
+.how-center h2{font-family:'Sora',sans-serif;font-size:26px;font-weight:800;}
+.how-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:28px;}
+.how-step{text-align:center;padding:0 12px;}
+.how-num{width:48px;height:48px;background:linear-gradient(135deg,var(--blue),var(--red));border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-size:18px;font-weight:800;color:#fff;margin:0 auto 14px;}
+.how-step h4{font-size:15px;font-weight:700;margin-bottom:6px;}
+.how-step p{font-size:13px;color:var(--muted);line-height:1.6;}
+/* CONTACT */
+.contact-section{background:linear-gradient(135deg,var(--blue-dk),var(--blue));padding:68px 24px;text-align:center;}
+.contact-section h2{font-family:'Sora',sans-serif;font-size:28px;font-weight:800;color:#fff;margin-bottom:10px;}
+.contact-section>p{color:rgba(255,255,255,.7);margin-bottom:30px;font-size:15px;}
+.contact-form{max-width:480px;margin:0 auto;display:flex;flex-direction:column;gap:12px;}
+.cf-input{padding:13px 16px;border-radius:var(--rs);border:1.5px solid rgba(255,255,255,.2);background:rgba(255,255,255,.1);color:#fff;font-family:'Inter',sans-serif;font-size:14px;outline:none;transition:border-color .2s;width:100%;}
+.cf-input::placeholder{color:rgba(255,255,255,.45);}
+.cf-input:focus{border-color:var(--gold);}
+.cf-textarea{height:108px;resize:none;}
+.cf-submit{padding:14px;background:var(--gold);color:var(--blue-dk);border:none;border-radius:var(--rs);font-size:15px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;}
+.cf-submit:hover{opacity:.92;}
+.cf-ok{display:none;background:rgba(34,197,94,.12);border:1.5px solid rgba(34,197,94,.4);color:#15803d;padding:16px;border-radius:var(--rs);font-size:14px;font-weight:600;text-align:center;}
+.cf-submit:disabled{opacity:.6;cursor:not-allowed;}
+/* CAT SECTION HEADERS */
+.cat-section{padding-top:44px;margin-bottom:18px;}
+.cat-title{font-family:'Sora',sans-serif;font-size:18px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:10px;margin-bottom:4px;}
+.cat-title::before{content:'';display:block;width:4px;height:22px;background:linear-gradient(to bottom,var(--blue),var(--red));border-radius:2px;}
+.cat-sub{font-size:13px;color:var(--muted);padding-left:14px;}
+</style>
+</head>
+<body>
+
+<div id="adminBox"><h6>⚙ Panel Admin</h6>
+  <div class="adm-row"><span>Visitas hoy</span><span class="adm-val" id="adm-today">0</span></div>
+  <div class="adm-row"><span>Total</span><span class="adm-val" id="adm-total">0</span></div>
+  <div class="adm-row"><span>Última visita</span><span class="adm-val" id="adm-last">—</span></div>
+  <div class="adm-row"><span>Mensajes</span><span class="adm-val" id="adm-msgs">0</span></div>
+</div>
+
+<!-- ★ MENÚ completamente funcional -->
+<header>
+  <nav>
+    <a href="index.html" class="logo">
+      <div class="logo-mark">PS</div>
+      <div class="logo-name">PDF<em>Spark</em></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#herramientas">Todas</a></li>
+      <li><a href="#imagenes">🖼️ Imágenes</a></li>
+      <li><a href="#pdf">📄 PDF</a></li>
+      <li><a href="#conversion">🔄 Conversión</a></li>
+      <li><a href="#texto">📝 Texto</a></li>
+      <li><a href="#utilidades">🛠️ Utilidades</a></li>
+      <li><a href="#contacto" class="nav-cta">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+<div class="stripe"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-pill">⚡ 37 herramientas — 100% gratuitas</div>
+  <h1>PDFSpark – Todo lo que necesitas,<br><span class="ac">completamente gratis</span></h1>
+  <p class="hero-sub">PDF, imágenes, conversión de documentos y más. Sin instalar nada, sin crear cuenta. Todo funciona directamente en tu navegador.</p>
+  <div class="hero-actions">
+    <a href="#herramientas" class="btn-primary">Ver las 37 herramientas ↓</a>
+    <a href="#como-funciona" class="btn-ghost-h">¿Cómo funciona?</a>
+  </div>
+  <div class="hero-stats">
+    <div><span class="h-sn">37</span><div class="h-sl">Herramientas activas</div></div>
+    <div><span class="h-sn">100%</span><div class="h-sl">Gratuitas</div></div>
+    <div><span class="h-sn">0</span><div class="h-sl">Registro requerido</div></div>
+    <div><span class="h-sn">&lt;30s</span><div class="h-sl">Tiempo promedio</div></div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="ad-slot"><strong>Espacio publicitario — Google AdSense 728×90</strong>Inserta aquí tu código de AdSense</div>
+
+  <!-- ALL TOOLS ANCHOR -->
+  <div id="herramientas"></div>
+
+  <!-- ★ FILTER TABS -->
+  <div style="padding-top:40px;margin-bottom:22px;display:flex;align-items:flex-start;gap:14px;">
+    <div style="width:5px;height:40px;background:linear-gradient(to bottom,var(--blue),var(--red));border-radius:3px;flex-shrink:0;margin-top:2px;"></div>
+    <div><div style="font-family:'Sora',sans-serif;font-size:24px;font-weight:700;margin-bottom:4px;">Todas las herramientas</div>
+    <div style="font-size:14px;color:var(--muted);">37 herramientas gratuitas — sin registro, sin límites</div></div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="ftab on" onclick="ft('all',this)">Todas (37)</button>
+    <button class="ftab" onclick="ft('imagen',this)">🖼️ Imágenes (8)</button>
+    <button class="ftab" onclick="ft('pdf',this)">📄 PDF (8)</button>
+    <button class="ftab" onclick="ft('conv',this)">🔄 Conversión (7)</button>
+    <button class="ftab" onclick="ft('texto',this)">📝 Texto (6)</button>
+    <button class="ftab" onclick="ft('util',this)">🛠️ Utilidades (8)</button>
+  </div>
+
+  <div class="tools-grid" id="toolsGrid"></div>
+
+  <div class="ad-slot"><strong>Espacio publicitario — Google AdSense 300×250</strong></div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="como-funciona">
+  <div class="how-center"><p>Simple y rápido</p><h2>¿Cómo funciona?</h2></div>
+  <div class="how-grid">
+    <div class="how-step"><div class="how-num">1</div><h4>Elige tu herramienta</h4><p>Selecciona entre las 37 herramientas disponibles según lo que necesites.</p></div>
+    <div class="how-step"><div class="how-num">2</div><h4>Sube tu archivo</h4><p>Arrastra y suelta o haz clic para seleccionar desde tu dispositivo.</p></div>
+    <div class="how-step"><div class="how-num">3</div><h4>Procesa</h4><p>Todo se procesa en tu navegador. Nadie ve ni guarda tus archivos.</p></div>
+    <div class="how-step"><div class="how-num">4</div><h4>Descarga</h4><p>Descarga el resultado al instante. Gratis, sin límites, siempre.</p></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contacto">
+  <h2>¿Tienes alguna pregunta?</h2>
+  <p>Escríbenos y te responderemos directamente</p>
+  <div class="contact-form">
+    <input class="cf-input" type="text" id="cName" placeholder="Tu nombre" required>
+    <input class="cf-input" type="email" id="cEmail" placeholder="Tu correo electrónico (opcional)">
+    <textarea class="cf-input cf-textarea" id="cMsg" placeholder="Tu mensaje..."></textarea>
+    <button class="cf-submit" onclick="enviar('YOUR_FORM_ID')">Enviar mensaje →</button>
+    <div class="cf-ok" id="cfOk">
+      <div style="font-size:18px;margin-bottom:6px;">✓ ¡Mensaje enviado con éxito!</div>
+      Te responderemos lo antes posible.
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-in">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="fn">Tool<em>Spark</em></div>
+        <p>37 herramientas gratuitas para PDF, imágenes y más.</p>
+      </div>
+      <div class="footer-col">
+        <h5>🖼️ Imágenes</h5>
+        <ul>
+          <li><a href="comprimir-imagenes.html">Comprimir imágenes</a></li>
+          <li><a href="convertir-imagen.html">Convertir imagen</a></li>
+          <li><a href="recortar-imagen.html">Recortar imagen</a></li>
+          <li><a href="redimensionar-imagen.html">Redimensionar</a></li>
+          <li><a href="girar-imagen.html">Girar y voltear</a></li>
+          <li><a href="marca-de-agua.html">Marca de agua</a></li>
+          <li><a href="convertir-webp.html">Imagen a WebP</a></li>
+          <li><a href="base64-imagen.html">Imagen a Base64</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>📄 PDF</h5>
+        <ul>
+          <li><a href="unir-pdf.html">Unir PDF</a></li>
+          <li><a href="dividir-pdf.html">Dividir PDF</a></li>
+          <li><a href="comprimir-pdf.html">Comprimir PDF</a></li>
+          <li><a href="rotar-pdf.html">Rotar PDF</a></li>
+          <li><a href="numerar-pdf.html">Numerar páginas</a></li>
+          <li><a href="pdf-a-imagenes.html">PDF a imágenes</a></li>
+          <li><a href="proteger-pdf.html">Proteger PDF</a></li>
+          <li><a href="marca-agua-pdf.html">Marca de agua PDF</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>🔄 Conversión</h5>
+        <ul>
+          <li><a href="word-a-pdf.html">Word a PDF</a></li>
+          <li><a href="pdf-a-word.html">PDF a Word</a></li>
+          <li><a href="excel-a-pdf.html">Excel a PDF</a></li>
+          <li><a href="pdf-a-excel.html">PDF a Excel</a></li>
+          <li><a href="ppt-a-pdf.html">PowerPoint a PDF</a></li>
+          <li><a href="pdf-a-ppt.html">PDF a PowerPoint</a></li>
+          <li><a href="html-a-pdf.html">HTML a PDF</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>📝 Texto y Utilidades</h5>
+        <ul>
+          <li><a href="contar-palabras.html">Contador de palabras</a></li>
+          <li><a href="generador-qr.html">Generador de QR</a></li>
+          <li><a href="color-picker.html">Selector de color</a></li>
+          <li><a href="generador-contrasena.html">Generador contraseña</a></li>
+          <li><a href="conversor-unidades.html">Conversor de unidades</a></li>
+          <li><a href="json-formateador.html">Formateador JSON</a></li>
+          <li><a href="html-a-pdf.html">HTML a PDF</a></li>
+          <li><a href="temporizador.html">Temporizador</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 PDFSpark — Todos los derechos reservados</span>
+      <span>Hecho con ♥ para hispanohablantes · <a href="#">Privacidad</a> · <a href="#">Términos</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+<script>
+const ICO_CLASS = { imagen:'ico-b', pdf:'ico-r', conv:'ico-g', texto:'ico-p', util:'ico-o' };
+
+function renderTools(cat) {
+  const grid = document.getElementById('toolsGrid');
+  const list = cat === 'all' ? TOOLS : TOOLS.filter(t => t.cat === cat);
+  grid.innerHTML = list.map(t => `
+    <a href="${t.file}" class="tool-card" data-cat="${t.cat}">
+      <div class="tool-ico ${ICO_CLASS[t.cat]||'ico-b'}">${t.icon}</div>
+      <span class="tbadge ${t.badge}">${t.badgeTxt}</span>
+      <div class="tool-name">${t.name}</div>
+      <div class="tool-desc">${t.desc}</div>
+      <div class="tool-btn">Usar herramienta →</div>
+    </a>`).join('');
+}
+
+function ft(cat, btn) {
+  document.querySelectorAll('.ftab').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  renderTools(cat);
+}
+
+renderTools('all');
+initPage('');
+
+/* smooth scroll for nav anchors */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior:'smooth', block:'start' }); }
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Excel / CSV a PDF Gratis — ToolSpark</title>
+<meta name="description" content="Convierte tablas CSV o Excel a un PDF bien maquetado con tabla.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="adminBox"><h6>⚙ Panel Admin</h6>
+  <div class="adm-row"><span>Visitas hoy</span><span class="adm-val" id="adm-today">0</span></div>
+  <div class="adm-row"><span>Total</span><span class="adm-val" id="adm-total">0</span></div>
+  <div class="adm-row"><span>Última visita</span><span class="adm-val" id="adm-last">—</span></div>
+  <div class="adm-row"><span>Mensajes</span><span class="adm-val" id="adm-msgs">0</span></div>
+</div>
+<div class="topbar">⚡ Herramientas <span>100% gratuitas</span> — Sin registro</div>
+<header><nav>
+  <a href="index.html" class="logo"><div class="logo-mark">TS</div><div class="logo-name">Tool<em>Spark</em></div></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Todas</a></li>
+    <li><a href="index.html#imagenes">Imágenes</a></li>
+    <li><a href="index.html#pdf">PDF</a></li>
+    <li><a href="index.html#conversion" class="active">Conversión</a></li>
+    <li><a href="index.html#texto">Texto</a></li>
+    <li><a href="index.html#contacto" class="nav-cta">Contacto</a></li>
+  </ul>
+</nav></header>
+<div class="stripe"></div>
+<section class="tool-hero">
+  <div class="breadcrumb"><a href="index.html">Inicio</a> › <a href="index.html#conversion">Conversión</a> › Excel / CSV a PDF</div>
+  <h1>📊 Excel / CSV a PDF</h1>
+  <p>Convierte tablas CSV o Excel a un PDF bien maquetado con tabla.</p>
+</section>
+<div class="tool-wrap">
+  <a href="index.html" class="back-link">← Volver a todas las herramientas</a>
+  
+<div class="card">
+  <div class="card-title">📁 Selecciona tu archivo CSV o Excel</div>
+  <div class="upload-zone" id="dropZone"><input type="file" id="fileInput" accept=".csv,.xlsx,.xls,text/csv">
+    <span class="upload-icon">📊</span><h3>Arrastra tu CSV o Excel aquí</h3>
+    <p>.csv · .xlsx · .xls — Los datos se maquetan en una tabla PDF</p>
+  </div>
+</div>
+<div class="card" id="previewCard" style="display:none">
+  <div class="card-title">👁️ Vista previa de datos</div>
+  <div style="overflow-x:auto;max-height:280px;overflow-y:auto;">
+    <table id="dataTable" style="width:100%;border-collapse:collapse;font-size:12px;"></table>
+  </div>
+  <div style="margin-top:10px;font-size:12px;color:var(--muted);" id="dataInfo"></div>
+</div>
+<div class="card" id="optCard" style="display:none">
+  <div class="card-title">⚙️ Configuración del PDF</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+    <div><label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">Tamaño de página</label>
+      <select id="pgSize" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:Inter,sans-serif;font-size:13px;outline:none;background:#fff;">
+        <option value="a4">A4 Vertical</option><option value="a4l">A4 Horizontal</option>
+        <option value="a3">A3 Horizontal</option>
+      </select>
+    </div>
+    <div><label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">Título del documento</label>
+      <input type="text" id="docTitle" placeholder="Mi tabla de datos" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:Inter,sans-serif;font-size:13px;outline:none;">
+    </div>
+  </div>
+  <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;margin-bottom:14px;"><input type="checkbox" id="stripedRows" checked> Filas alternadas con color</label>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;">
+    <button class="btn btn-blue" onclick="generateTablePDF()">📊 Generar PDF</button>
+    <button class="btn btn-ghost" onclick="resetTool()">🗑 Limpiar</button>
+  </div>
+</div>
+<div class="progress-wrap" id="pw" style="display:none"><div class="progress-bar"><div class="progress-fill" id="pf"></div></div></div>
+<div class="result-box" id="resultBox">
+  <div class="result-success"><div class="result-icon">✅</div>
+    <div class="result-info"><h4>¡PDF generado con tu tabla!</h4><p id="rMeta">Descarga iniciada.</p></div>
+  </div>
+</div>
+  <div class="ad-slot" style="margin-top:24px;"><strong>Espacio publicitario</strong>Google AdSense 728×90</div>
+</div>
+<section class="related-section">
+  <div style="max-width:1200px;margin:0 auto;"><h3 style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px;">Herramientas relacionadas</h3>
+  <p style="font-size:13px;color:var(--muted);">Más herramientas de conversión</p></div>
+  <div class="related-grid" id="relatedGrid"></div>
+</section>
+<footer><div class="footer-in">
+  <div class="footer-top">
+    <div class="footer-brand"><div class="fn">Tool<em>Spark</em></div><p>37 herramientas gratuitas.</p></div>
+    <div class="footer-col"><h5>Conversión</h5><ul>
+      <li><a href="word-a-pdf.html">Word a PDF</a></li><li><a href="pdf-a-word.html">PDF a Word</a></li>
+      <li><a href="excel-a-pdf.html">Excel a PDF</a></li><li><a href="pdf-a-excel.html">PDF a Excel</a></li>
+      <li><a href="ppt-a-pdf.html">PowerPoint a PDF</a></li><li><a href="pdf-a-ppt.html">PDF a PowerPoint</a></li>
+      <li><a href="html-a-pdf.html">HTML a PDF</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Sitio</h5><ul>
+      <li><a href="index.html">Inicio</a></li><li><a href="index.html#contacto">Contacto</a></li><li><a href="#">Privacidad</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 ToolSpark</span><a href="index.html">← Inicio</a></div>
+</div></footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script><script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="shared.js"></script>
+<script>
+initPage('excel-a-pdf');
+
+let tableData=[];
+setupDrop('dropZone','fileInput',fl=>loadFile(fl[0]));
+function loadFile(file){
+  if(!file)return;
+  const name=file.name.toLowerCase();
+  if(name.endsWith('.csv')){
+    const reader=new FileReader();
+    reader.onload=e=>{parseCSV(e.target.result);};reader.readAsText(file,'UTF-8');
+  }else if(name.endsWith('.xlsx')||name.endsWith('.xls')){
+    if(typeof XLSX==='undefined'){alert('Cargando librería Excel...');return;}
+    const reader=new FileReader();
+    reader.onload=e=>{
+      const wb=XLSX.read(e.target.result,{type:'array'});
+      const ws=wb.Sheets[wb.SheetNames[0]];
+      const data=XLSX.utils.sheet_to_json(ws,{header:1,defval:''});
+      tableData=data;renderPreview();
+    };reader.readAsArrayBuffer(file);
+  }else{alert('Formato no soportado. Usa .csv, .xlsx o .xls');}
+}
+function parseCSV(text){
+  const lines=text.split('\n').filter(l=>l.trim());
+  tableData=lines.map(line=>{
+    const result=[];let cur='',inQ=false;
+    for(let i=0;i<line.length;i++){const c=line[i];if(c==='"')inQ=!inQ;else if(c===','&&!inQ){result.push(cur.trim());cur='';}else cur+=c;}
+    result.push(cur.trim());return result;
+  });
+  renderPreview();
+}
+function renderPreview(){
+  if(!tableData.length)return;
+  const table=document.getElementById('dataTable');
+  table.innerHTML=tableData.map((row,ri)=>`<tr>${row.map(cell=>`<${ri===0?'th':'td'} style="border:1px solid var(--border);padding:5px 8px;text-align:left;background:${ri===0?'rgba(0,77,152,.08)':'transparent'};font-weight:${ri===0?'700':'400'};font-size:11.5px;">${String(cell).substring(0,60)}</${ri===0?'th':'td'}>`).join('')}</tr>`).join('');
+  document.getElementById('dataInfo').textContent=`${tableData.length-1} filas · ${tableData[0]?.length||0} columnas`;
+  document.getElementById('previewCard').style.display='block';
+  document.getElementById('optCard').style.display='block';
+}
+async function generateTablePDF(){
+  if(!tableData.length)return;
+  if(typeof PDFLib==='undefined'){alert('Cargando librería PDF...');return;}
+  document.getElementById('pw').style.display='block';document.getElementById('pf').style.width='20%';
+  try{
+    const sizes={a4:[595.28,841.89],a4l:[841.89,595.28],a3:[1190.55,841.89]};
+    const pgKey=document.getElementById('pgSize').value;
+    const [pageW,pageH]=sizes[pgKey];
+    const margin=40,headerH=22,rowH=18,fontSize=9,titleSize=14;
+    const pdfDoc=await PDFLib.PDFDocument.create();
+    const font=await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
+    const fontB=await pdfDoc.embedFont(PDFLib.StandardFonts.HelveticaBold);
+    const striped=document.getElementById('stripedRows').checked;
+    const title=document.getElementById('docTitle').value||'Tabla de datos';
+    const cols=tableData[0]?.length||1;
+    const colW=(pageW-margin*2)/cols;
+    let page=pdfDoc.addPage([pageW,pageH]);
+    let y=pageH-margin;
+    // Title
+    page.drawText(title,{x:margin,y,size:titleSize,font:fontB,color:PDFLib.rgb(0,0.3,0.6)});
+    y-=titleSize+10;
+    document.getElementById('pf').style.width='50%';
+    const rows=tableData;
+    for(let ri=0;ri<rows.length;ri++){
+      if(y<margin+rowH){page=pdfDoc.addPage([pageW,pageH]);y=pageH-margin;}
+      const isHeader=ri===0;const h=isHeader?headerH:rowH;
+      // row bg
+      if(isHeader){page.drawRectangle({x:margin,y:y-h,width:pageW-margin*2,height:h,color:PDFLib.rgb(0,0.3,0.6)});}
+      else if(striped&&ri%2===0){page.drawRectangle({x:margin,y:y-h,width:pageW-margin*2,height:h,color:PDFLib.rgb(0.95,0.97,1)});}
+      rows[ri].forEach((cell,ci)=>{
+        const txt=String(cell).substring(0,Math.floor(colW/5.5));
+        const textColor=isHeader?PDFLib.rgb(1,1,1):PDFLib.rgb(0.1,0.1,0.1);
+        try{page.drawText(txt,{x:margin+ci*colW+4,y:y-h+5,size:fontSize,font:isHeader?fontB:font,color:textColor});}catch(e){}
+      });
+      // borders
+      page.drawLine({start:{x:margin,y:y-h},end:{x:pageW-margin,y:y-h},thickness:0.5,color:PDFLib.rgb(0.8,0.8,0.8)});
+      y-=h;
+    }
+    document.getElementById('pf').style.width='95%';
+    const out=await pdfDoc.save();document.getElementById('pf').style.width='100%';
+    const blob=new Blob([out],{type:'application/pdf'});
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='tabla.pdf';a.click();
+    document.getElementById('resultBox').classList.add('show');
+    document.getElementById('rMeta').textContent=`${rows.length-1} filas · ${cols} columnas · ${fmtSize(blob.size)}`;
+  }catch(e){console.error(e);alert('Error al generar el PDF.');}
+  document.getElementById('pw').style.display='none';
+}
+function resetTool(){tableData=[];document.getElementById('fileInput').value='';document.getElementById('previewCard').style.display='none';document.getElementById('optCard').style.display='none';document.getElementById('resultBox').classList.remove('show');}
+
+</script>
+</body>
+</html>

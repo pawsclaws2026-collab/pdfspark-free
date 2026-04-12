@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recortar Imagen Gratis — ToolSpark</title>
+<meta name="description" content="Recorta imágenes online gratis con selección visual interactiva. Sin registro.">
+<link rel="stylesheet" href="style.css">
+<style>
+.crop-ws{position:relative;overflow:hidden;background:#1a1a2e;border-radius:var(--rs);cursor:crosshair;user-select:none;touch-action:none;line-height:0;}
+.crop-canvas{display:block;max-width:100%;}
+.sel-box{position:absolute;border:2px solid #fff;box-shadow:0 0 0 9999px rgba(0,0,0,.55);cursor:move;pointer-events:all;}
+.hdl{position:absolute;width:10px;height:10px;background:#fff;border-radius:2px;}
+.hdl-tl{top:-5px;left:-5px;cursor:nw-resize;}
+.hdl-tr{top:-5px;right:-5px;cursor:ne-resize;}
+.hdl-bl{bottom:-5px;left:-5px;cursor:sw-resize;}
+.hdl-br{bottom:-5px;right:-5px;cursor:se-resize;}
+.ratio-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:18px;}
+.ratio-btn{padding:10px 6px;border:1.5px solid var(--border);border-radius:var(--rs);background:#fff;cursor:pointer;text-align:center;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:var(--muted);transition:all .15s;}
+.ratio-btn:hover{border-color:var(--blue);color:var(--blue);}
+.ratio-btn.on{background:var(--blue);border-color:var(--blue);color:#fff;}
+.crop-info{font-size:12px;color:var(--muted);text-align:center;padding:8px 0;}
+.manual-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px;}
+.manual-row label{font-size:11px;color:var(--muted);display:block;margin-bottom:3px;}
+.manual-row input{padding:8px;border:1.5px solid var(--border);border-radius:var(--rs);font-size:13px;font-family:'Inter',sans-serif;outline:none;text-align:center;width:100%;}
+.manual-row input:focus{border-color:var(--blue);}
+</style>
+</head>
+<body>
+<div id="adminBox"><h6>⚙ Panel Admin</h6>
+  <div class="adm-row"><span>Visitas hoy</span><span class="adm-val" id="adm-today">0</span></div>
+  <div class="adm-row"><span>Total</span><span class="adm-val" id="adm-total">0</span></div>
+  <div class="adm-row"><span>Última visita</span><span class="adm-val" id="adm-last">—</span></div>
+  <div class="adm-row"><span>Mensajes</span><span class="adm-val" id="adm-msgs">0</span></div>
+</div>
+<div class="topbar">⚡ Herramientas <span>100% gratuitas</span> — Sin registro</div>
+<header><nav>
+  <a href="index.html" class="logo"><div class="logo-mark">TS</div><div class="logo-name">Tool<em>Spark</em></div></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Herramientas</a></li>
+    <li><a href="comprimir-imagenes.html">Comprimir</a></li>
+    <li><a href="convertir-imagen.html">Convertir</a></li>
+    <li><a href="recortar-imagen.html" class="active">Recortar</a></li>
+    <li><a href="unir-pdf.html">PDF</a></li>
+    <li><a href="index.html#contacto" class="nav-cta">Contacto</a></li>
+  </ul>
+</nav></header>
+<div class="stripe"></div>
+
+<section class="tool-hero">
+  <div class="breadcrumb"><a href="index.html">Inicio</a> › Recortar imagen</div>
+  <h1>✂️ Recortar imagen</h1>
+  <p>Selecciona visualmente el área de recorte o elige una proporción predefinida</p>
+</section>
+
+<div class="tool-wrap" style="max-width:900px;">
+  <a href="index.html" class="back-link">← Volver a todas las herramientas</a>
+
+  <div class="card" id="uploadCard">
+    <div class="card-title">📁 Selecciona una imagen</div>
+    <div class="upload-zone" id="dropZone">
+      <input type="file" id="fileInput" accept="image/*">
+      <span class="upload-icon">✂️</span>
+      <h3>Arrastra una imagen aquí</h3>
+      <p>JPG · PNG · WebP — Una imagen a la vez</p>
+    </div>
+  </div>
+
+  <div id="editorWrap" style="display:none;">
+    <div class="card">
+      <div class="card-title">🎯 Proporción de recorte</div>
+      <div class="ratio-grid">
+        <div class="ratio-btn on" onclick="setRatio(0,0,this)">Libre</div>
+        <div class="ratio-btn" onclick="setRatio(1,1,this)">1 : 1</div>
+        <div class="ratio-btn" onclick="setRatio(4,3,this)">4 : 3</div>
+        <div class="ratio-btn" onclick="setRatio(16,9,this)">16 : 9</div>
+        <div class="ratio-btn" onclick="setRatio(3,2,this)">3 : 2</div>
+        <div class="ratio-btn" onclick="setRatio(2,3,this)">2 : 3</div>
+        <div class="ratio-btn" onclick="setRatio(9,16,this)">9 : 16</div>
+        <div class="ratio-btn" onclick="setRatio(1,1.4142,this)">A4</div>
+      </div>
+      <div class="card-title" style="margin-top:4px;">📐 Posición exacta (px)</div>
+      <div class="manual-row">
+        <div><label>X</label><input type="number" id="mX" value="0" onchange="applyManual()"></div>
+        <div><label>Y</label><input type="number" id="mY" value="0" onchange="applyManual()"></div>
+        <div><label>Ancho</label><input type="number" id="mW" value="100" onchange="applyManual()"></div>
+        <div><label>Alto</label><input type="number" id="mH" value="100" onchange="applyManual()"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🖼️ Selecciona el área de recorte</div>
+      <div class="crop-ws" id="ws">
+        <canvas id="mainCanvas" class="crop-canvas"></canvas>
+        <div class="sel-box" id="selBox" style="display:none;">
+          <div class="hdl hdl-tl" data-h="tl"></div>
+          <div class="hdl hdl-tr" data-h="tr"></div>
+          <div class="hdl hdl-bl" data-h="bl"></div>
+          <div class="hdl hdl-br" data-h="br"></div>
+        </div>
+      </div>
+      <div class="crop-info" id="cropInfo">Arrastra sobre la imagen para seleccionar el área a recortar</div>
+    </div>
+
+    <div class="card" style="display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn btn-blue" onclick="doCrop()">✂️ Recortar y descargar</button>
+      <button class="btn btn-ghost" onclick="resetSel()">↺ Restablecer selección</button>
+      <button class="btn btn-ghost" onclick="changeImg()">📁 Cambiar imagen</button>
+    </div>
+
+    <div class="result-box" id="resultBox">
+      <div class="result-success">
+        <div class="result-icon">✅</div>
+        <div class="result-info"><h4>¡Imagen recortada!</h4><p id="rMeta">Descarga iniciada.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ad-slot" style="margin-top:24px;"><strong>Espacio publicitario</strong>Google AdSense 728×90</div>
+</div>
+
+<section class="related-section">
+  <div style="max-width:1200px;margin:0 auto;">
+    <h3 style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px;">Otras herramientas</h3>
+    <p style="font-size:13px;color:var(--muted);">Descubre más herramientas gratuitas de ToolSpark</p>
+  </div>
+  <div class="related-grid" id="relatedGrid"></div>
+</section>
+
+<footer><div class="footer-in">
+  <div class="footer-top">
+    <div class="footer-brand"><div class="fn">Tool<em>Spark</em></div><p>Herramientas gratuitas para PDF e imágenes.</p></div>
+    <div class="footer-col"><h5>Herramientas</h5><ul>
+      <li><a href="comprimir-imagenes.html">Comprimir imágenes</a></li>
+      <li><a href="convertir-imagen.html">Convertir imagen</a></li>
+      <li><a href="recortar-imagen.html">Recortar imagen</a></li>
+      <li><a href="unir-pdf.html">Unir PDF</a></li>
+      <li><a href="dividir-pdf.html">Dividir PDF</a></li>
+      <li><a href="contar-palabras.html">Contador de palabras</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Sitio</h5><ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="index.html#contacto">Contacto</a></li>
+      <li><a href="#">Privacidad</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 ToolSpark</span><a href="index.html">← Volver al inicio</a></div>
+</div></footer>
+
+<script src="shared.js"></script>
+<script>
+initPage('recortar-imagen');
+let img=null,scaleX=1,scaleY=1,sel={x:0,y:0,w:0,h:0};
+let dragging=false,dragMode=null,startX=0,startY=0,startSel=null;
+let ratioW=0,ratioH=0;
+const canvas=document.getElementById('mainCanvas');
+const ctx=canvas.getContext('2d');
+const selBox=document.getElementById('selBox');
+const ws=document.getElementById('ws');
+
+setupDrop('dropZone','fileInput',fl=>loadFile(fl[0]));
+
+function loadFile(file){
+  if(!file||!file.type.startsWith('image/'))return;
+  const url=URL.createObjectURL(file);
+  const i=new Image();
+  i.onload=()=>{
+    img=i;
+    document.getElementById('uploadCard').style.display='none';
+    document.getElementById('editorWrap').style.display='block';
+    drawCanvas(); initSel();
+  };
+  i.src=url;
+}
+
+function drawCanvas(){
+  const maxW=ws.clientWidth||700;
+  const ratio=Math.min(maxW/img.naturalWidth,500/img.naturalHeight,1);
+  canvas.width=Math.round(img.naturalWidth*ratio);
+  canvas.height=Math.round(img.naturalHeight*ratio);
+  scaleX=img.naturalWidth/canvas.width; scaleY=img.naturalHeight/canvas.height;
+  ctx.drawImage(img,0,0,canvas.width,canvas.height);
+}
+
+function initSel(){sel={x:0,y:0,w:canvas.width,h:canvas.height};updateSel();}
+
+function updateSel(){
+  selBox.style.display='block';
+  selBox.style.left=sel.x+'px'; selBox.style.top=sel.y+'px';
+  selBox.style.width=sel.w+'px'; selBox.style.height=sel.h+'px';
+  const rW=Math.round(sel.w*scaleX), rH=Math.round(sel.h*scaleY);
+  document.getElementById('cropInfo').textContent=`Selección: ${rW} × ${rH} px (original)`;
+  document.getElementById('mX').value=Math.round(sel.x*scaleX);
+  document.getElementById('mY').value=Math.round(sel.y*scaleY);
+  document.getElementById('mW').value=rW; document.getElementById('mH').value=rH;
+}
+
+ws.addEventListener('mousedown',e=>{
+  const rect=canvas.getBoundingClientRect();
+  const x=e.clientX-rect.left, y=e.clientY-rect.top;
+  const h=e.target.dataset.h;
+  if(h){dragMode=h;}
+  else if(e.target===canvas){dragMode='new';sel.x=x;sel.y=y;sel.w=0;sel.h=0;}
+  else{dragMode='move';}
+  startX=x;startY=y;startSel={...sel};dragging=true;
+  e.preventDefault();
+});
+window.addEventListener('mousemove',e=>{
+  if(!dragging)return;
+  const rect=canvas.getBoundingClientRect();
+  const x=e.clientX-rect.left, y=e.clientY-rect.top;
+  const dx=x-startX, dy=y-startY;
+  if(dragMode==='new'){sel.w=x-sel.x;sel.h=y-sel.y;applyRatio();}
+  else if(dragMode==='move'){sel.x=startSel.x+dx;sel.y=startSel.y+dy;}
+  else if(dragMode==='br'){sel.w=startSel.w+dx;sel.h=startSel.h+dy;applyRatio();}
+  else if(dragMode==='bl'){sel.x=startSel.x+dx;sel.w=startSel.w-dx;sel.h=startSel.h+dy;applyRatio();}
+  else if(dragMode==='tr'){sel.y=startSel.y+dy;sel.w=startSel.w+dx;sel.h=startSel.h-dy;applyRatio();}
+  else if(dragMode==='tl'){sel.x=startSel.x+dx;sel.y=startSel.y+dy;sel.w=startSel.w-dx;sel.h=startSel.h-dy;applyRatio();}
+  clamp();updateSel();
+});
+window.addEventListener('mouseup',()=>{dragging=false;dragMode=null;});
+
+function applyRatio(){if(ratioW)sel.h=sel.w*(ratioH/ratioW);}
+function clamp(){
+  if(sel.w<10)sel.w=10; if(sel.h<10)sel.h=10;
+  if(sel.x<0)sel.x=0; if(sel.y<0)sel.y=0;
+  if(sel.x+sel.w>canvas.width)sel.w=canvas.width-sel.x;
+  if(sel.y+sel.h>canvas.height)sel.h=canvas.height-sel.y;
+}
+function setRatio(w,h,el){
+  document.querySelectorAll('.ratio-btn').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on'); ratioW=w; ratioH=h;
+  if(w){sel.h=sel.w*(h/w);clamp();updateSel();}
+}
+function applyManual(){
+  sel.x=parseInt(document.getElementById('mX').value)/scaleX;
+  sel.y=parseInt(document.getElementById('mY').value)/scaleY;
+  sel.w=parseInt(document.getElementById('mW').value)/scaleX;
+  sel.h=parseInt(document.getElementById('mH').value)/scaleY;
+  clamp();updateSel();
+}
+function doCrop(){
+  if(!img)return;
+  const oc=document.createElement('canvas');
+  const rx=Math.round(sel.x*scaleX),ry=Math.round(sel.y*scaleY);
+  const rw=Math.round(sel.w*scaleX),rh=Math.round(sel.h*scaleY);
+  oc.width=rw;oc.height=rh;
+  oc.getContext('2d').drawImage(img,rx,ry,rw,rh,0,0,rw,rh);
+  oc.toBlob(blob=>{
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download='recortada.jpg';a.click();
+    document.getElementById('resultBox').classList.add('show');
+    document.getElementById('rMeta').textContent=`${rw} × ${rh} px — descarga iniciada.`;
+  },'image/jpeg',0.92);
+}
+function resetSel(){initSel();}
+function changeImg(){
+  img=null;
+  document.getElementById('uploadCard').style.display='block';
+  document.getElementById('editorWrap').style.display='none';
+  document.getElementById('fileInput').value='';
+  document.getElementById('resultBox').classList.remove('show');
+}
+</script>
+</body>
+</html>

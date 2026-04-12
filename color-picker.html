@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selector de color — ToolSpark</title>
+<meta name="description" content="Elige colores y obtén su código HEX, RGB, HSL y más formatos al instante.">
+<link rel="stylesheet" href="style.css">
+<style>.color-out-box{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--rs);padding:10px 12px;display:flex;align-items:center;gap:8px;}.co-label{font-size:11px;font-weight:700;color:var(--muted);min-width:80px;text-transform:uppercase;}.co-val{flex:1;font-family:monospace;font-size:13px;color:var(--text);}.co-cp{background:none;border:none;cursor:pointer;font-size:14px;padding:4px;}</style>
+</head>
+<body>
+<div id="adminBox"><h6>⚙ Panel Admin</h6>
+  <div class="adm-row"><span>Visitas hoy</span><span class="adm-val" id="adm-today">0</span></div>
+  <div class="adm-row"><span>Total</span><span class="adm-val" id="adm-total">0</span></div>
+  <div class="adm-row"><span>Última visita</span><span class="adm-val" id="adm-last">—</span></div>
+  <div class="adm-row"><span>Mensajes</span><span class="adm-val" id="adm-msgs">0</span></div>
+</div>
+<div class="topbar">⚡ Herramientas <span>100% gratuitas</span> — Sin registro</div>
+<header>
+  <nav>
+    <a href="index.html" class="logo"><div class="logo-mark">TS</div><div class="logo-name">Tool<em>Spark</em></div></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Herramientas</a></li>
+      <li><a href="index.html?cat=imagen">Imágenes</a></li>
+      <li><a href="index.html?cat=pdf">PDF</a></li>
+      <li><a href="index.html?cat=texto">Texto</a></li>
+      <li><a href="index.html?cat=util">Utilidades</a></li>
+      <li><a href="index.html#contacto" class="nav-cta">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+<div class="stripe"></div>
+<section class="tool-hero">
+  <div class="breadcrumb"><a href="index.html">Inicio</a> › Selector de color</div>
+  <h1>🎨 Selector de color</h1>
+  <p>Elige colores y obtén su código HEX, RGB, HSL y más formatos al instante.</p>
+</section>
+<div class="tool-wrap">
+  <a href="index.html" class="back-link">← Volver a todas las herramientas</a>
+  
+<div class="card">
+  <div class="card-title">🎨 Selector de color</div>
+  <div style="display:flex;gap:16px;align-items:center;margin-bottom:20px;flex-wrap:wrap;">
+    <input type="color" id="cpPicker" value="#004D98" style="width:80px;height:80px;border:none;border-radius:12px;cursor:pointer;padding:0;" oninput="updateColor(this.value)">
+    <div style="flex:1;">
+      <div id="cpSwatch" style="height:60px;border-radius:var(--rs);background:#004D98;margin-bottom:8px;"></div>
+      <input type="text" id="cpHex" value="#004D98" placeholder="#000000" style="width:100%;padding:8px 12px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:monospace;font-size:14px;outline:none;" oninput="if(this.value.match(/^#[0-9a-f]{6}$/i))updateColor(this.value)">
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+    <div class="color-out-box" id="boxRGB"><div class="co-label">RGB</div><div class="co-val" id="vRGB"></div><button class="co-cp" onclick="copyVal('vRGB')">📋</button></div>
+    <div class="color-out-box" id="boxHSL"><div class="co-label">HSL</div><div class="co-val" id="vHSL"></div><button class="co-cp" onclick="copyVal('vHSL')">📋</button></div>
+    <div class="color-out-box" id="boxHEX"><div class="co-label">HEX</div><div class="co-val" id="vHEX"></div><button class="co-cp" onclick="copyVal('vHEX')">📋</button></div>
+    <div class="color-out-box" id="boxCSS"><div class="co-label">CSS variable</div><div class="co-val" id="vCSS"></div><button class="co-cp" onclick="copyVal('vCSS')">📋</button></div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">🎨 Paleta de colores relacionados</div>
+  <div id="palette" style="display:flex;gap:8px;flex-wrap:wrap;"></div>
+</div>
+  <div class="ad-slot" style="margin-top:24px;"><strong>Espacio publicitario</strong>Google AdSense 728×90</div>
+</div>
+<section class="related-section">
+  <div style="max-width:1200px;margin:0 auto;">
+    <h3 style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px;">Otras herramientas</h3>
+    <p style="font-size:13px;color:var(--muted);">Descubre más herramientas gratuitas de ToolSpark</p>
+  </div>
+  <div class="related-grid" id="relatedGrid"></div>
+</section>
+<footer>
+  <div class="footer-in">
+    <div class="footer-top">
+      <div class="footer-brand"><div class="fn">Tool<em>Spark</em></div><p>30 herramientas gratuitas para PDF, imágenes y más.</p></div>
+      <div class="footer-col"><h5>Herramientas populares</h5><ul>
+        <li><a href="comprimir-imagenes.html">Comprimir imágenes</a></li>
+        <li><a href="unir-pdf.html">Unir PDF</a></li>
+        <li><a href="generador-qr.html">Generador de QR</a></li>
+        <li><a href="contar-palabras.html">Contador de palabras</a></li>
+        <li><a href="generador-contrasena.html">Generador contraseña</a></li>
+        <li><a href="color-picker.html">Selector de color</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Sitio</h5><ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
+        <li><a href="#">Privacidad</a></li>
+        <li><a href="#">Términos</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 ToolSpark — Todos los derechos reservados</span>
+      <a href="index.html">← Volver al inicio</a>
+    </div>
+  </div>
+</footer>
+<script src="shared.js"></script>
+<script>
+initPage('color-picker');
+
+function updateColor(hex){
+  if(!hex.match(/^#[0-9a-f]{6}$/i))return;
+  hex=hex.toLowerCase();
+  document.getElementById('cpPicker').value=hex;
+  document.getElementById('cpHex').value=hex;
+  document.getElementById('cpSwatch').style.background=hex;
+  const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+  const rn=r/255,gn=g/255,bn=b/255;
+  const max=Math.max(rn,gn,bn),min=Math.min(rn,gn,bn),l=(max+min)/2;
+  let h=0,s=0;
+  if(max!==min){s=l>0.5?(max-min)/(2-max-min):(max-min)/(max+min);if(max===rn)h=(gn-bn)/(max-min)+(gn<bn?6:0);else if(max===gn)h=(bn-rn)/(max-min)+2;else h=(rn-gn)/(max-min)+4;h=Math.round(h*60);}
+  s=Math.round(s*100);const lp=Math.round(l*100);
+  document.getElementById('vRGB').textContent=`rgb(${r}, ${g}, ${b})`;
+  document.getElementById('vHSL').textContent=`hsl(${h}, ${s}%, ${lp}%)`;
+  document.getElementById('vHEX').textContent=hex.toUpperCase();
+  document.getElementById('vCSS').textContent=`--color: ${hex};`;
+  const pal=document.getElementById('palette');
+  pal.innerHTML='';
+  [-40,-25,-10,0,10,25,40].forEach(offset=>{
+    const nr=Math.min(255,Math.max(0,r+offset*2));
+    const ng=Math.min(255,Math.max(0,g+offset*2));
+    const nb=Math.min(255,Math.max(0,b+offset*2));
+    const ph=`#${nr.toString(16).padStart(2,'0')}${ng.toString(16).padStart(2,'0')}${nb.toString(16).padStart(2,'0')}`;
+    const d=document.createElement('div');
+    d.style.cssText=`width:40px;height:40px;border-radius:8px;background:${ph};cursor:pointer;border:2px solid transparent;transition:all .15s;title="${ph}"`;
+    d.title=ph;d.onclick=()=>updateColor(ph);
+    pal.appendChild(d);
+  });
+}
+async function copyVal(id){try{await navigator.clipboard.writeText(document.getElementById(id).textContent);alert('¡Copiado!');}catch{}}
+updateColor('#004D98');
+
+</script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invertir texto — ToolSpark</title>
+<meta name="description" content="Invierte el orden de los caracteres, palabras o líneas de tu texto.">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<div id="adminBox"><h6>⚙ Panel Admin</h6>
+  <div class="adm-row"><span>Visitas hoy</span><span class="adm-val" id="adm-today">0</span></div>
+  <div class="adm-row"><span>Total</span><span class="adm-val" id="adm-total">0</span></div>
+  <div class="adm-row"><span>Última visita</span><span class="adm-val" id="adm-last">—</span></div>
+  <div class="adm-row"><span>Mensajes</span><span class="adm-val" id="adm-msgs">0</span></div>
+</div>
+<div class="topbar">⚡ Herramientas <span>100% gratuitas</span> — Sin registro</div>
+<header>
+  <nav>
+    <a href="index.html" class="logo"><div class="logo-mark">TS</div><div class="logo-name">Tool<em>Spark</em></div></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Herramientas</a></li>
+      <li><a href="index.html?cat=imagen">Imágenes</a></li>
+      <li><a href="index.html?cat=pdf">PDF</a></li>
+      <li><a href="index.html?cat=texto">Texto</a></li>
+      <li><a href="index.html?cat=util">Utilidades</a></li>
+      <li><a href="index.html#contacto" class="nav-cta">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+<div class="stripe"></div>
+<section class="tool-hero">
+  <div class="breadcrumb"><a href="index.html">Inicio</a> › Invertir texto</div>
+  <h1>↩️ Invertir texto</h1>
+  <p>Invierte el orden de los caracteres, palabras o líneas de tu texto.</p>
+</section>
+<div class="tool-wrap">
+  <a href="index.html" class="back-link">← Volver a todas las herramientas</a>
+  
+<div class="card">
+  <div class="card-title">↩️ Invertir texto</div>
+  <textarea id="taIn" class="tool-textarea" placeholder="Escribe o pega el texto a invertir..." style="min-height:150px;width:100%;padding:14px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:Inter,sans-serif;font-size:14px;resize:vertical;outline:none;"></textarea>
+</div>
+<div class="card">
+  <div class="card-title">⚙️ Modo de inversión</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;">
+    <button class="btn btn-blue" onclick="inv('chars')">↩ Invertir caracteres</button>
+    <button class="btn btn-ghost" onclick="inv('words')">↩ Invertir palabras</button>
+    <button class="btn btn-ghost" onclick="inv('lines')">↩ Invertir líneas</button>
+    <button class="btn btn-ghost" onclick="inv('mirror')">🪞 Texto espejo</button>
+  </div>
+  <label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">Resultado:</label>
+  <textarea id="taOut" readonly style="min-height:150px;width:100%;padding:14px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:Inter,sans-serif;font-size:14px;resize:vertical;outline:none;background:var(--bg);"></textarea>
+  <div style="margin-top:10px;"><button class="btn btn-gold" onclick="copyOut()">📋 Copiar resultado</button></div>
+</div>
+  <div class="ad-slot" style="margin-top:24px;"><strong>Espacio publicitario</strong>Google AdSense 728×90</div>
+</div>
+<section class="related-section">
+  <div style="max-width:1200px;margin:0 auto;">
+    <h3 style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px;">Otras herramientas</h3>
+    <p style="font-size:13px;color:var(--muted);">Descubre más herramientas gratuitas de ToolSpark</p>
+  </div>
+  <div class="related-grid" id="relatedGrid"></div>
+</section>
+<footer>
+  <div class="footer-in">
+    <div class="footer-top">
+      <div class="footer-brand"><div class="fn">Tool<em>Spark</em></div><p>30 herramientas gratuitas para PDF, imágenes y más.</p></div>
+      <div class="footer-col"><h5>Herramientas populares</h5><ul>
+        <li><a href="comprimir-imagenes.html">Comprimir imágenes</a></li>
+        <li><a href="unir-pdf.html">Unir PDF</a></li>
+        <li><a href="generador-qr.html">Generador de QR</a></li>
+        <li><a href="contar-palabras.html">Contador de palabras</a></li>
+        <li><a href="generador-contrasena.html">Generador contraseña</a></li>
+        <li><a href="color-picker.html">Selector de color</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Sitio</h5><ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
+        <li><a href="#">Privacidad</a></li>
+        <li><a href="#">Términos</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 ToolSpark — Todos los derechos reservados</span>
+      <a href="index.html">← Volver al inicio</a>
+    </div>
+  </div>
+</footer>
+<script src="shared.js"></script>
+<script>
+initPage('invertir-texto');
+
+const MIRROR={'a':'ɐ','b':'q','c':'ɔ','d':'p','e':'ǝ','f':'ɟ','g':'ƃ','h':'ɥ','i':'ᴉ','j':'ɾ','k':'ʞ','l':'l','m':'ɯ','n':'u','o':'o','p':'d','q':'b','r':'ɹ','s':'s','t':'ʇ','u':'n','v':'ʌ','w':'ʍ','x':'x','y':'ʎ','z':'z'};
+function inv(mode){
+  const v=document.getElementById('taIn').value;
+  let r='';
+  if(mode==='chars')r=[...v].reverse().join('');
+  else if(mode==='words')r=v.split(' ').reverse().join(' ');
+  else if(mode==='lines')r=v.split('\n').reverse().join('\n');
+  else if(mode==='mirror')r=[...v].reverse().map(c=>MIRROR[c.toLowerCase()]??(c)).join('');
+  document.getElementById('taOut').value=r;
+}
+async function copyOut(){try{await navigator.clipboard.writeText(document.getElementById('taOut').value);alert('¡Copiado!');}catch{}}
+
+</script>
+</body>
+</html>

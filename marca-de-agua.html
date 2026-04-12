@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Añadir marca de agua — ToolSpark</title>
+<meta name="description" content="Añade texto como marca de agua a tus fotos directamente en el navegador.">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<div id="adminBox"><h6>⚙ Panel Admin</h6>
+  <div class="adm-row"><span>Visitas hoy</span><span class="adm-val" id="adm-today">0</span></div>
+  <div class="adm-row"><span>Total</span><span class="adm-val" id="adm-total">0</span></div>
+  <div class="adm-row"><span>Última visita</span><span class="adm-val" id="adm-last">—</span></div>
+  <div class="adm-row"><span>Mensajes</span><span class="adm-val" id="adm-msgs">0</span></div>
+</div>
+<div class="topbar">⚡ Herramientas <span>100% gratuitas</span> — Sin registro</div>
+<header>
+  <nav>
+    <a href="index.html" class="logo"><div class="logo-mark">TS</div><div class="logo-name">Tool<em>Spark</em></div></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Herramientas</a></li>
+      <li><a href="index.html?cat=imagen">Imágenes</a></li>
+      <li><a href="index.html?cat=pdf">PDF</a></li>
+      <li><a href="index.html?cat=texto">Texto</a></li>
+      <li><a href="index.html?cat=util">Utilidades</a></li>
+      <li><a href="index.html#contacto" class="nav-cta">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+<div class="stripe"></div>
+<section class="tool-hero">
+  <div class="breadcrumb"><a href="index.html">Inicio</a> › Añadir marca de agua</div>
+  <h1>💧 Añadir marca de agua</h1>
+  <p>Añade texto como marca de agua a tus fotos directamente en el navegador.</p>
+</section>
+<div class="tool-wrap">
+  <a href="index.html" class="back-link">← Volver a todas las herramientas</a>
+  
+<div class="card">
+  <div class="card-title">📁 Selecciona una imagen</div>
+  <div class="upload-zone" id="dropZone"><input type="file" id="fileInput" accept="image/*">
+    <span class="upload-icon">💧</span><h3>Arrastra tu imagen aquí</h3><p>JPG · PNG · WebP</p>
+  </div>
+</div>
+<div class="card" id="optCard" style="display:none">
+  <div class="card-title">⚙️ Configurar marca de agua</div>
+  <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:16px;">
+    <div><label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">Texto de la marca de agua</label>
+      <input type="text" id="wmText" value="© ToolSpark" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:Inter,sans-serif;font-size:14px;outline:none;">
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+      <div><label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">Color</label>
+        <input type="color" id="wmColor" value="#ffffff" style="width:100%;height:40px;border:1.5px solid var(--border);border-radius:var(--rs);cursor:pointer;padding:2px;">
+      </div>
+      <div><label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">Tamaño</label>
+        <input type="number" id="wmSize" value="40" min="10" max="200" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:Inter,sans-serif;font-size:14px;outline:none;">
+      </div>
+      <div><label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">Opacidad %</label>
+        <input type="number" id="wmAlpha" value="50" min="5" max="100" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:Inter,sans-serif;font-size:14px;outline:none;">
+      </div>
+    </div>
+    <div><label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">Posición</label>
+      <select id="wmPos" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:Inter,sans-serif;font-size:14px;outline:none;background:#fff;">
+        <option value="center">Centro</option><option value="br">Abajo derecha</option>
+        <option value="bl">Abajo izquierda</option><option value="tr">Arriba derecha</option>
+        <option value="tl">Arriba izquierda</option><option value="tile">Mosaico (toda la imagen)</option>
+      </select>
+    </div>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;">
+    <button class="btn btn-blue" onclick="applyWM()">💧 Aplicar y descargar</button>
+    <button class="btn btn-ghost" onclick="resetTool()">🗑 Limpiar</button>
+  </div>
+</div>
+<div class="result-box" id="resultBox">
+  <div class="result-success"><div class="result-icon">✅</div>
+    <div class="result-info"><h4>¡Marca de agua aplicada!</h4><p>Descarga iniciada.</p></div>
+  </div>
+</div>
+  <div class="ad-slot" style="margin-top:24px;"><strong>Espacio publicitario</strong>Google AdSense 728×90</div>
+</div>
+<section class="related-section">
+  <div style="max-width:1200px;margin:0 auto;">
+    <h3 style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px;">Otras herramientas</h3>
+    <p style="font-size:13px;color:var(--muted);">Descubre más herramientas gratuitas de ToolSpark</p>
+  </div>
+  <div class="related-grid" id="relatedGrid"></div>
+</section>
+<footer>
+  <div class="footer-in">
+    <div class="footer-top">
+      <div class="footer-brand"><div class="fn">Tool<em>Spark</em></div><p>30 herramientas gratuitas para PDF, imágenes y más.</p></div>
+      <div class="footer-col"><h5>Herramientas populares</h5><ul>
+        <li><a href="comprimir-imagenes.html">Comprimir imágenes</a></li>
+        <li><a href="unir-pdf.html">Unir PDF</a></li>
+        <li><a href="generador-qr.html">Generador de QR</a></li>
+        <li><a href="contar-palabras.html">Contador de palabras</a></li>
+        <li><a href="generador-contrasena.html">Generador contraseña</a></li>
+        <li><a href="color-picker.html">Selector de color</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Sitio</h5><ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
+        <li><a href="#">Privacidad</a></li>
+        <li><a href="#">Términos</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 ToolSpark — Todos los derechos reservados</span>
+      <a href="index.html">← Volver al inicio</a>
+    </div>
+  </div>
+</footer>
+<script src="shared.js"></script>
+<script>
+initPage('marca-de-agua');
+
+let origImg=null;
+setupDrop('dropZone','fileInput',fl=>loadImg(fl[0]));
+function loadImg(file){
+  if(!file||!file.type.startsWith('image/'))return;
+  const url=URL.createObjectURL(file);const i=new Image();
+  i.onload=()=>{origImg=i;document.getElementById('optCard').style.display='block';};i.src=url;
+}
+function applyWM(){
+  if(!origImg)return;
+  const c=document.createElement('canvas');c.width=origImg.naturalWidth;c.height=origImg.naturalHeight;
+  const ctx=c.getContext('2d');ctx.drawImage(origImg,0,0);
+  const txt=document.getElementById('wmText').value||'Watermark';
+  const size=parseInt(document.getElementById('wmSize').value)||40;
+  const color=document.getElementById('wmColor').value;
+  const alpha=parseInt(document.getElementById('wmAlpha').value)/100;
+  const pos=document.getElementById('wmPos').value;
+  ctx.font=`bold ${size}px Inter,sans-serif`;
+  const hex=color.replace('#','');
+  const r=parseInt(hex.slice(0,2),16),g=parseInt(hex.slice(2,4),16),b=parseInt(hex.slice(4,6),16);
+  ctx.fillStyle=`rgba(${r},${g},${b},${alpha})`;
+  const tw=ctx.measureText(txt).width, th=size;
+  const pad=20;
+  let x,y;
+  if(pos==='center'){x=(c.width-tw)/2;y=(c.height+th)/2;}
+  else if(pos==='br'){x=c.width-tw-pad;y=c.height-pad;}
+  else if(pos==='bl'){x=pad;y=c.height-pad;}
+  else if(pos==='tr'){x=c.width-tw-pad;y=th+pad;}
+  else if(pos==='tl'){x=pad;y=th+pad;}
+  else{/* tile */
+    for(let ty=th+pad;ty<c.height;ty+=th*2+pad*3)
+      for(let tx=pad;tx<c.width;tx+=tw+pad*3){ctx.fillText(txt,tx,ty);}
+    x=null;
+  }
+  if(x!==null)ctx.fillText(txt,x,y);
+  c.toBlob(blob=>{const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='con_marca_agua.jpg';a.click();
+    document.getElementById('resultBox').classList.add('show');
+  },'image/jpeg',0.92);
+}
+function resetTool(){origImg=null;document.getElementById('fileInput').value='';document.getElementById('optCard').style.display='none';document.getElementById('resultBox').classList.remove('show');}
+
+</script>
+</body>
+</html>

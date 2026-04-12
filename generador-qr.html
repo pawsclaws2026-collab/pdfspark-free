@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generador de códigos QR — ToolSpark</title>
+<meta name="description" content="Crea códigos QR personalizados para URLs, texto, emails o teléfonos al instante.">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+<div id="adminBox"><h6>⚙ Panel Admin</h6>
+  <div class="adm-row"><span>Visitas hoy</span><span class="adm-val" id="adm-today">0</span></div>
+  <div class="adm-row"><span>Total</span><span class="adm-val" id="adm-total">0</span></div>
+  <div class="adm-row"><span>Última visita</span><span class="adm-val" id="adm-last">—</span></div>
+  <div class="adm-row"><span>Mensajes</span><span class="adm-val" id="adm-msgs">0</span></div>
+</div>
+<div class="topbar">⚡ Herramientas <span>100% gratuitas</span> — Sin registro</div>
+<header>
+  <nav>
+    <a href="index.html" class="logo"><div class="logo-mark">TS</div><div class="logo-name">Tool<em>Spark</em></div></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Herramientas</a></li>
+      <li><a href="index.html?cat=imagen">Imágenes</a></li>
+      <li><a href="index.html?cat=pdf">PDF</a></li>
+      <li><a href="index.html?cat=texto">Texto</a></li>
+      <li><a href="index.html?cat=util">Utilidades</a></li>
+      <li><a href="index.html#contacto" class="nav-cta">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+<div class="stripe"></div>
+<section class="tool-hero">
+  <div class="breadcrumb"><a href="index.html">Inicio</a> › Generador de códigos QR</div>
+  <h1>📱 Generador de códigos QR</h1>
+  <p>Crea códigos QR personalizados para URLs, texto, emails o teléfonos al instante.</p>
+</section>
+<div class="tool-wrap">
+  <a href="index.html" class="back-link">← Volver a todas las herramientas</a>
+  
+<div class="card">
+  <div class="card-title">📱 Configurar QR</div>
+  <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:16px;">
+    <div><label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">Tipo de contenido</label>
+      <select id="qrType" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:Inter,sans-serif;font-size:14px;outline:none;background:#fff;" onchange="updateQRInput()">
+        <option value="url">URL / Enlace web</option><option value="text">Texto libre</option>
+        <option value="email">Email</option><option value="tel">Teléfono</option><option value="wifi">WiFi</option>
+      </select>
+    </div>
+    <div id="qrInputWrap">
+      <label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">URL o contenido</label>
+      <input type="text" id="qrInput" placeholder="https://toolspark.com" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:Inter,sans-serif;font-size:14px;outline:none;">
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <div><label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">Tamaño (px)</label>
+        <input type="number" id="qrSize" value="256" min="128" max="512" step="64" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:Inter,sans-serif;font-size:14px;outline:none;">
+      </div>
+      <div><label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">Corrección de error</label>
+        <select id="qrEC" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:Inter,sans-serif;font-size:14px;outline:none;background:#fff;">
+          <option value="L">L (7%)</option><option value="M" selected>M (15%)</option><option value="Q">Q (25%)</option><option value="H">H (30%)</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn btn-blue btn-lg" onclick="generateQR()">📱 Generar código QR</button>
+  </div>
+</div>
+<div class="card" id="qrResult" style="display:none;text-align:center;">
+  <div class="card-title">✅ Código QR generado</div>
+  <div id="qrContainer" style="margin:0 auto 16px;display:inline-block;"></div>
+  <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
+    <button class="btn btn-blue" onclick="downloadQR('png')">⬇ Descargar PNG</button>
+    <button class="btn btn-ghost" onclick="downloadQR('svg')">⬇ Descargar SVG</button>
+  </div>
+</div>
+  <div class="ad-slot" style="margin-top:24px;"><strong>Espacio publicitario</strong>Google AdSense 728×90</div>
+</div>
+<section class="related-section">
+  <div style="max-width:1200px;margin:0 auto;">
+    <h3 style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px;">Otras herramientas</h3>
+    <p style="font-size:13px;color:var(--muted);">Descubre más herramientas gratuitas de ToolSpark</p>
+  </div>
+  <div class="related-grid" id="relatedGrid"></div>
+</section>
+<footer>
+  <div class="footer-in">
+    <div class="footer-top">
+      <div class="footer-brand"><div class="fn">Tool<em>Spark</em></div><p>30 herramientas gratuitas para PDF, imágenes y más.</p></div>
+      <div class="footer-col"><h5>Herramientas populares</h5><ul>
+        <li><a href="comprimir-imagenes.html">Comprimir imágenes</a></li>
+        <li><a href="unir-pdf.html">Unir PDF</a></li>
+        <li><a href="generador-qr.html">Generador de QR</a></li>
+        <li><a href="contar-palabras.html">Contador de palabras</a></li>
+        <li><a href="generador-contrasena.html">Generador contraseña</a></li>
+        <li><a href="color-picker.html">Selector de color</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Sitio</h5><ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
+        <li><a href="#">Privacidad</a></li>
+        <li><a href="#">Términos</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 ToolSpark — Todos los derechos reservados</span>
+      <a href="index.html">← Volver al inicio</a>
+    </div>
+  </div>
+</footer>
+<script src="shared.js"></script>
+<script>
+initPage('generador-qr');
+
+function updateQRInput(){
+  const type=document.getElementById('qrType').value;
+  const label={'url':'URL o enlace','text':'Texto libre','email':'Dirección de email','tel':'Número de teléfono','wifi':'SSID de la red WiFi'}[type];
+  const ph={'url':'https://toolspark.com','text':'Tu texto aquí','email':'correo@ejemplo.com','tel':'+34 600 000 000','wifi':'NombreDeRed'}[type];
+  document.querySelector('#qrInputWrap label').textContent=label;
+  document.getElementById('qrInput').placeholder=ph;
+}
+function getQRContent(){
+  const type=document.getElementById('qrType').value;
+  const val=document.getElementById('qrInput').value.trim();
+  if(!val)return null;
+  if(type==='email')return 'mailto:'+val;
+  if(type==='tel')return 'tel:'+val.replace(/\s/g,'');
+  if(type==='wifi')return `WIFI:T:WPA;S:${val};P:;;`;
+  return val;
+}
+function generateQR(){
+  const content=getQRContent();
+  if(!content){alert('Introduce el contenido del QR.');return;}
+  if(typeof QRCode==='undefined'){alert('Cargando librería QR...');return;}
+  const size=parseInt(document.getElementById('qrSize').value)||256;
+  const ec=document.getElementById('qrEC').value;
+  const container=document.getElementById('qrContainer');container.innerHTML='';
+  new QRCode(container,{text:content,width:size,height:size,correctLevel:QRCode.CorrectLevel[ec]});
+  document.getElementById('qrResult').style.display='block';
+}
+function downloadQR(fmt){
+  const img=document.querySelector('#qrContainer img');
+  if(!img){alert('Genera primero el QR.');return;}
+  const a=document.createElement('a');a.href=img.src;a.download='qr.'+fmt;a.click();
+}
+
+</script>
+</body>
+</html>

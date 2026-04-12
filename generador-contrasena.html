@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generador de contraseña — ToolSpark</title>
+<meta name="description" content="Genera contraseñas seguras, aleatorias y personalizables al instante.">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<div id="adminBox"><h6>⚙ Panel Admin</h6>
+  <div class="adm-row"><span>Visitas hoy</span><span class="adm-val" id="adm-today">0</span></div>
+  <div class="adm-row"><span>Total</span><span class="adm-val" id="adm-total">0</span></div>
+  <div class="adm-row"><span>Última visita</span><span class="adm-val" id="adm-last">—</span></div>
+  <div class="adm-row"><span>Mensajes</span><span class="adm-val" id="adm-msgs">0</span></div>
+</div>
+<div class="topbar">⚡ Herramientas <span>100% gratuitas</span> — Sin registro</div>
+<header>
+  <nav>
+    <a href="index.html" class="logo"><div class="logo-mark">TS</div><div class="logo-name">Tool<em>Spark</em></div></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Herramientas</a></li>
+      <li><a href="index.html?cat=imagen">Imágenes</a></li>
+      <li><a href="index.html?cat=pdf">PDF</a></li>
+      <li><a href="index.html?cat=texto">Texto</a></li>
+      <li><a href="index.html?cat=util">Utilidades</a></li>
+      <li><a href="index.html#contacto" class="nav-cta">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+<div class="stripe"></div>
+<section class="tool-hero">
+  <div class="breadcrumb"><a href="index.html">Inicio</a> › Generador de contraseña</div>
+  <h1>🔑 Generador de contraseña</h1>
+  <p>Genera contraseñas seguras, aleatorias y personalizables al instante.</p>
+</section>
+<div class="tool-wrap">
+  <a href="index.html" class="back-link">← Volver a todas las herramientas</a>
+  
+<div class="card">
+  <div class="card-title">🔑 Generar contraseña segura</div>
+  <div style="display:flex;gap:10px;margin-bottom:16px;align-items:center;">
+    <input type="text" id="pwOut" readonly style="flex:1;padding:14px 16px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:monospace;font-size:16px;font-weight:700;outline:none;background:var(--bg);letter-spacing:1px;">
+    <button class="btn btn-blue" onclick="copyPW()">📋</button>
+  </div>
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;">
+    <span style="font-size:13px;color:var(--muted);">Fortaleza:</span>
+    <div style="flex:1;height:8px;background:var(--bg);border-radius:50px;overflow:hidden;min-width:100px;">
+      <div id="pwStrengthBar" style="height:100%;border-radius:50px;transition:all .3s;"></div>
+    </div>
+    <span id="pwStrengthTxt" style="font-size:13px;font-weight:700;min-width:60px;"></span>
+  </div>
+  <div class="slider-wrap" style="margin-bottom:14px;">
+    <div class="slider-label"><span>Longitud</span><strong id="pwLenLbl">16</strong> caracteres</div>
+    <input type="range" id="pwLen" min="6" max="64" value="16" oninput="document.getElementById('pwLenLbl').textContent=this.value;generatePW()">
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;">
+    <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;"><input type="checkbox" id="pwUpper" checked onchange="generatePW()"> Mayúsculas (A-Z)</label>
+    <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;"><input type="checkbox" id="pwLower" checked onchange="generatePW()"> Minúsculas (a-z)</label>
+    <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;"><input type="checkbox" id="pwNums" checked onchange="generatePW()"> Números (0-9)</label>
+    <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;"><input type="checkbox" id="pwSyms" checked onchange="generatePW()"> Símbolos (!@#$)</label>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;">
+    <button class="btn btn-blue" onclick="generatePW()">🔑 Generar nueva</button>
+    <button class="btn btn-ghost" onclick="generateMultiple()">📋 Generar 5 contraseñas</button>
+  </div>
+  <div id="multiPW" style="margin-top:14px;display:none;"></div>
+</div>
+  <div class="ad-slot" style="margin-top:24px;"><strong>Espacio publicitario</strong>Google AdSense 728×90</div>
+</div>
+<section class="related-section">
+  <div style="max-width:1200px;margin:0 auto;">
+    <h3 style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px;">Otras herramientas</h3>
+    <p style="font-size:13px;color:var(--muted);">Descubre más herramientas gratuitas de ToolSpark</p>
+  </div>
+  <div class="related-grid" id="relatedGrid"></div>
+</section>
+<footer>
+  <div class="footer-in">
+    <div class="footer-top">
+      <div class="footer-brand"><div class="fn">Tool<em>Spark</em></div><p>30 herramientas gratuitas para PDF, imágenes y más.</p></div>
+      <div class="footer-col"><h5>Herramientas populares</h5><ul>
+        <li><a href="comprimir-imagenes.html">Comprimir imágenes</a></li>
+        <li><a href="unir-pdf.html">Unir PDF</a></li>
+        <li><a href="generador-qr.html">Generador de QR</a></li>
+        <li><a href="contar-palabras.html">Contador de palabras</a></li>
+        <li><a href="generador-contrasena.html">Generador contraseña</a></li>
+        <li><a href="color-picker.html">Selector de color</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Sitio</h5><ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
+        <li><a href="#">Privacidad</a></li>
+        <li><a href="#">Términos</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 ToolSpark — Todos los derechos reservados</span>
+      <a href="index.html">← Volver al inicio</a>
+    </div>
+  </div>
+</footer>
+<script src="shared.js"></script>
+<script>
+initPage('generador-contrasena');
+
+const CHARS={upper:'ABCDEFGHIJKLMNOPQRSTUVWXYZ',lower:'abcdefghijklmnopqrstuvwxyz',nums:'0123456789',syms:'!@#$%^&*()-_=+[]{}|;:,.<>?'};
+function generatePW(){
+  let pool='';
+  if(document.getElementById('pwUpper').checked)pool+=CHARS.upper;
+  if(document.getElementById('pwLower').checked)pool+=CHARS.lower;
+  if(document.getElementById('pwNums').checked)pool+=CHARS.nums;
+  if(document.getElementById('pwSyms').checked)pool+=CHARS.syms;
+  if(!pool){pool=CHARS.lower;}
+  const len=parseInt(document.getElementById('pwLen').value)||16;
+  let pw='';const arr=new Uint32Array(len);crypto.getRandomValues(arr);arr.forEach(v=>pw+=pool[v%pool.length]);
+  document.getElementById('pwOut').value=pw;
+  updateStrength(pw);
+  document.getElementById('multiPW').style.display='none';
+}
+function updateStrength(pw){
+  let score=0;if(pw.length>=8)score++;if(pw.length>=12)score++;if(pw.length>=16)score++;
+  if(/[A-Z]/.test(pw))score++;if(/[a-z]/.test(pw))score++;if(/[0-9]/.test(pw))score++;if(/[^A-Za-z0-9]/.test(pw))score++;
+  const pct=Math.min(100,Math.round(score/7*100));
+  const color=pct<40?'#dc2626':pct<70?'#d97706':'#15803d';
+  const txt=pct<40?'Débil':pct<70?'Media':'Fuerte';
+  document.getElementById('pwStrengthBar').style.width=pct+'%';
+  document.getElementById('pwStrengthBar').style.background=color;
+  document.getElementById('pwStrengthTxt').textContent=txt;
+  document.getElementById('pwStrengthTxt').style.color=color;
+}
+function generateMultiple(){
+  const list=document.getElementById('multiPW');list.style.display='block';
+  list.innerHTML=Array.from({length:5},()=>{
+    let pool='';
+    if(document.getElementById('pwUpper').checked)pool+=CHARS.upper;
+    if(document.getElementById('pwLower').checked)pool+=CHARS.lower;
+    if(document.getElementById('pwNums').checked)pool+=CHARS.nums;
+    if(document.getElementById('pwSyms').checked)pool+=CHARS.syms;
+    if(!pool)pool=CHARS.lower;
+    const len=parseInt(document.getElementById('pwLen').value)||16;
+    let pw='';const arr=new Uint32Array(len);crypto.getRandomValues(arr);arr.forEach(v=>pw+=pool[v%pool.length]);
+    return `<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><code style="flex:1;padding:8px 12px;background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);font-size:13px;">${pw}</code><button class="btn btn-ghost" style="padding:7px 12px;font-size:12px;" onclick="navigator.clipboard.writeText('${pw}')">📋</button></div>`;
+  }).join('');
+}
+async function copyPW(){try{await navigator.clipboard.writeText(document.getElementById('pwOut').value);alert('¡Contraseña copiada!');}catch{}}
+generatePW();
+
+</script>
+</body>
+</html>

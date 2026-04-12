@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Word a PDF Gratis — ToolSpark</title>
+<meta name="description" content="Convierte documentos Word .docx a PDF gratis online sin registro.">
+<link rel="stylesheet" href="style.css">
+<style>
+.info-box{background:rgba(0,77,152,.06);border:1px solid rgba(0,77,152,.18);border-radius:var(--rs);padding:14px 18px;font-size:13.5px;color:var(--mid);margin-bottom:16px;line-height:1.7;}
+.info-box strong{color:var(--blue);}
+.step-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+.step-list li{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;}
+.step-num{width:22px;height:22px;background:var(--blue);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px;}
+</style>
+</head>
+<body>
+<div id="adminBox"><h6>⚙ Panel Admin</h6>
+  <div class="adm-row"><span>Visitas hoy</span><span class="adm-val" id="adm-today">0</span></div>
+  <div class="adm-row"><span>Total</span><span class="adm-val" id="adm-total">0</span></div>
+  <div class="adm-row"><span>Última visita</span><span class="adm-val" id="adm-last">—</span></div>
+  <div class="adm-row"><span>Mensajes</span><span class="adm-val" id="adm-msgs">0</span></div>
+</div>
+<div class="topbar">⚡ Herramientas <span>100% gratuitas</span> — Sin registro</div>
+<header><nav>
+  <a href="index.html" class="logo"><div class="logo-mark">TS</div><div class="logo-name">Tool<em>Spark</em></div></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Todas</a></li>
+    <li><a href="index.html#imagenes">Imágenes</a></li>
+    <li><a href="index.html#pdf">PDF</a></li>
+    <li><a href="index.html#conversion" class="active">Conversión</a></li>
+    <li><a href="index.html#texto">Texto</a></li>
+    <li><a href="index.html#utilidades">Utilidades</a></li>
+    <li><a href="index.html#contacto" class="nav-cta">Contacto</a></li>
+  </ul>
+</nav></header>
+<div class="stripe"></div>
+
+<section class="tool-hero">
+  <div class="breadcrumb"><a href="index.html">Inicio</a> › <a href="index.html#conversion">Conversión</a> › Word a PDF</div>
+  <h1>📝 Word a PDF</h1>
+  <p>Convierte documentos .docx a PDF preservando el texto y la estructura</p>
+</section>
+
+<div class="tool-wrap">
+  <a href="index.html" class="back-link">← Volver a todas las herramientas</a>
+
+  <div class="info-box">
+    ℹ️ <strong>Nota técnica:</strong> Los navegadores no pueden acceder directamente al motor de renderizado de Word. Esta herramienta <strong>extrae el texto y el contenido</strong> del .docx y genera un PDF bien maquetado. Para conversiones con imágenes y formato complejo, recomendamos LibreOffice (gratuito) o Google Docs.
+  </div>
+
+  <div class="card">
+    <div class="card-title">📁 Selecciona tu documento Word</div>
+    <div class="upload-zone" id="dropZone">
+      <input type="file" id="fileInput" accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+      <span class="upload-icon">📝</span>
+      <h3>Arrastra tu archivo .docx aquí</h3>
+      <p>Solo archivos .docx — procesado 100% en tu navegador</p>
+    </div>
+  </div>
+
+  <div class="card" id="optCard" style="display:none">
+    <div class="card-title">⚙️ Opciones del PDF</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+      <div>
+        <label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">Tamaño de página</label>
+        <select id="pageSize" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:Inter,sans-serif;font-size:14px;outline:none;background:#fff;">
+          <option value="a4">A4 (210×297 mm)</option>
+          <option value="letter">Letter (216×279 mm)</option>
+          <option value="a3">A3 (297×420 mm)</option>
+        </select>
+      </div>
+      <div>
+        <label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">Tamaño de fuente base</label>
+        <select id="fontSize" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:Inter,sans-serif;font-size:14px;outline:none;background:#fff;">
+          <option value="11">11 pt (compacto)</option>
+          <option value="12" selected>12 pt (estándar)</option>
+          <option value="14">14 pt (grande)</option>
+        </select>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="btn btn-blue" onclick="convertWordToPDF()">📝 Convertir a PDF</button>
+      <button class="btn btn-ghost" onclick="resetTool()">🗑 Limpiar</button>
+    </div>
+  </div>
+
+  <div class="progress-wrap" id="pw" style="display:none">
+    <div class="slider-label"><span id="pwLbl">Procesando documento...</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="pf"></div></div>
+  </div>
+
+  <div class="result-box" id="resultBox">
+    <div class="result-success">
+      <div class="result-icon">✅</div>
+      <div class="result-info"><h4>¡Documento convertido a PDF!</h4><p id="rMeta">Descarga iniciada.</p></div>
+    </div>
+  </div>
+
+  <div class="ad-slot" style="margin-top:24px;"><strong>Espacio publicitario</strong>Google AdSense 728×90</div>
+
+  <div class="card" style="margin-top:18px;">
+    <div class="card-title">💡 Alternativas recomendadas para conversión perfecta</div>
+    <ul class="step-list">
+      <li><span class="step-num">1</span><span><strong>Google Docs (gratis):</strong> Abre tu .docx → Archivo → Descargar → PDF. Resultado perfecto con imágenes y formato completo.</span></li>
+      <li><span class="step-num">2</span><span><strong>LibreOffice (gratis):</strong> Software de escritorio que convierte .docx a PDF con fidelidad perfecta.</span></li>
+      <li><span class="step-num">3</span><span><strong>Microsoft Word online (gratis):</strong> Si tienes cuenta Microsoft, puedes abrir y exportar directamente como PDF.</span></li>
+    </ul>
+  </div>
+</div>
+
+<section class="related-section">
+  <div style="max-width:1200px;margin:0 auto;">
+    <h3 style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px;">Herramientas relacionadas</h3>
+    <p style="font-size:13px;color:var(--muted);">Más herramientas de conversión gratuitas</p>
+  </div>
+  <div class="related-grid" id="relatedGrid"></div>
+</section>
+
+<footer><div class="footer-in">
+  <div class="footer-top">
+    <div class="footer-brand"><div class="fn">Tool<em>Spark</em></div><p>37 herramientas gratuitas.</p></div>
+    <div class="footer-col"><h5>Conversión</h5><ul>
+      <li><a href="word-a-pdf.html">Word a PDF</a></li>
+      <li><a href="pdf-a-word.html">PDF a Word</a></li>
+      <li><a href="excel-a-pdf.html">Excel a PDF</a></li>
+      <li><a href="pdf-a-excel.html">PDF a Excel</a></li>
+      <li><a href="ppt-a-pdf.html">PowerPoint a PDF</a></li>
+      <li><a href="html-a-pdf.html">HTML a PDF</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Sitio</h5><ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="index.html#contacto">Contacto</a></li>
+      <li><a href="#">Privacidad</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 ToolSpark</span><a href="index.html">← Inicio</a></div>
+</div></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="shared.js"></script>
+<script>
+initPage('word-a-pdf');
+let docxFile = null;
+setupDrop('dropZone','fileInput', fl => { docxFile = fl[0]; if(docxFile) document.getElementById('optCard').style.display='block'; });
+
+async function convertWordToPDF() {
+  if (!docxFile) return;
+  if (typeof mammoth === 'undefined' || typeof PDFLib === 'undefined') {
+    alert('Cargando librerías... Espera un momento e inténtalo de nuevo.'); return;
+  }
+  const pw = document.getElementById('pw'); pw.style.display='block';
+  const pf = document.getElementById('pf');
+  document.getElementById('pwLbl').textContent = 'Leyendo documento Word...';
+  pf.style.width = '20%';
+
+  try {
+    const arrayBuffer = await docxFile.arrayBuffer();
+    const result = await mammoth.extractRawText({ arrayBuffer });
+    const text = result.value;
+    pf.style.width = '50%';
+    document.getElementById('pwLbl').textContent = 'Generando PDF...';
+
+    const pageSize = document.getElementById('pageSize').value;
+    const fontSize = parseInt(document.getElementById('fontSize').value) || 12;
+
+    const sizes = {
+      a4:     [595.28, 841.89],
+      letter: [612, 792],
+      a3:     [841.89, 1190.55]
+    };
+    const [pageW, pageH] = sizes[pageSize];
+    const margin = 56;
+    const lineH  = fontSize * 1.5;
+    const maxW   = pageW - margin * 2;
+
+    const pdfDoc = await PDFLib.PDFDocument.create();
+    const font   = await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
+    const fontB  = await pdfDoc.embedFont(PDFLib.StandardFonts.HelveticaBold);
+
+    const lines = text.split('\n').filter(l => l !== undefined);
+    let page = pdfDoc.addPage([pageW, pageH]);
+    let y = pageH - margin;
+
+    const addPage = () => {
+      page = pdfDoc.addPage([pageW, pageH]);
+      y = pageH - margin;
+    };
+
+    const drawLine = (txt, sz, bold) => {
+      if (!txt.trim()) { y -= lineH * 0.6; if (y < margin + lineH) addPage(); return; }
+      const words = txt.split(' ');
+      let line = '';
+      const f = bold ? fontB : font;
+      words.forEach(w => {
+        const test = line ? line + ' ' + w : w;
+        if (f.widthOfTextAtSize(test, sz) > maxW) {
+          if (y < margin + lineH) addPage();
+          page.drawText(line, { x: margin, y, size: sz, font: f, color: PDFLib.rgb(0.1,0.1,0.1) });
+          y -= lineH; line = w;
+        } else { line = test; }
+      });
+      if (line) {
+        if (y < margin + lineH) addPage();
+        page.drawText(line, { x: margin, y, size: sz, font: f, color: PDFLib.rgb(0.1,0.1,0.1) });
+        y -= lineH;
+      }
+    };
+
+    lines.forEach(line => {
+      const isHeading = line.length < 80 && line === line.toUpperCase() && line.trim().length > 3;
+      if (isHeading) { y -= 4; drawLine(line, fontSize + 2, true); y -= 4; }
+      else drawLine(line, fontSize, false);
+    });
+
+    pf.style.width = '90%';
+    const pdfBytes = await pdfDoc.save();
+    pf.style.width = '100%';
+    const blob = new Blob([pdfBytes], { type:'application/pdf' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = docxFile.name.replace('.docx','.pdf');
+    a.click();
+
+    pw.style.display = 'none';
+    document.getElementById('resultBox').classList.add('show');
+    document.getElementById('rMeta').textContent = `${pdfDoc.getPageCount()} página(s) — ${fmtSize(blob.size)} — descarga iniciada.`;
+  } catch(e) {
+    console.error(e);
+    alert('Error al procesar el documento. Asegúrate de que es un archivo .docx válido.');
+    pw.style.display = 'none';
+  }
+}
+function resetTool() { docxFile=null; document.getElementById('fileInput').value=''; document.getElementById('optCard').style.display='none'; document.getElementById('resultBox').classList.remove('show'); document.getElementById('pw').style.display='none'; }
+</script>
+</body>
+</html>

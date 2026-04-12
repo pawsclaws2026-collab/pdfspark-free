@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PowerPoint a PDF Gratis — ToolSpark</title>
+<meta name="description" content="Convierte presentaciones .pptx a PDF con una diapositiva por página.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="adminBox"><h6>⚙ Panel Admin</h6>
+  <div class="adm-row"><span>Visitas hoy</span><span class="adm-val" id="adm-today">0</span></div>
+  <div class="adm-row"><span>Total</span><span class="adm-val" id="adm-total">0</span></div>
+  <div class="adm-row"><span>Última visita</span><span class="adm-val" id="adm-last">—</span></div>
+  <div class="adm-row"><span>Mensajes</span><span class="adm-val" id="adm-msgs">0</span></div>
+</div>
+<div class="topbar">⚡ Herramientas <span>100% gratuitas</span> — Sin registro</div>
+<header><nav>
+  <a href="index.html" class="logo"><div class="logo-mark">TS</div><div class="logo-name">Tool<em>Spark</em></div></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Todas</a></li>
+    <li><a href="index.html#imagenes">Imágenes</a></li>
+    <li><a href="index.html#pdf">PDF</a></li>
+    <li><a href="index.html#conversion" class="active">Conversión</a></li>
+    <li><a href="index.html#texto">Texto</a></li>
+    <li><a href="index.html#contacto" class="nav-cta">Contacto</a></li>
+  </ul>
+</nav></header>
+<div class="stripe"></div>
+<section class="tool-hero">
+  <div class="breadcrumb"><a href="index.html">Inicio</a> › <a href="index.html#conversion">Conversión</a> › PowerPoint a PDF</div>
+  <h1>🗂️ PowerPoint a PDF</h1>
+  <p>Convierte presentaciones .pptx a PDF con una diapositiva por página.</p>
+</section>
+<div class="tool-wrap">
+  <a href="index.html" class="back-link">← Volver a todas las herramientas</a>
+  
+<div style="background:rgba(237,187,0,.1);border:1px solid rgba(237,187,0,.3);border-radius:var(--rs);padding:14px 18px;font-size:13.5px;color:var(--mid);margin-bottom:16px;line-height:1.7;">
+  ℹ️ <strong>Cómo funciona:</strong> Esta herramienta lee el archivo <strong>.pptx</strong>, extrae el texto de cada diapositiva y genera un PDF con una diapositiva por página. Para conversiones con imágenes y animaciones, usa Google Slides (gratis) o LibreOffice Impress.
+</div>
+<div class="card">
+  <div class="card-title">📁 Selecciona tu presentación</div>
+  <div class="upload-zone" id="dropZone"><input type="file" id="fileInput" accept=".pptx">
+    <span class="upload-icon">🗂️</span><h3>Arrastra tu archivo .pptx aquí</h3>
+    <p>Solo archivos .pptx — PowerPoint 2007 o superior</p>
+  </div>
+</div>
+<div class="card" id="optCard" style="display:none">
+  <div class="card-title">⚙️ Configuración</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+    <div><label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">Orientación</label>
+      <select id="orient" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:Inter,sans-serif;font-size:13px;outline:none;background:#fff;">
+        <option value="landscape">Horizontal (16:9)</option>
+        <option value="portrait">Vertical</option>
+      </select>
+    </div>
+    <div><label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">Diapositivas detectadas</label>
+      <div id="slideCount" style="padding:10px;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--rs);font-size:14px;font-weight:700;color:var(--blue);">—</div>
+    </div>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;">
+    <button class="btn btn-blue" onclick="convertPPTtoPDF()">🗂️ Convertir a PDF</button>
+    <button class="btn btn-ghost" onclick="resetTool()">🗑 Limpiar</button>
+  </div>
+</div>
+<div class="progress-wrap" id="pw" style="display:none">
+  <div class="slider-label"><span id="pwLbl">Procesando presentación...</span></div>
+  <div class="progress-bar"><div class="progress-fill" id="pf"></div></div>
+</div>
+<div class="result-box" id="resultBox">
+  <div class="result-success"><div class="result-icon">✅</div>
+    <div class="result-info"><h4>¡Presentación convertida a PDF!</h4><p id="rMeta">Descarga iniciada.</p></div>
+  </div>
+</div>
+  <div class="ad-slot" style="margin-top:24px;"><strong>Espacio publicitario</strong>Google AdSense 728×90</div>
+</div>
+<section class="related-section">
+  <div style="max-width:1200px;margin:0 auto;"><h3 style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px;">Herramientas relacionadas</h3>
+  <p style="font-size:13px;color:var(--muted);">Más herramientas de conversión</p></div>
+  <div class="related-grid" id="relatedGrid"></div>
+</section>
+<footer><div class="footer-in">
+  <div class="footer-top">
+    <div class="footer-brand"><div class="fn">Tool<em>Spark</em></div><p>37 herramientas gratuitas.</p></div>
+    <div class="footer-col"><h5>Conversión</h5><ul>
+      <li><a href="word-a-pdf.html">Word a PDF</a></li><li><a href="pdf-a-word.html">PDF a Word</a></li>
+      <li><a href="excel-a-pdf.html">Excel a PDF</a></li><li><a href="pdf-a-excel.html">PDF a Excel</a></li>
+      <li><a href="ppt-a-pdf.html">PowerPoint a PDF</a></li><li><a href="pdf-a-ppt.html">PDF a PowerPoint</a></li>
+      <li><a href="html-a-pdf.html">HTML a PDF</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Sitio</h5><ul>
+      <li><a href="index.html">Inicio</a></li><li><a href="index.html#contacto">Contacto</a></li><li><a href="#">Privacidad</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 ToolSpark</span><a href="index.html">← Inicio</a></div>
+</div></footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script><script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="shared.js"></script>
+<script>
+initPage('ppt-a-pdf');
+
+let pptFile=null;let slideTexts=[];
+setupDrop('dropZone','fileInput',fl=>loadPPTX(fl[0]));
+async function loadPPTX(file){
+  if(!file||!file.name.endsWith('.pptx')){alert('Selecciona un archivo .pptx válido.');return;}
+  pptFile=file;
+  if(typeof JSZip==='undefined'){alert('Cargando librería...');return;}
+  try{
+    const ab=await file.arrayBuffer();
+    const zip=await JSZip.loadAsync(ab);
+    const slideFiles=Object.keys(zip.files).filter(n=>n.match(/ppt\/slides\/slide[0-9]+\.xml$/)).sort((a,b)=>{
+      const na=parseInt(a.match(/slide(\d+)/)?.[1]||0);
+      const nb=parseInt(b.match(/slide(\d+)/)?.[1]||0);
+      return na-nb;
+    });
+    slideTexts=[];
+    for(const sf of slideFiles){
+      const xml=await zip.files[sf].async('text');
+      const parser=new DOMParser();const doc=parser.parseFromString(xml,'text/xml');
+      const textNodes=doc.querySelectorAll('t');
+      const text=[...textNodes].map(n=>n.textContent).join(' ').replace(/\s+/g,' ').trim();
+      slideTexts.push(text||'(Diapositiva sin texto)');
+    }
+    document.getElementById('slideCount').textContent=slideTexts.length+' diapositivas';
+    document.getElementById('optCard').style.display='block';
+  }catch(e){console.error(e);alert('Error al leer el archivo .pptx.');}
+}
+async function convertPPTtoPDF(){
+  if(!slideTexts.length)return;
+  if(typeof PDFLib==='undefined'){alert('Cargando librería PDF...');return;}
+  const landscape=document.getElementById('orient').value==='landscape';
+  const pageW=landscape?841.89:595.28,pageH=landscape?595.28:841.89;
+  const margin=50;
+  document.getElementById('pw').style.display='block';document.getElementById('pf').style.width='10%';
+  try{
+    const pdfDoc=await PDFLib.PDFDocument.create();
+    const font=await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
+    const fontB=await pdfDoc.embedFont(PDFLib.StandardFonts.HelveticaBold);
+    for(let i=0;i<slideTexts.length;i++){
+      document.getElementById('pwLbl').textContent=`Diapositiva ${i+1} de ${slideTexts.length}...`;
+      document.getElementById('pf').style.width=((i+1)/slideTexts.length*90)+'%';
+      const page=pdfDoc.addPage([pageW,pageH]);
+      // Slide number badge
+      page.drawRectangle({x:margin,y:pageH-margin-26,width:120,height:26,color:PDFLib.rgb(0,0.3,0.6),borderRadius:4});
+      page.drawText(`Diapositiva ${i+1} / ${slideTexts.length}`,{x:margin+8,y:pageH-margin-16,size:11,font,color:PDFLib.rgb(1,1,1)});
+      // slide border
+      page.drawRectangle({x:margin-1,y:margin-1,width:pageW-margin*2+2,height:pageH-margin*2+2,borderColor:PDFLib.rgb(0.8,0.8,0.8),borderWidth:1});
+      // content
+      const lines=slideTexts[i].split(/(?<=[\.!?])\s+/);
+      let y=pageH-margin-60;
+      lines.forEach((line,li)=>{
+        if(!line.trim()||y<margin+20)return;
+        const isFirst=li===0;const sz=isFirst?16:12;const f=isFirst?fontB:font;
+        const words=line.split(' ');let ln='';
+        words.forEach(w=>{
+          const test=ln?ln+' '+w:w;
+          if(f.widthOfTextAtSize(test,sz)>pageW-margin*2-20){
+            if(y>margin+sz){try{page.drawText(ln,{x:margin+10,y,size:sz,font:f,color:PDFLib.rgb(0.1,0.1,0.1)});}catch(e){}y-=sz*1.6;}
+            ln=w;
+          }else ln=test;
+        });
+        if(ln&&y>margin+sz){try{page.drawText(ln,{x:margin+10,y,size:sz,font:f,color:PDFLib.rgb(0.1,0.1,0.1)});}catch(e){}y-=sz*1.6+(isFirst?8:4);}
+      });
+      await new Promise(r=>setTimeout(r,10));
+    }
+    document.getElementById('pf').style.width='100%';
+    const out=await pdfDoc.save();
+    const blob=new Blob([out],{type:'application/pdf'});
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=pptFile.name.replace('.pptx','.pdf');a.click();
+    document.getElementById('resultBox').classList.add('show');
+    document.getElementById('rMeta').textContent=`${slideTexts.length} diapositivas · ${fmtSize(blob.size)}`;
+  }catch(e){console.error(e);alert('Error al generar el PDF.');}
+  document.getElementById('pw').style.display='none';
+}
+function resetTool(){pptFile=null;slideTexts=[];document.getElementById('fileInput').value='';document.getElementById('optCard').style.display='none';document.getElementById('resultBox').classList.remove('show');document.getElementById('pw').style.display='none';}
+
+</script>
+</body>
+</html>

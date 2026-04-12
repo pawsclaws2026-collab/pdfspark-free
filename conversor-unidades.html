@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conversor de unidades — ToolSpark</title>
+<meta name="description" content="Convierte longitud, peso, temperatura, área y volumen de forma instantánea.">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<div id="adminBox"><h6>⚙ Panel Admin</h6>
+  <div class="adm-row"><span>Visitas hoy</span><span class="adm-val" id="adm-today">0</span></div>
+  <div class="adm-row"><span>Total</span><span class="adm-val" id="adm-total">0</span></div>
+  <div class="adm-row"><span>Última visita</span><span class="adm-val" id="adm-last">—</span></div>
+  <div class="adm-row"><span>Mensajes</span><span class="adm-val" id="adm-msgs">0</span></div>
+</div>
+<div class="topbar">⚡ Herramientas <span>100% gratuitas</span> — Sin registro</div>
+<header>
+  <nav>
+    <a href="index.html" class="logo"><div class="logo-mark">TS</div><div class="logo-name">Tool<em>Spark</em></div></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Herramientas</a></li>
+      <li><a href="index.html?cat=imagen">Imágenes</a></li>
+      <li><a href="index.html?cat=pdf">PDF</a></li>
+      <li><a href="index.html?cat=texto">Texto</a></li>
+      <li><a href="index.html?cat=util">Utilidades</a></li>
+      <li><a href="index.html#contacto" class="nav-cta">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+<div class="stripe"></div>
+<section class="tool-hero">
+  <div class="breadcrumb"><a href="index.html">Inicio</a> › Conversor de unidades</div>
+  <h1>📏 Conversor de unidades</h1>
+  <p>Convierte longitud, peso, temperatura, área y volumen de forma instantánea.</p>
+</section>
+<div class="tool-wrap">
+  <a href="index.html" class="back-link">← Volver a todas las herramientas</a>
+  
+<div class="card">
+  <div class="card-title">📏 Convertir unidades</div>
+  <div style="margin-bottom:14px;">
+    <label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">Categoría</label>
+    <select id="cvCat" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:Inter,sans-serif;font-size:14px;outline:none;background:#fff;" onchange="updateUnits()">
+      <option value="length">Longitud</option><option value="weight">Peso / Masa</option>
+      <option value="temp">Temperatura</option><option value="area">Área</option><option value="volume">Volumen</option>
+      <option value="speed">Velocidad</option><option value="time">Tiempo</option>
+    </select>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:end;margin-bottom:14px;">
+    <div>
+      <label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">De</label>
+      <select id="cvFrom" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:Inter,sans-serif;font-size:14px;outline:none;background:#fff;" onchange="convert()"></select>
+      <input type="number" id="cvVal" value="1" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:Inter,sans-serif;font-size:16px;font-weight:700;outline:none;margin-top:8px;" oninput="convert()">
+    </div>
+    <div style="padding-bottom:16px;font-size:22px;color:var(--blue);font-weight:700;">→</div>
+    <div>
+      <label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">A</label>
+      <select id="cvTo" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:Inter,sans-serif;font-size:14px;outline:none;background:#fff;" onchange="convert()"></select>
+      <div id="cvResult" style="padding:10px;border:1.5px solid #86efac;border-radius:var(--rs);background:#f0fdf4;font-size:20px;font-weight:800;color:#15803d;margin-top:8px;min-height:42px;"></div>
+    </div>
+  </div>
+  <button class="btn btn-ghost" onclick="swapUnits()">⇄ Intercambiar</button>
+</div>
+  <div class="ad-slot" style="margin-top:24px;"><strong>Espacio publicitario</strong>Google AdSense 728×90</div>
+</div>
+<section class="related-section">
+  <div style="max-width:1200px;margin:0 auto;">
+    <h3 style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px;">Otras herramientas</h3>
+    <p style="font-size:13px;color:var(--muted);">Descubre más herramientas gratuitas de ToolSpark</p>
+  </div>
+  <div class="related-grid" id="relatedGrid"></div>
+</section>
+<footer>
+  <div class="footer-in">
+    <div class="footer-top">
+      <div class="footer-brand"><div class="fn">Tool<em>Spark</em></div><p>30 herramientas gratuitas para PDF, imágenes y más.</p></div>
+      <div class="footer-col"><h5>Herramientas populares</h5><ul>
+        <li><a href="comprimir-imagenes.html">Comprimir imágenes</a></li>
+        <li><a href="unir-pdf.html">Unir PDF</a></li>
+        <li><a href="generador-qr.html">Generador de QR</a></li>
+        <li><a href="contar-palabras.html">Contador de palabras</a></li>
+        <li><a href="generador-contrasena.html">Generador contraseña</a></li>
+        <li><a href="color-picker.html">Selector de color</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Sitio</h5><ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
+        <li><a href="#">Privacidad</a></li>
+        <li><a href="#">Términos</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 ToolSpark — Todos los derechos reservados</span>
+      <a href="index.html">← Volver al inicio</a>
+    </div>
+  </div>
+</footer>
+<script src="shared.js"></script>
+<script>
+initPage('conversor-unidades');
+
+const UNITS={
+  length:{Metros:1,Kilómetros:1000,Centímetros:0.01,Milímetros:0.001,Pulgadas:0.0254,Pies:0.3048,Yardas:0.9144,Millas:1609.344,'Millas náuticas':1852},
+  weight:{Kilogramos:1,Gramos:0.001,Miligramos:0.000001,Libras:0.453592,Onzas:0.0283495,Toneladas:1000},
+  temp:{Celsius:null,Fahrenheit:null,Kelvin:null},
+  area:{'m²':1,'km²':1e6,'cm²':0.0001,'Hectáreas':10000,'Acres':4046.86,'ft²':0.092903},
+  volume:{Litros:1,Mililitros:0.001,'m³':1000,Galones:3.78541,Pintas:0.473176,Tazas:0.236588},
+  speed:{'km/h':1,'m/s':3.6,'mph':1.60934,'nudos':1.852},
+  time:{Segundos:1,Minutos:60,Horas:3600,Días:86400,Semanas:604800,Meses:2629800,Años:31557600}
+};
+function updateUnits(){
+  const cat=document.getElementById('cvCat').value;
+  const keys=Object.keys(UNITS[cat]);
+  ['cvFrom','cvTo'].forEach((id,i)=>{
+    const sel=document.getElementById(id);
+    sel.innerHTML=keys.map(k=>`<option>${k}</option>`).join('');
+    sel.selectedIndex=i;
+  });
+  convert();
+}
+function convert(){
+  const cat=document.getElementById('cvCat').value;
+  const from=document.getElementById('cvFrom').value;
+  const to=document.getElementById('cvTo').value;
+  const val=parseFloat(document.getElementById('cvVal').value);
+  if(isNaN(val)){document.getElementById('cvResult').textContent='—';return;}
+  let result;
+  if(cat==='temp'){
+    let c;
+    if(from==='Celsius')c=val;
+    else if(from==='Fahrenheit')c=(val-32)*5/9;
+    else c=val-273.15;
+    if(to==='Celsius')result=c;
+    else if(to==='Fahrenheit')result=c*9/5+32;
+    else result=c+273.15;
+  }else{result=val*UNITS[cat][from]/UNITS[cat][to];}
+  const fmt=result===0?'0':Math.abs(result)>=0.001&&Math.abs(result)<1e9?parseFloat(result.toPrecision(7)).toString():result.toExponential(4);
+  document.getElementById('cvResult').textContent=fmt+' '+to;
+}
+function swapUnits(){const f=document.getElementById('cvFrom').value,t=document.getElementById('cvTo').value;document.getElementById('cvFrom').value=t;document.getElementById('cvTo').value=f;convert();}
+updateUnits();
+
+</script>
+</body>
+</html>

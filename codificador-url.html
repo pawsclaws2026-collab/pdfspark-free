@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Codificador URL — ToolSpark</title>
+<meta name="description" content="Codifica y decodifica URLs y parámetros para web de forma instantánea.">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<div id="adminBox"><h6>⚙ Panel Admin</h6>
+  <div class="adm-row"><span>Visitas hoy</span><span class="adm-val" id="adm-today">0</span></div>
+  <div class="adm-row"><span>Total</span><span class="adm-val" id="adm-total">0</span></div>
+  <div class="adm-row"><span>Última visita</span><span class="adm-val" id="adm-last">—</span></div>
+  <div class="adm-row"><span>Mensajes</span><span class="adm-val" id="adm-msgs">0</span></div>
+</div>
+<div class="topbar">⚡ Herramientas <span>100% gratuitas</span> — Sin registro</div>
+<header>
+  <nav>
+    <a href="index.html" class="logo"><div class="logo-mark">TS</div><div class="logo-name">Tool<em>Spark</em></div></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Herramientas</a></li>
+      <li><a href="index.html?cat=imagen">Imágenes</a></li>
+      <li><a href="index.html?cat=pdf">PDF</a></li>
+      <li><a href="index.html?cat=texto">Texto</a></li>
+      <li><a href="index.html?cat=util">Utilidades</a></li>
+      <li><a href="index.html#contacto" class="nav-cta">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+<div class="stripe"></div>
+<section class="tool-hero">
+  <div class="breadcrumb"><a href="index.html">Inicio</a> › Codificador URL</div>
+  <h1>🌐 Codificador URL</h1>
+  <p>Codifica y decodifica URLs y parámetros para web de forma instantánea.</p>
+</section>
+<div class="tool-wrap">
+  <a href="index.html" class="back-link">← Volver a todas las herramientas</a>
+  
+<div class="card">
+  <div class="card-title">🌐 Codificar / Decodificar URL</div>
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <div>
+      <label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">Texto de entrada</label>
+      <textarea id="urlIn" style="width:100%;height:120px;padding:12px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:monospace;font-size:13px;resize:vertical;outline:none;" placeholder="https://ejemplo.com/búsqueda?q=hola mundo&cat=tecnología"></textarea>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="btn btn-blue" onclick="urlOp('encode')">🔒 Codificar URL</button>
+      <button class="btn btn-ghost" onclick="urlOp('decode')">🔓 Decodificar URL</button>
+      <button class="btn btn-ghost" onclick="urlOp('encodeComp')">🔒 Codificar componente</button>
+      <button class="btn btn-ghost" onclick="urlOp('decodeComp')">🔓 Decodificar componente</button>
+    </div>
+    <div>
+      <label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">Resultado</label>
+      <textarea id="urlOut" readonly style="width:100%;height:120px;padding:12px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:monospace;font-size:13px;resize:vertical;outline:none;background:var(--bg);"></textarea>
+    </div>
+    <button class="btn btn-gold" style="align-self:flex-start;" onclick="copyURL()">📋 Copiar resultado</button>
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">🔍 Analizador de URL</div>
+  <input type="text" id="urlAnalyze" placeholder="https://ejemplo.com/ruta?param1=valor1&param2=valor2" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:monospace;font-size:13px;outline:none;margin-bottom:10px;" oninput="analyzeURL(this.value)">
+  <div id="urlParts" style="font-size:13px;"></div>
+</div>
+  <div class="ad-slot" style="margin-top:24px;"><strong>Espacio publicitario</strong>Google AdSense 728×90</div>
+</div>
+<section class="related-section">
+  <div style="max-width:1200px;margin:0 auto;">
+    <h3 style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px;">Otras herramientas</h3>
+    <p style="font-size:13px;color:var(--muted);">Descubre más herramientas gratuitas de ToolSpark</p>
+  </div>
+  <div class="related-grid" id="relatedGrid"></div>
+</section>
+<footer>
+  <div class="footer-in">
+    <div class="footer-top">
+      <div class="footer-brand"><div class="fn">Tool<em>Spark</em></div><p>30 herramientas gratuitas para PDF, imágenes y más.</p></div>
+      <div class="footer-col"><h5>Herramientas populares</h5><ul>
+        <li><a href="comprimir-imagenes.html">Comprimir imágenes</a></li>
+        <li><a href="unir-pdf.html">Unir PDF</a></li>
+        <li><a href="generador-qr.html">Generador de QR</a></li>
+        <li><a href="contar-palabras.html">Contador de palabras</a></li>
+        <li><a href="generador-contrasena.html">Generador contraseña</a></li>
+        <li><a href="color-picker.html">Selector de color</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Sitio</h5><ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
+        <li><a href="#">Privacidad</a></li>
+        <li><a href="#">Términos</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 ToolSpark — Todos los derechos reservados</span>
+      <a href="index.html">← Volver al inicio</a>
+    </div>
+  </div>
+</footer>
+<script src="shared.js"></script>
+<script>
+initPage('codificador-url');
+
+function urlOp(op){
+  const val=document.getElementById('urlIn').value;
+  try{
+    let r;
+    if(op==='encode')r=encodeURI(val);
+    else if(op==='decode')r=decodeURI(val);
+    else if(op==='encodeComp')r=encodeURIComponent(val);
+    else r=decodeURIComponent(val);
+    document.getElementById('urlOut').value=r;
+  }catch(e){document.getElementById('urlOut').value='Error: '+e.message;}
+}
+async function copyURL(){try{await navigator.clipboard.writeText(document.getElementById('urlOut').value);alert('¡Copiado!');}catch{}}
+function analyzeURL(url){
+  const out=document.getElementById('urlParts');
+  if(!url){out.innerHTML='';return;}
+  try{
+    const u=new URL(url);
+    let html=`<div style="display:grid;grid-template-columns:120px 1fr;gap:4px 12px;">`;
+    const parts={Protocolo:u.protocol,Host:u.hostname,Puerto:u.port||'(por defecto)',Ruta:u.pathname,Hash:u.hash||'(ninguno)'};
+    Object.entries(parts).forEach(([k,v])=>html+=`<span style="font-weight:700;color:var(--muted);">${k}:</span><span style="font-family:monospace;">${v}</span>`);
+    if(u.search){html+=`<span style="font-weight:700;color:var(--muted);grid-column:1/-1;margin-top:8px;">Parámetros:</span>`;u.searchParams.forEach((v,k)=>html+=`<span style="padding-left:12px;color:var(--blue);">${k}</span><span style="font-family:monospace;">${v}</span>`);}
+    html+='</div>';out.innerHTML=html;
+  }catch{out.innerHTML='<span style="color:var(--muted);">Introduce una URL completa válida (con https://)</span>';}
+}
+
+</script>
+</body>
+</html>

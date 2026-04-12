@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de IMC — ToolSpark</title>
+<meta name="description" content="Calcula tu índice de masa corporal (IMC) e interpreta tu resultado al instante.">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<div id="adminBox"><h6>⚙ Panel Admin</h6>
+  <div class="adm-row"><span>Visitas hoy</span><span class="adm-val" id="adm-today">0</span></div>
+  <div class="adm-row"><span>Total</span><span class="adm-val" id="adm-total">0</span></div>
+  <div class="adm-row"><span>Última visita</span><span class="adm-val" id="adm-last">—</span></div>
+  <div class="adm-row"><span>Mensajes</span><span class="adm-val" id="adm-msgs">0</span></div>
+</div>
+<div class="topbar">⚡ Herramientas <span>100% gratuitas</span> — Sin registro</div>
+<header>
+  <nav>
+    <a href="index.html" class="logo"><div class="logo-mark">TS</div><div class="logo-name">Tool<em>Spark</em></div></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Herramientas</a></li>
+      <li><a href="index.html?cat=imagen">Imágenes</a></li>
+      <li><a href="index.html?cat=pdf">PDF</a></li>
+      <li><a href="index.html?cat=texto">Texto</a></li>
+      <li><a href="index.html?cat=util">Utilidades</a></li>
+      <li><a href="index.html#contacto" class="nav-cta">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+<div class="stripe"></div>
+<section class="tool-hero">
+  <div class="breadcrumb"><a href="index.html">Inicio</a> › Calculadora de IMC</div>
+  <h1>⚖️ Calculadora de IMC</h1>
+  <p>Calcula tu índice de masa corporal (IMC) e interpreta tu resultado al instante.</p>
+</section>
+<div class="tool-wrap">
+  <a href="index.html" class="back-link">← Volver a todas las herramientas</a>
+  
+<div class="card">
+  <div class="card-title">⚖️ Calcular IMC</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+    <div>
+      <label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">Peso (kg)</label>
+      <input type="number" id="imcPeso" placeholder="70" min="20" max="300" style="width:100%;padding:12px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:Inter,sans-serif;font-size:16px;font-weight:700;outline:none;" oninput="calcIMC()">
+    </div>
+    <div>
+      <label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">Altura (cm)</label>
+      <input type="number" id="imcAltura" placeholder="170" min="100" max="250" style="width:100%;padding:12px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:Inter,sans-serif;font-size:16px;font-weight:700;outline:none;" oninput="calcIMC()">
+    </div>
+  </div>
+  <div id="imcResult" style="display:none;">
+    <div style="text-align:center;padding:24px;background:var(--bg);border-radius:var(--r);margin-bottom:14px;">
+      <div style="font-family:'Sora',sans-serif;font-size:52px;font-weight:800;" id="imcVal">—</div>
+      <div style="font-size:16px;font-weight:700;margin-top:4px;" id="imcCat">—</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:6px;" id="imcDesc">—</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;">
+      <div style="text-align:center;padding:10px 4px;border-radius:var(--rs);background:#bfdbfe;"><div style="font-size:11px;font-weight:700;color:#1d4ed8;">Bajo peso</div><div style="font-size:11px;color:#1d4ed8;">&lt; 18.5</div></div>
+      <div style="text-align:center;padding:10px 4px;border-radius:var(--rs);background:#bbf7d0;"><div style="font-size:11px;font-weight:700;color:#15803d;">Normal</div><div style="font-size:11px;color:#15803d;">18.5 – 24.9</div></div>
+      <div style="text-align:center;padding:10px 4px;border-radius:var(--rs);background:#fef9c3;"><div style="font-size:11px;font-weight:700;color:#a16207;">Sobrepeso</div><div style="font-size:11px;color:#a16207;">25 – 29.9</div></div>
+      <div style="text-align:center;padding:10px 4px;border-radius:var(--rs);background:#fecaca;"><div style="font-size:11px;font-weight:700;color:#dc2626;">Obesidad</div><div style="font-size:11px;color:#dc2626;">≥ 30</div></div>
+    </div>
+  </div>
+</div>
+  <div class="ad-slot" style="margin-top:24px;"><strong>Espacio publicitario</strong>Google AdSense 728×90</div>
+</div>
+<section class="related-section">
+  <div style="max-width:1200px;margin:0 auto;">
+    <h3 style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px;">Otras herramientas</h3>
+    <p style="font-size:13px;color:var(--muted);">Descubre más herramientas gratuitas de ToolSpark</p>
+  </div>
+  <div class="related-grid" id="relatedGrid"></div>
+</section>
+<footer>
+  <div class="footer-in">
+    <div class="footer-top">
+      <div class="footer-brand"><div class="fn">Tool<em>Spark</em></div><p>30 herramientas gratuitas para PDF, imágenes y más.</p></div>
+      <div class="footer-col"><h5>Herramientas populares</h5><ul>
+        <li><a href="comprimir-imagenes.html">Comprimir imágenes</a></li>
+        <li><a href="unir-pdf.html">Unir PDF</a></li>
+        <li><a href="generador-qr.html">Generador de QR</a></li>
+        <li><a href="contar-palabras.html">Contador de palabras</a></li>
+        <li><a href="generador-contrasena.html">Generador contraseña</a></li>
+        <li><a href="color-picker.html">Selector de color</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Sitio</h5><ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
+        <li><a href="#">Privacidad</a></li>
+        <li><a href="#">Términos</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 ToolSpark — Todos los derechos reservados</span>
+      <a href="index.html">← Volver al inicio</a>
+    </div>
+  </div>
+</footer>
+<script src="shared.js"></script>
+<script>
+initPage('calculadora-imc');
+
+function calcIMC(){
+  const peso=parseFloat(document.getElementById('imcPeso').value);
+  const altura=parseFloat(document.getElementById('imcAltura').value)/100;
+  if(!peso||!altura||altura<=0)return;
+  const imc=peso/(altura*altura);
+  document.getElementById('imcResult').style.display='block';
+  let cat,desc,color;
+  if(imc<18.5){cat='Bajo peso';desc='Considera consultar a un médico o nutricionista.';color='#1d4ed8';}
+  else if(imc<25){cat='Peso normal';desc='¡Enhorabuena! Tu peso está dentro del rango saludable.';color='#15803d';}
+  else if(imc<30){cat='Sobrepeso';desc='Un poco por encima del rango saludable. Considera hacer ejercicio.';color='#a16207';}
+  else{cat='Obesidad';desc='Se recomienda consultar a un profesional de la salud.';color='#dc2626';}
+  document.getElementById('imcVal').textContent=imc.toFixed(1);
+  document.getElementById('imcVal').style.color=color;
+  document.getElementById('imcCat').textContent=cat;
+  document.getElementById('imcCat').style.color=color;
+  document.getElementById('imcDesc').textContent=desc;
+}
+
+</script>
+</body>
+</html>

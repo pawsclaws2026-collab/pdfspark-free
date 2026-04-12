@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contador de Palabras Gratis — ToolSpark</title>
+<meta name="description" content="Cuenta palabras, caracteres y analiza la densidad de keywords en tiempo real. Gratis.">
+<link rel="stylesheet" href="style.css">
+<style>
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;margin-bottom:20px;}
+.stat-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--rs);padding:16px 10px;text-align:center;transition:border-color .18s;}
+.stat-card:hover{border-color:var(--blue);}
+.snum{font-family:'Sora',sans-serif;font-size:28px;font-weight:800;color:var(--blue);display:block;line-height:1;margin-bottom:6px;}
+.snum.r{color:var(--red);}.snum.g{color:#15803d;}.snum.o{color:#b08800;}
+.slbl{font-size:12px;color:var(--muted);font-weight:500;}
+.text-actions{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;}
+.tact{padding:7px 14px;border:1.5px solid var(--border);border-radius:50px;font-size:12.5px;font-weight:600;cursor:pointer;background:#fff;color:var(--muted);transition:all .15s;font-family:'Inter',sans-serif;}
+.tact:hover{border-color:var(--blue);color:var(--blue);}
+.density-list{list-style:none;max-height:250px;overflow-y:auto;}
+.di{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px;}
+.di:last-child{border:none;}
+.dw{font-weight:700;min-width:90px;color:var(--text);}
+.db-wrap{flex:1;background:var(--bg);border-radius:50px;height:6px;overflow:hidden;}
+.db-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--red));border-radius:50px;transition:width .4s;}
+.dc{font-size:12px;color:var(--muted);min-width:60px;text-align:right;}
+.read-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,77,152,.07);border:1px solid rgba(0,77,152,.18);color:var(--blue);padding:8px 16px;border-radius:50px;font-size:13px;font-weight:600;margin-bottom:18px;}
+</style>
+</head>
+<body>
+<div id="adminBox"><h6>⚙ Panel Admin</h6>
+  <div class="adm-row"><span>Visitas hoy</span><span class="adm-val" id="adm-today">0</span></div>
+  <div class="adm-row"><span>Total</span><span class="adm-val" id="adm-total">0</span></div>
+  <div class="adm-row"><span>Última visita</span><span class="adm-val" id="adm-last">—</span></div>
+  <div class="adm-row"><span>Mensajes</span><span class="adm-val" id="adm-msgs">0</span></div>
+</div>
+<div class="topbar">⚡ Herramientas <span>100% gratuitas</span> — Sin registro</div>
+<header><nav>
+  <a href="index.html" class="logo"><div class="logo-mark">TS</div><div class="logo-name">Tool<em>Spark</em></div></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Herramientas</a></li>
+    <li><a href="comprimir-imagenes.html">Imágenes</a></li>
+    <li><a href="unir-pdf.html">PDF</a></li>
+    <li><a href="contar-palabras.html" class="active">Contador</a></li>
+    <li><a href="index.html#contacto" class="nav-cta">Contacto</a></li>
+  </ul>
+</nav></header>
+<div class="stripe"></div>
+
+<section class="tool-hero">
+  <div class="breadcrumb"><a href="index.html">Inicio</a> › Contador de palabras</div>
+  <h1>📝 Contador de palabras</h1>
+  <p>Analiza tu texto en tiempo real — palabras, caracteres, frases y densidad de keywords</p>
+</section>
+
+<div class="tool-wrap" style="max-width:960px;">
+  <a href="index.html" class="back-link">← Volver a todas las herramientas</a>
+
+  <!-- STATS -->
+  <div class="stats-grid">
+    <div class="stat-card"><span class="snum" id="sw">0</span><div class="slbl">Palabras</div></div>
+    <div class="stat-card"><span class="snum r" id="sc">0</span><div class="slbl">Caracteres</div></div>
+    <div class="stat-card"><span class="snum o" id="scns">0</span><div class="slbl">Sin espacios</div></div>
+    <div class="stat-card"><span class="snum g" id="ss">0</span><div class="slbl">Frases</div></div>
+    <div class="stat-card"><span class="snum" id="sp">0</span><div class="slbl">Párrafos</div></div>
+    <div class="stat-card"><span class="snum r" id="sr">—</span><div class="slbl">Lectura</div></div>
+  </div>
+
+  <div class="read-badge">📖 Lectura estimada: <strong id="rDetail">Escribe texto para calcular</strong></div>
+
+  <!-- TEXT ACTIONS -->
+  <div class="text-actions">
+    <button class="tact" onclick="tx('upper')">MAYÚSCULAS</button>
+    <button class="tact" onclick="tx('lower')">minúsculas</button>
+    <button class="tact" onclick="tx('title')">Título</button>
+    <button class="tact" onclick="tx('sentence')">Oración</button>
+    <button class="tact" onclick="copyTx()">📋 Copiar</button>
+    <button class="tact" onclick="document.getElementById(\'ta\').value=\'\';analyze()">🗑 Limpiar</button>
+  </div>
+
+  <!-- TEXTAREA -->
+  <div class="card" style="padding:0;overflow:hidden;">
+    <textarea id="ta" class="tool-textarea" placeholder="Escribe o pega tu texto aquí para analizarlo en tiempo real..." style="border:none;border-radius:var(--r);min-height:280px;" oninput="analyze()"></textarea>
+  </div>
+
+  <!-- KEYWORD DENSITY -->
+  <div class="card" style="margin-top:18px;">
+    <div class="card-title">🔑 Densidad de palabras clave (Top 15)</div>
+    <ul class="density-list" id="dl"><li style="color:var(--muted);font-size:13px;padding:12px 0;">Escribe texto para ver el análisis de keywords...</li></ul>
+  </div>
+
+  <div class="ad-slot" style="margin-top:24px;"><strong>Espacio publicitario</strong>Google AdSense 728×90</div>
+</div>
+
+<section class="related-section">
+  <div style="max-width:1200px;margin:0 auto;">
+    <h3 style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px;">Otras herramientas</h3>
+    <p style="font-size:13px;color:var(--muted);">Descubre más herramientas gratuitas de ToolSpark</p>
+  </div>
+  <div class="related-grid" id="relatedGrid"></div>
+</section>
+
+<footer><div class="footer-in">
+  <div class="footer-top">
+    <div class="footer-brand"><div class="fn">Tool<em>Spark</em></div><p>Herramientas gratuitas para PDF e imágenes.</p></div>
+    <div class="footer-col"><h5>Herramientas</h5><ul>
+      <li><a href="comprimir-imagenes.html">Comprimir imágenes</a></li>
+      <li><a href="convertir-imagen.html">Convertir imagen</a></li>
+      <li><a href="recortar-imagen.html">Recortar imagen</a></li>
+      <li><a href="unir-pdf.html">Unir PDF</a></li>
+      <li><a href="dividir-pdf.html">Dividir PDF</a></li>
+      <li><a href="contar-palabras.html">Contador de palabras</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Sitio</h5><ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="index.html#contacto">Contacto</a></li>
+      <li><a href="#">Privacidad</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 ToolSpark</span><a href="index.html">← Volver al inicio</a></div>
+</div></footer>
+
+<script src="shared.js"></script>
+<script>
+initPage('contar-palabras');
+const STOP=new Set(['de','la','el','en','y','a','los','las','del','se','un','una','es','que','con','por','para','al','su','lo','le','me','te','nos','más','pero','como','también','este','esta','muy','ya','si','no','hay','era','son','fue','ser','han','the','is','in','and','of','to','an','or','at','by','for','on','with']);
+
+function analyze(){
+  const txt=document.getElementById('ta').value;
+  const words=txt.trim()?txt.trim().split(/\s+/).filter(w=>w.length>0):[];
+  const sents=txt.trim()?txt.split(/[.!?]+/).filter(s=>s.trim().length>0):[];
+  const paras=txt.trim()?txt.split(/\n\s*\n/).filter(p=>p.trim().length>0):[];
+  const rm=Math.ceil(words.length/200);
+  document.getElementById('sw').textContent=words.length.toLocaleString('es');
+  document.getElementById('sc').textContent=txt.length.toLocaleString('es');
+  document.getElementById('scns').textContent=txt.replace(/\s/g,'').length.toLocaleString('es');
+  document.getElementById('ss').textContent=sents.length.toLocaleString('es');
+  document.getElementById('sp').textContent=paras.length.toLocaleString('es');
+  document.getElementById('sr').textContent=rm?rm+' min':'—';
+  document.getElementById('rDetail').textContent=words.length?`~${rm} min (${words.length} palabras · 200 p/min)`:'Escribe texto para calcular';
+  if(words.length>0){
+    const freq={};
+    words.forEach(w=>{const c=w.toLowerCase().replace(/[^a-záéíóúüñ]/g,'');if(c.length>2&&!STOP.has(c))freq[c]=(freq[c]||0)+1;});
+    const sorted=Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,15);
+    const maxF=sorted[0]?.[1]||1;
+    document.getElementById('dl').innerHTML=sorted.length?sorted.map(([w,n])=>{
+      const pct=(n/words.length*100).toFixed(1);
+      const bw=Math.round(n/maxF*100);
+      return `<li class="di"><span class="dw">${w}</span><div class="db-wrap"><div class="db-fill" style="width:${bw}%"></div></div><span class="dc">${n}× (${pct}%)</span></li>`;
+    }).join(''):'<li style="color:var(--muted);font-size:13px;padding:8px 0;">No hay suficientes palabras significativas.</li>';
+  } else {
+    document.getElementById('dl').innerHTML='<li style="color:var(--muted);font-size:13px;padding:12px 0;">Escribe texto para ver el análisis de keywords...</li>';
+  }
+}
+function tx(t){
+  const ta=document.getElementById('ta');
+  let v=ta.value;
+  if(t==='upper')v=v.toUpperCase();
+  else if(t==='lower')v=v.toLowerCase();
+  else if(t==='title')v=v.toLowerCase().replace(/\b\w/g,c=>c.toUpperCase());
+  else if(t==='sentence')v=v.charAt(0).toUpperCase()+v.slice(1).toLowerCase();
+  ta.value=v;analyze();
+}
+async function copyTx(){
+  try{await navigator.clipboard.writeText(document.getElementById('ta').value);alert('¡Texto copiado!');}
+  catch{document.getElementById('ta').select();document.execCommand('copy');}
+}
+</script>
+</body>
+</html>

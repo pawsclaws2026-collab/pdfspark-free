@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDF a PowerPoint Gratis — ToolSpark</title>
+<meta name="description" content="Convierte páginas de PDF en diapositivas .pptx exportables.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="adminBox"><h6>⚙ Panel Admin</h6>
+  <div class="adm-row"><span>Visitas hoy</span><span class="adm-val" id="adm-today">0</span></div>
+  <div class="adm-row"><span>Total</span><span class="adm-val" id="adm-total">0</span></div>
+  <div class="adm-row"><span>Última visita</span><span class="adm-val" id="adm-last">—</span></div>
+  <div class="adm-row"><span>Mensajes</span><span class="adm-val" id="adm-msgs">0</span></div>
+</div>
+<div class="topbar">⚡ Herramientas <span>100% gratuitas</span> — Sin registro</div>
+<header><nav>
+  <a href="index.html" class="logo"><div class="logo-mark">TS</div><div class="logo-name">Tool<em>Spark</em></div></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Todas</a></li>
+    <li><a href="index.html#imagenes">Imágenes</a></li>
+    <li><a href="index.html#pdf">PDF</a></li>
+    <li><a href="index.html#conversion" class="active">Conversión</a></li>
+    <li><a href="index.html#texto">Texto</a></li>
+    <li><a href="index.html#contacto" class="nav-cta">Contacto</a></li>
+  </ul>
+</nav></header>
+<div class="stripe"></div>
+<section class="tool-hero">
+  <div class="breadcrumb"><a href="index.html">Inicio</a> › <a href="index.html#conversion">Conversión</a> › PDF a PowerPoint</div>
+  <h1>🗂️ PDF a PowerPoint</h1>
+  <p>Convierte páginas de PDF en diapositivas .pptx exportables.</p>
+</section>
+<div class="tool-wrap">
+  <a href="index.html" class="back-link">← Volver a todas las herramientas</a>
+  
+<div style="background:rgba(0,77,152,.06);border:1px solid rgba(0,77,152,.18);border-radius:var(--rs);padding:14px 18px;font-size:13.5px;color:var(--mid);margin-bottom:16px;line-height:1.7;">
+  ℹ️ <strong>Cómo funciona:</strong> Esta herramienta convierte cada página del PDF en una imagen PNG de alta calidad y las empaqueta en un archivo <strong>.pptx</strong> con una diapositiva por página. Ideal para presentar documentos PDF.
+</div>
+<div class="card">
+  <div class="card-title">📁 Selecciona un PDF</div>
+  <div class="upload-zone" id="dropZone"><input type="file" id="fileInput" accept=".pdf,application/pdf">
+    <span class="upload-icon">🗂️</span><h3>Arrastra tu PDF aquí</h3>
+    <p>Cada página se convertirá en una diapositiva .pptx</p>
+  </div>
+</div>
+<div class="card" id="optCard" style="display:none">
+  <div class="card-title">⚙️ Configuración</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+    <div><label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">Calidad de imagen</label>
+      <select id="scale" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--rs);font-family:Inter,sans-serif;font-size:13px;outline:none;background:#fff;">
+        <option value="1">Normal (rápido)</option>
+        <option value="1.5" selected>Alta calidad</option>
+        <option value="2">Máxima calidad</option>
+      </select>
+    </div>
+    <div><label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">Páginas detectadas</label>
+      <div id="pageCount" style="padding:10px;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--rs);font-size:14px;font-weight:700;color:var(--blue);">—</div>
+    </div>
+  </div>
+  <button class="btn btn-blue btn-lg" onclick="convertPDFtoPPT()">🗂️ Convertir a PowerPoint</button>
+</div>
+<div class="progress-wrap" id="pw" style="display:none">
+  <div class="slider-label"><span id="pwLbl">Procesando...</span></div>
+  <div class="progress-bar"><div class="progress-fill" id="pf"></div></div>
+</div>
+<div class="result-box" id="resultBox">
+  <div class="result-success"><div class="result-icon">✅</div>
+    <div class="result-info"><h4>¡PDF convertido a PowerPoint!</h4><p id="rMeta">Descarga iniciada.</p></div>
+  </div>
+</div>
+  <div class="ad-slot" style="margin-top:24px;"><strong>Espacio publicitario</strong>Google AdSense 728×90</div>
+</div>
+<section class="related-section">
+  <div style="max-width:1200px;margin:0 auto;"><h3 style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px;">Herramientas relacionadas</h3>
+  <p style="font-size:13px;color:var(--muted);">Más herramientas de conversión</p></div>
+  <div class="related-grid" id="relatedGrid"></div>
+</section>
+<footer><div class="footer-in">
+  <div class="footer-top">
+    <div class="footer-brand"><div class="fn">Tool<em>Spark</em></div><p>37 herramientas gratuitas.</p></div>
+    <div class="footer-col"><h5>Conversión</h5><ul>
+      <li><a href="word-a-pdf.html">Word a PDF</a></li><li><a href="pdf-a-word.html">PDF a Word</a></li>
+      <li><a href="excel-a-pdf.html">Excel a PDF</a></li><li><a href="pdf-a-excel.html">PDF a Excel</a></li>
+      <li><a href="ppt-a-pdf.html">PowerPoint a PDF</a></li><li><a href="pdf-a-ppt.html">PDF a PowerPoint</a></li>
+      <li><a href="html-a-pdf.html">HTML a PDF</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Sitio</h5><ul>
+      <li><a href="index.html">Inicio</a></li><li><a href="index.html#contacto">Contacto</a></li><li><a href="#">Privacidad</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 ToolSpark</span><a href="index.html">← Inicio</a></div>
+</div></footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="shared.js"></script>
+<script>
+initPage('pdf-a-ppt');
+
+let pdfFile=null;let pdfDoc_=null;
+setupDrop('dropZone','fileInput',fl=>loadPDF(fl[0]));
+async function loadPDF(file){
+  if(!file)return;pdfFile=file;
+  if(typeof pdfjsLib==='undefined'){alert('Cargando librería...');return;}
+  pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  const bytes=await file.arrayBuffer();
+  pdfDoc_=await pdfjsLib.getDocument({data:bytes}).promise;
+  document.getElementById('pageCount').textContent=pdfDoc_.numPages+' páginas';
+  document.getElementById('optCard').style.display='block';
+}
+async function convertPDFtoPPT(){
+  if(!pdfDoc_)return;
+  if(typeof JSZip==='undefined'){alert('Cargando librería ZIP...');return;}
+  const scale=parseFloat(document.getElementById('scale').value)||1.5;
+  const total=pdfDoc_.numPages;
+  document.getElementById('pw').style.display='block';document.getElementById('pf').style.width='5%';
+  const slides=[];
+  for(let i=1;i<=total;i++){
+    document.getElementById('pwLbl').textContent=`Convirtiendo página ${i} de ${total}...`;
+    document.getElementById('pf').style.width=((i/total)*80)+'%';
+    const page=await pdfDoc_.getPage(i);
+    const vp=page.getViewport({scale});
+    const c=document.createElement('canvas');c.width=vp.width;c.height=vp.height;
+    await page.render({canvasContext:c.getContext('2d'),viewport:vp}).promise;
+    const b64=c.toDataURL('image/jpeg',0.88).split(',')[1];
+    slides.push({b64,w:vp.width,h:vp.height});
+    await new Promise(r=>setTimeout(r,30));
+  }
+  document.getElementById('pwLbl').textContent='Generando archivo PowerPoint...';
+  document.getElementById('pf').style.width='90%';
+  // Build .pptx using JSZip
+  const zip=new JSZip();
+  const slideW=9144000,slideH=6858000;// EMU units (widescreen 13.3x10 inches)
+  // [Content_Types].xml
+  const ctypes=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
+<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
+<Default Extension="xml" ContentType="application/xml"/>
+<Default Extension="jpeg" ContentType="image/jpeg"/>
+<Override PartName="/ppt/presentation.xml" ContentType="application/vnd.openxmlformats-officedocument.presentationml.presentation.main+xml"/>
+${slides.map((_,i)=>`<Override PartName="/ppt/slides/slide${i+1}.xml" ContentType="application/vnd.openxmlformats-officedocument.presentationml.slide+xml"/>`).join('')}
+</Types>`;
+  zip.file('[Content_Types].xml',ctypes);
+  zip.file('_rels/.rels',`<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="ppt/presentation.xml"/></Relationships>`);
+  // presentation.xml
+  const presXml=`<?xml version="1.0" encoding="UTF-8"?><p:presentation xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><p:sldSz cx="${slideW}" cy="${slideH}"/><p:sldIdLst>${slides.map((_,i)=>`<p:sldId id="${256+i}" r:id="rId${i+1}"/>`).join('')}</p:sldIdLst></p:presentation>`;
+  zip.file('ppt/presentation.xml',presXml);
+  zip.file('ppt/_rels/presentation.xml.rels',`<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${slides.map((_,i)=>`<Relationship Id="rId${i+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slide" Target="slides/slide${i+1}.xml"/>`).join('')}</Relationships>`);
+  slides.forEach((sl,i)=>{
+    const imgName=`image${i+1}.jpeg`;
+    zip.file(`ppt/media/${imgName}`,sl.b64,{base64:true});
+    const slideXml=`<?xml version="1.0" encoding="UTF-8"?><p:sld xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><p:cSld><p:spTree><p:sp><p:nvSpPr><p:cNvPr id="1" name="Title"/><p:cNvSpPr><a:spLocks noGrp="1"/></p:cNvSpPr><p:nvPr><p:ph type="title"/></p:nvPr></p:nvSpPr><p:spPr/><p:txBody><a:bodyPr/><a:p><a:r><a:t>Diapositiva ${i+1}</a:t></a:r></a:p></p:txBody></p:sp><p:pic><p:nvPicPr><p:cNvPr id="2" name="img${i+1}"/><p:cNvPicPr/><p:nvPr/></p:nvPicPr><p:blipFill><a:blip r:embed="rId1"/><a:stretch><a:fillRect/></a:stretch></p:blipFill><p:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="${slideW}" cy="${slideH}"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></p:spPr></p:pic></p:spTree></p:cSld></p:sld>`;
+    zip.file(`ppt/slides/slide${i+1}.xml`,slideXml);
+    zip.file(`ppt/slides/_rels/slide${i+1}.xml.rels`,`<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="../media/${imgName}"/></Relationships>`);
+  });
+  const blob=await zip.generateAsync({type:'blob',mimeType:'application/vnd.openxmlformats-officedocument.presentationml.presentation'});
+  document.getElementById('pf').style.width='100%';
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download=pdfFile.name.replace('.pdf','.pptx');a.click();
+  document.getElementById('resultBox').classList.add('show');
+  document.getElementById('rMeta').textContent=`${total} diapositivas · ${fmtSize(blob.size)}`;
+  document.getElementById('pw').style.display='none';
+}
+
+</script>
+</body>
+</html>

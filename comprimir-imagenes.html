@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comprimir Imágenes Gratis — ToolSpark</title>
+<meta name="description" content="Comprime imágenes JPG y PNG gratis online. Reduce hasta un 90% sin pérdida de calidad.">
+<link rel="stylesheet" href="style.css">
+<style>
+.results-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-top:16px;}
+.res-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--rs);padding:14px;display:flex;flex-direction:column;gap:8px;}
+.res-thumb{width:100%;height:110px;object-fit:contain;border-radius:6px;background:var(--bg);}
+.res-name{font-size:12px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.res-sizes{font-size:11px;color:var(--muted);}
+.res-saved{color:#15803d;font-weight:700;}
+.res-dl{width:100%;padding:7px;background:var(--blue);color:#fff;border:none;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:background .15s;}
+.res-dl:hover{background:var(--blue-dk);}
+.summary-bar{background:rgba(0,77,152,.06);border:1px solid rgba(0,77,152,.15);border-radius:var(--rs);padding:14px 18px;display:flex;flex-wrap:wrap;gap:20px;font-size:14px;margin-bottom:4px;}
+.summary-bar strong{color:var(--blue);}
+</style>
+</head>
+<body>
+<div id="adminBox"><h6>⚙ Panel Admin</h6>
+  <div class="adm-row"><span>Visitas hoy</span><span class="adm-val" id="adm-today">0</span></div>
+  <div class="adm-row"><span>Total</span><span class="adm-val" id="adm-total">0</span></div>
+  <div class="adm-row"><span>Última visita</span><span class="adm-val" id="adm-last">—</span></div>
+  <div class="adm-row"><span>Mensajes</span><span class="adm-val" id="adm-msgs">0</span></div>
+</div>
+<div class="topbar">⚡ Herramientas <span>100% gratuitas</span> — Sin registro</div>
+<header><nav>
+  <a href="index.html" class="logo"><div class="logo-mark">TS</div><div class="logo-name">Tool<em>Spark</em></div></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Herramientas</a></li>
+    <li><a href="comprimir-imagenes.html" class="active">Comprimir</a></li>
+    <li><a href="convertir-imagen.html">Convertir</a></li>
+    <li><a href="recortar-imagen.html">Recortar</a></li>
+    <li><a href="unir-pdf.html">PDF</a></li>
+    <li><a href="index.html#contacto" class="nav-cta">Contacto</a></li>
+  </ul>
+</nav></header>
+<div class="stripe"></div>
+
+<section class="tool-hero">
+  <div class="breadcrumb"><a href="index.html">Inicio</a> › Comprimir imágenes</div>
+  <h1>🖼️ Comprimir imágenes</h1>
+  <p>Reduce el tamaño de tus JPG, PNG y WebP hasta un 90% sin pérdida visible de calidad</p>
+</section>
+
+<div class="tool-wrap">
+  <a href="index.html" class="back-link">← Volver a todas las herramientas</a>
+
+  <div class="card">
+    <div class="card-title">📁 Selecciona tus imágenes</div>
+    <div class="upload-zone" id="dropZone">
+      <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" multiple>
+      <span class="upload-icon">🖼️</span>
+      <h3>Arrastra tus imágenes aquí</h3>
+      <p>JPG · PNG · WebP — Múltiples archivos permitidos</p>
+    </div>
+  </div>
+
+  <div class="card" id="optCard" style="display:none">
+    <div class="card-title">⚙️ Nivel de compresión</div>
+    <div class="slider-wrap">
+      <div class="slider-label"><span>Calidad de imagen</span><strong id="qLbl">75%</strong></div>
+      <input type="range" id="qSlider" min="10" max="95" value="75" oninput="document.getElementById('qLbl').textContent=this.value+'%'">
+    </div>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:16px;">💡 Recomendado: 60-80% para web. 85-95% para impresión.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="btn btn-blue" onclick="compressAll()">⚡ Comprimir todo</button>
+      <button class="btn btn-ghost" onclick="resetTool()">🗑 Limpiar</button>
+    </div>
+  </div>
+
+  <div class="progress-wrap" id="pw" style="display:none">
+    <div class="slider-label"><span id="pwLabel">Procesando...</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="pf"></div></div>
+  </div>
+
+  <div id="resultArea"></div>
+
+  <div class="ad-slot" style="margin-top:24px;"><strong>Espacio publicitario</strong>Google AdSense 728×90</div>
+</div>
+
+<!-- RELATED TOOLS -->
+<section class="related-section">
+  <div style="max-width:1200px;margin:0 auto;">
+    <h3 style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px;">Otras herramientas</h3>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:0;">Descubre más herramientas gratuitas de ToolSpark</p>
+  </div>
+  <div class="related-grid" id="relatedGrid"></div>
+</section>
+
+<footer><div class="footer-in">
+  <div class="footer-top">
+    <div class="footer-brand"><div class="fn">Tool<em>Spark</em></div><p>Herramientas gratuitas para PDF e imágenes.</p></div>
+    <div class="footer-col"><h5>Herramientas</h5><ul>
+      <li><a href="comprimir-imagenes.html">Comprimir imágenes</a></li>
+      <li><a href="convertir-imagen.html">Convertir imagen</a></li>
+      <li><a href="recortar-imagen.html">Recortar imagen</a></li>
+      <li><a href="unir-pdf.html">Unir PDF</a></li>
+      <li><a href="dividir-pdf.html">Dividir PDF</a></li>
+      <li><a href="contar-palabras.html">Contador de palabras</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Sitio</h5><ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="index.html#contacto">Contacto</a></li>
+      <li><a href="#">Privacidad</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 ToolSpark</span><a href="index.html">← Volver al inicio</a></div>
+</div></footer>
+
+<script src="shared.js"></script>
+<script>
+initPage('comprimir-imagenes');
+let files=[];
+setupDrop('dropZone','fileInput',handleFiles);
+
+function handleFiles(fl){
+  files=[...fl].filter(f=>f.type.startsWith('image/'));
+  if(!files.length)return;
+  document.getElementById('optCard').style.display='block';
+  document.getElementById('resultArea').innerHTML=`<div class="card" style="color:var(--muted);font-size:14px;">📋 <strong>${files.length}</strong> imagen(es) lista(s). Ajusta la calidad y pulsa <strong>Comprimir todo</strong>.</div>`;
+}
+
+async function compressAll(){
+  if(!files.length)return;
+  const quality=parseInt(document.getElementById('qSlider').value)/100;
+  const pw=document.getElementById('pw'); pw.style.display='block';
+  const pf=document.getElementById('pf'); pf.style.width='0%';
+  const results=[];
+  for(let i=0;i<files.length;i++){
+    document.getElementById('pwLabel').textContent=`Procesando ${i+1} de ${files.length}...`;
+    pf.style.width=((i+1)/files.length*100)+'%';
+    const blob=await compressOne(files[i],quality);
+    results.push({file:files[i],blob});
+    await new Promise(r=>setTimeout(r,20));
+  }
+  pw.style.display='none';
+  renderResults(results);
+}
+
+function compressOne(file,quality){
+  return new Promise(resolve=>{
+    const img=new Image(), url=URL.createObjectURL(file);
+    img.onload=()=>{
+      const c=document.createElement('canvas');
+      c.width=img.naturalWidth; c.height=img.naturalHeight;
+      c.getContext('2d').drawImage(img,0,0);
+      URL.revokeObjectURL(url);
+      const mime=file.type==='image/png'?'image/jpeg':file.type;
+      c.toBlob(b=>resolve(b),mime,quality);
+    };
+    img.src=url;
+  });
+}
+
+function renderResults(results){
+  window._results=results;
+  const totalOrig=results.reduce((a,r)=>a+r.file.size,0);
+  const totalComp=results.reduce((a,r)=>a+r.blob.size,0);
+  const pct=Math.round((1-totalComp/totalOrig)*100);
+  let html=`<div class="card">
+    <div class="card-title">✅ Compresión completada</div>
+    <div class="summary-bar">
+      <span>Archivos: <strong>${results.length}</strong></span>
+      <span>Antes: <strong>${fmtSize(totalOrig)}</strong></span>
+      <span>Después: <strong>${fmtSize(totalComp)}</strong></span>
+      <span>Ahorro: <strong style="color:#15803d;">-${pct}%</strong></span>
+    </div>
+    <div class="results-grid">`;
+  results.forEach((r,i)=>{
+    const saved=Math.max(0,Math.round((1-r.blob.size/r.file.size)*100));
+    const ext=r.file.type==='image/png'?'jpg':(r.file.type==='image/webp'?'webp':'jpg');
+    html+=`<div class="res-card">
+      <img class="res-thumb" id="thumb${i}" alt="">
+      <div class="res-name">${r.file.name}</div>
+      <div class="res-sizes">${fmtSize(r.file.size)} → ${fmtSize(r.blob.size)} <span class="res-saved">-${saved}%</span></div>
+      <button class="res-dl" onclick="dlOne(${i})">⬇ Descargar</button>
+    </div>`;
+  });
+  html+=`</div>`;
+  if(results.length>1) html+=`<div style="margin-top:14px;"><button class="btn btn-blue btn-lg" onclick="dlAll()">⬇ Descargar todas las imágenes</button></div>`;
+  html+=`</div><div style="margin-top:12px;"><button class="btn btn-ghost" onclick="resetTool()">🔄 Comprimir más imágenes</button></div>`;
+  document.getElementById('resultArea').innerHTML=html;
+  results.forEach((r,i)=>{const el=document.getElementById('thumb'+i);if(el)el.src=URL.createObjectURL(r.blob);});
+}
+
+function dlOne(i){
+  const r=window._results[i];
+  const ext=r.file.type==='image/webp'?'webp':'jpg';
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(r.blob);
+  a.download=r.file.name.replace(/\.[^.]+$/,'')+'_comprimida.'+ext;
+  a.click();
+}
+function dlAll(){window._results.forEach((_,i)=>setTimeout(()=>dlOne(i),i*400));}
+function resetTool(){
+  files=[];document.getElementById('fileInput').value='';
+  document.getElementById('optCard').style.display='none';
+  document.getElementById('resultArea').innerHTML='';
+  document.getElementById('pw').style.display='none';
+}
+</script>
+</body>
+</html>

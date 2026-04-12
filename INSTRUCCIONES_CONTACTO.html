@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚙️ Configurar formulario de contacto — ToolSpark</title>
+<style>
+  body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 40px 24px; color: #1a1a2e; line-height: 1.7; }
+  h1 { color: #004D98; border-bottom: 3px solid #EDBB00; padding-bottom: 12px; }
+  h2 { color: #004D98; margin-top: 36px; }
+  .step { background: #f0f6ff; border-left: 4px solid #004D98; border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 16px 0; }
+  .step-num { display: inline-block; background: #004D98; color: white; border-radius: 50%; width: 28px; height: 28px; text-align: center; line-height: 28px; font-weight: bold; margin-right: 10px; }
+  code { background: #1a1a2e; color: #EDBB00; padding: 3px 10px; border-radius: 4px; font-family: monospace; font-size: 14px; }
+  .warning { background: rgba(237,187,0,.15); border: 1px solid #EDBB00; border-radius: 8px; padding: 14px 18px; margin: 16px 0; }
+  .success { background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 14px 18px; color: #15803d; margin: 16px 0; }
+  a { color: #004D98; }
+  .code-block { background: #1a1a2e; color: #a5f3fc; padding: 16px 20px; border-radius: 8px; font-family: monospace; font-size: 13px; margin: 12px 0; white-space: pre-wrap; }
+  img { max-width: 100%; border: 1px solid #e5e7eb; border-radius: 8px; margin: 10px 0; }
+</style>
+</head>
+<body>
+
+<h1>⚙️ Cómo activar el formulario de contacto</h1>
+
+<div class="warning">
+  ⚠️ <strong>Este archivo es solo para ti.</strong> No lo subas al servidor — es una guía de configuración. Puedes eliminarlo después de configurar tu formulario.
+</div>
+
+<p>El formulario de contacto usa <strong>Formspree</strong> — un servicio gratuito que envía los mensajes directamente a tu correo electrónico sin necesidad de servidor ni código PHP.</p>
+
+<h2>✅ Plan gratuito de Formspree incluye:</h2>
+<ul>
+  <li>✅ 50 mensajes por mes (suficiente para empezar)</li>
+  <li>✅ Entrega directa a tu correo</li>
+  <li>✅ Protección anti-spam incluida</li>
+  <li>✅ Sin tarjeta de crédito requerida</li>
+</ul>
+
+<h2>📋 Pasos para configurarlo (5 minutos)</h2>
+
+<div class="step">
+  <span class="step-num">1</span>
+  <strong>Crea tu cuenta gratuita en Formspree</strong><br>
+  Ve a <a href="https://formspree.io" target="_blank">https://formspree.io</a> → Haz clic en <strong>"Get Started"</strong> → Regístrate con tu correo.
+</div>
+
+<div class="step">
+  <span class="step-num">2</span>
+  <strong>Crea un nuevo formulario</strong><br>
+  Después de iniciar sesión → Haz clic en <strong>"+ New Form"</strong> → Ponle un nombre como "ToolSpark Contacto" → Confirma tu correo si te lo pide.
+</div>
+
+<div class="step">
+  <span class="step-num">3</span>
+  <strong>Copia tu ID de formulario</strong><br>
+  Formspree te dará un endpoint como:<br>
+  <code>https://formspree.io/f/<strong>xyzabcde</strong></code><br><br>
+  El ID es la parte final: <strong>xyzabcde</strong> (8 caracteres). Cópialo.
+</div>
+
+<div class="step">
+  <span class="step-num">4</span>
+  <strong>Pega tu ID en el archivo shared.js</strong><br>
+  Abre el archivo <code>shared.js</code> con cualquier editor de texto (Bloc de notas, VS Code, etc.)<br><br>
+  Busca esta línea:<br>
+  <div class="code-block">const endpoint=`https://formspree.io/f/${formspreeId||'YOUR_FORM_ID'}`;</div>
+  Y también en <code>index.html</code> busca:<br>
+  <div class="code-block">onclick="enviar('YOUR_FORM_ID')"</div>
+  Reemplaza <strong>YOUR_FORM_ID</strong> por tu ID real. Por ejemplo si tu ID es <code>xyzabcde</code>:<br>
+  <div class="code-block">onclick="enviar('xyzabcde')"</div>
+</div>
+
+<div class="step">
+  <span class="step-num">5</span>
+  <strong>¡Listo! Prueba el formulario</strong><br>
+  Sube el sitio a tu hosting → Ve a la sección Contacto → Envía un mensaje de prueba → Debería llegarte a tu correo en segundos.
+</div>
+
+<h2>🔒 Configuración adicional recomendada en Formspree</h2>
+<ul>
+  <li><strong>Spam protection:</strong> Activa "reCAPTCHA" en la configuración del formulario</li>
+  <li><strong>Notificaciones:</strong> Confirma que el correo de notificación es el correcto</li>
+  <li><strong>Auto-respuesta:</strong> Puedes activar un email automático de confirmación al usuario</li>
+</ul>
+
+<h2>❓ Si necesitas más de 50 mensajes/mes</h2>
+<p>Puedes actualizar al plan de pago de Formspree ($10/mes) o usar alternativas:</p>
+<ul>
+  <li><a href="https://web3forms.com" target="_blank">Web3Forms</a> — 250 mensajes/mes gratis</li>
+  <li><a href="https://getform.io" target="_blank">GetForm</a> — 50 mensajes/mes gratis</li>
+  <li><a href="https://emailjs.com" target="_blank">EmailJS</a> — 200 mensajes/mes gratis</li>
+</ul>
+
+<div class="success">
+  ✅ <strong>¿Ya lo configuraste?</strong> Puedes eliminar este archivo (INSTRUCCIONES_CONTACTO.html) del servidor — es solo para tu referencia.
+</div>
+
+<hr style="margin:30px 0;border-color:#e5e7eb;">
+<p style="font-size:13px;color:#6b7280;">ToolSpark — Guía de configuración · Versión 2025</p>
+</body>
+</html>
