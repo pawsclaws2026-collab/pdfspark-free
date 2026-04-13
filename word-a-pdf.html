@@ -237,7 +237,10 @@ async function convertWordToPDF() {
     document.getElementById('rMeta').textContent = `${pdfDoc.getPageCount()} página(s) — ${fmtSize(blob.size)} — descarga iniciada.`;
   } catch(e) {
     console.error(e);
-    alert('Error al procesar el documento. Asegúrate de que es un archivo .docx válido.');
+    catch(e){
+  console.error(e);
+  alert('ERROR: ' + e.message);
+}
     pw.style.display = 'none';
   }
 }
