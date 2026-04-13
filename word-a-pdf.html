@@ -142,8 +142,18 @@
 <script>
 initPage('word-a-pdf');
 let docxFile = null;
-setupDrop('dropZone','fileInput', fl => { docxFile = fl[0]; if(docxFile) document.getElementById('optCard').style.display='block'; });
+setupDrop('dropZone','fileInput', f1 => { 
+  const file = f1[0];
 
+  if (!file || !file.name.toLowerCase().endsWith('.docx')) {
+    alert('Selecciona un archivo Word válido (.docx)');
+    return;
+  }
+
+  docxFile = file;
+
+  document.getElementById('optCard').style.display='block'; 
+});
 async function convertWordToPDF() {
   if (!docxFile) return;
   if (typeof mammoth === 'undefined' || typeof PDFLib === 'undefined') {
