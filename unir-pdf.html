@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Unir PDF Gratis — ToolSpark</title>
+<title>Unir PDF Gratis — PDFSpark</title>
 <meta name="description" content="Une varios archivos PDF en uno solo gratis, sin registro, de forma segura.">
 <link rel="stylesheet" href="style.css">
 <style>
@@ -30,7 +30,7 @@
 </div>
 <div class="topbar">⚡ Herramientas <span>100% gratuitas</span> — Sin registro</div>
 <header><nav>
-  <a href="index.html" class="logo"><div class="logo-mark">TS</div><div class="logo-name">Tool<em>Spark</em></div></a>
+  <a href="index.html" class="logo"><div class="logo-mark">PS</div><div class="logo-name">PDF<em>Spark</em></div></a>
   <ul class="nav-links">
     <li><a href="index.html">Herramientas</a></li>
     <li><a href="comprimir-imagenes.html">Imágenes</a></li>
@@ -97,14 +97,14 @@
 <section class="related-section">
   <div style="max-width:1200px;margin:0 auto;">
     <h3 style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px;">Otras herramientas</h3>
-    <p style="font-size:13px;color:var(--muted);">Descubre más herramientas gratuitas de ToolSpark</p>
+    <p style="font-size:13px;color:var(--muted);">Descubre más herramientas gratuitas de PDFSpark</p>
   </div>
   <div class="related-grid" id="relatedGrid"></div>
 </section>
 
 <footer><div class="footer-in">
   <div class="footer-top">
-    <div class="footer-brand"><div class="fn">Tool<em>Spark</em></div><p>Herramientas gratuitas para PDF e imágenes.</p></div>
+    <div class="footer-brand"><div class="fn">PDF<em>Spark</em></div><p>Herramientas gratuitas para PDF e imágenes.</p></div>
     <div class="footer-col"><h5>Herramientas</h5><ul>
       <li><a href="comprimir-imagenes.html">Comprimir imágenes</a></li>
       <li><a href="convertir-imagen.html">Convertir imagen</a></li>
@@ -119,7 +119,7 @@
       <li><a href="#">Privacidad</a></li>
     </ul></div>
   </div>
-  <div class="footer-bottom"><span>© 2025 ToolSpark</span><a href="index.html">← Volver al inicio</a></div>
+  <div class="footer-bottom"><span>© 2026 PDFSpark</span><a href="index.html">← Volver al inicio</a></div>
 </div></footer>
 
 <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
@@ -180,7 +180,7 @@ async function mergePDFs(){
     pf.style.width='100%';
     const out=await merged.save();
     const blob=new Blob([out],{type:'application/pdf'});
-    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='toolspark_unido.pdf';a.click();
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='pdfspark_unido.pdf';a.click();
     document.getElementById('resultBox').classList.add('show');
     document.getElementById('rInfo').textContent=`${files.length} archivos · ${merged.getPageCount()} páginas · ${fmtSize(blob.size)}`;
   }catch(err){
