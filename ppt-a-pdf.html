@@ -101,8 +101,8 @@ initPage('ppt-a-pdf');
 let pptFile=null;let slideTexts=[];
 setupDrop('dropZone','fileInput',fl=>loadPPTX(fl[0]));
 async function loadPPTX(file){
-  if (!file || !file.name.toLowerCase().endsWith('.pptx')) {
-  alert('Selecciona un archivo .pptx válido');
+  if (!file || !(file.name.toLowerCase().endsWith('.pptx') || file.name.toLowerCase().endsWith('.ppt'))) {
+  alert('Selecciona un archivo PowerPoint válido (.ppt o .pptx)');
   return;
 }
   pptFile=file;
