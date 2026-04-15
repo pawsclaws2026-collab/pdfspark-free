@@ -141,38 +141,9 @@
   <h2>¿Tienes alguna pregunta?</h2>
   <p>Escríbenos y te responderemos directamente</p>
 <div class="contact-form">
-  <form action="https://formspree.io/f/xzdknqog" method="POST">
-    <input type="hidden" name="_next" value="https://pdf-spark-blush.vercel.app/#contacto">
-    <input type="hidden" name="_captcha" value="false">
-    <input class="cf-input" name="name" type="text" placeholder="Tu nombre" required>
-    
-    <input class="cf-input" name="email" type="email" placeholder="Tu correo electrónico">
-    
-    <textarea class="cf-input cf-textarea" name="message" placeholder="Tu mensaje..." required></textarea>
-    
-    <button type="submit" class="cf-submit">Enviar mensaje</button>
-    
-    document.getElementById("contactForm").addEventListener("submit", async function(e) {
-  e.preventDefault();
-
-  const form = e.target;
-  const data = new FormData(form);
-
-  const response = await fetch(form.action, {
-    method: "POST",
-    body: data,
-    headers: { 'Accept': 'application/json' }
-  });
-
-  if (response.ok) {
-    alert("✅ Mensaje enviado correctamente");
-    form.reset();
-  } else {
-    alert("❌ Error al enviar");
-  }
-});  
-
-  </form>
+  <a href="mailto:youremail@gmail.com" class="cf-submit">
+  Contáctanos por correo
+</a>
 </div>
     <div class="cf-ok" id="cfOk">
       <div style="font-size:18px;margin-bottom:6px;">✓ ¡Mensaje enviado con éxito!</div>
