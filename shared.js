@@ -17,8 +17,6 @@ const TOOLS = [
   { id:'pdf-a-imagenes',      name:'PDF a imágenes',          icon:'🖼️', desc:'Convierte cada página de un PDF en JPG o PNG.',      cat:'pdf',   file:'pdf-a-imagenes.html',       badge:'b-pop',  badgeTxt:'Popular' },
   { id:'proteger-pdf',        name:'Proteger PDF',            icon:'🔒', desc:'Añade contraseña a tu PDF en segundos.',              cat:'pdf',   file:'proteger-pdf.html',         badge:'b-new',  badgeTxt:'Nuevo' },
   { id:'marca-agua-pdf',      name:'Marca de agua en PDF',   icon:'💧', desc:'Añade texto como marca de agua en todas las páginas.',cat:'pdf',   file:'marca-agua-pdf.html',       badge:'b-free', badgeTxt:'Gratis' },
-  { id:'word-a-pdf',          name:'Word a PDF',              icon:'📝', desc:'Convierte documentos .docx a PDF con todo el formato.', cat:'conv', file:'word-a-pdf.html',           badge:'b-hot',  badgeTxt:'Muy usado' },
-  { id:'pdf-a-word',          name:'PDF a Word',              icon:'📄', desc:'Extrae el texto de un PDF en formato editable.',       cat:'conv', file:'pdf-a-word.html',           badge:'b-hot',  badgeTxt:'Muy usado' },
   { id:'excel-a-pdf',         name:'Excel / CSV a PDF',       icon:'📊', desc:'Convierte tablas CSV o Excel a PDF bien maquetado.',   cat:'conv', file:'excel-a-pdf.html',          badge:'b-pop',  badgeTxt:'Popular' },
   { id:'pdf-a-excel',         name:'PDF a Excel / CSV',       icon:'📊', desc:'Extrae tablas de un PDF y descárgalas como CSV.',      cat:'conv', file:'pdf-a-excel.html',          badge:'b-pop',  badgeTxt:'Popular' },
   { id:'ppt-a-pdf',           name:'PowerPoint a PDF',        icon:'🗂️', desc:'Convierte presentaciones .pptx a PDF al instante.',   cat:'conv', file:'ppt-a-pdf.html',            badge:'b-new',  badgeTxt:'Nuevo' },
