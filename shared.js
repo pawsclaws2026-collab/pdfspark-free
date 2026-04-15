@@ -1,4 +1,4 @@
-/* ===== TOOLSPARK shared.js — 37 tools ===== */
+/* ===== TOOLSPARK shared.js — 35 tools ===== */
 
 const TOOLS = [
   { id:'comprimir-imagenes',  name:'Comprimir imágenes',    icon:'🖼️', desc:'Reduce el peso de JPG y PNG hasta un 90%.',            cat:'imagen', file:'comprimir-imagenes.html',   badge:'b-pop',  badgeTxt:'Popular' },
