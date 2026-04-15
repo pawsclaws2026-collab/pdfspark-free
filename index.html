@@ -140,11 +140,12 @@
 <section class="contact-section" id="contacto">
   <h2>¿Tienes alguna pregunta?</h2>
   <p>Escríbenos y te responderemos directamente</p>
-  <div class="contact-form">
-    <input class="cf-input" type="text" id="cName" placeholder="Tu nombre" required>
-    <input class="cf-input" type="email" id="cEmail" placeholder="Tu correo electrónico (opcional)">
-    <textarea class="cf-input cf-textarea" id="cMsg" placeholder="Tu mensaje..."></textarea>
-    <button class="cf-submit" onclick="enviar('YOUR_FORM_ID')">Enviar mensaje →</button>
+  <form class="contact-form" action="https://formspree.io/f/xxxxabcd" method="POST">
+  <input name="name" type="text" placeholder="Tu nombre" required>
+  <input name="email" type="email" placeholder="Tu correo electrónico">
+  <textarea name="message" placeholder="Tu mensaje..." required></textarea>
+  <button type="submit">Enviar mensaje</button>
+</form>
     <div class="cf-ok" id="cfOk">
       <div style="font-size:18px;margin-bottom:6px;">✓ ¡Mensaje enviado con éxito!</div>
       Te responderemos lo antes posible.
