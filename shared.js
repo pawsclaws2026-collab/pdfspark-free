@@ -1,41 +1,14 @@
-/* ===== TOOLSPARK shared.js — 35 tools ===== */
+/* ===== TOOLSPARK shared.js — 8 tools ===== */
 
 const TOOLS = [
   { id:'comprimir-imagenes',  name:'Comprimir imágenes',    icon:'🖼️', desc:'Reduce el peso de JPG y PNG hasta un 90%.',            cat:'imagen', file:'comprimir-imagenes.html',   badge:'b-pop',  badgeTxt:'Popular' },
-  { id:'convertir-imagen',    name:'Convertir imagen',       icon:'🔄', desc:'Convierte entre JPG, PNG y WebP en segundos.',          cat:'imagen', file:'convertir-imagen.html',     badge:'b-new',  badgeTxt:'Nuevo' },
   { id:'recortar-imagen',     name:'Recortar imagen',        icon:'✂️', desc:'Selección visual interactiva con proporciones.',       cat:'imagen', file:'recortar-imagen.html',      badge:'b-free', badgeTxt:'Gratis' },
-  { id:'redimensionar-imagen',name:'Redimensionar imagen',   icon:'📐', desc:'Cambia el tamaño de tus imágenes en píxeles o %.',    cat:'imagen', file:'redimensionar-imagen.html', badge:'b-hot',  badgeTxt:'Útil' },
-  { id:'marca-de-agua',       name:'Añadir marca de agua',  icon:'💧', desc:'Añade texto como marca de agua a tus fotos.',          cat:'imagen', file:'marca-de-agua.html',        badge:'b-new',  badgeTxt:'Nuevo' },
-  { id:'girar-imagen',        name:'Girar y voltear',        icon:'🔃', desc:'Gira imágenes 90°/180° o voltéalas en segundos.',     cat:'imagen', file:'girar-imagen.html',         badge:'b-free', badgeTxt:'Gratis' },
-  { id:'convertir-webp',      name:'Imagen a WebP',          icon:'⚡', desc:'Convierte cualquier imagen al formato WebP moderno.',  cat:'imagen', file:'convertir-webp.html',       badge:'b-new',  badgeTxt:'Nuevo' },
-  { id:'base64-imagen',       name:'Imagen a Base64',        icon:'🔢', desc:'Codifica o decodifica imágenes en Base64.',            cat:'imagen', file:'base64-imagen.html',        badge:'b-free', badgeTxt:'Gratis' },
   { id:'unir-pdf',            name:'Unir PDF',               icon:'📄', desc:'Combina varios PDFs en uno. Arrastra para reordenar.', cat:'pdf',   file:'unir-pdf.html',             badge:'b-pop',  badgeTxt:'Popular' },
   { id:'dividir-pdf',         name:'Dividir PDF',             icon:'📑', desc:'Extrae páginas o divide un PDF en archivos.',         cat:'pdf',   file:'dividir-pdf.html',          badge:'b-free', badgeTxt:'Gratis' },
   { id:'comprimir-pdf',       name:'Comprimir PDF',           icon:'🗜️', desc:'Reduce el tamaño de tus PDFs sin perder calidad.',   cat:'pdf',   file:'comprimir-pdf.html',        badge:'b-pop',  badgeTxt:'Popular' },
-  { id:'rotar-pdf',           name:'Rotar páginas PDF',       icon:'🔄', desc:'Rota las páginas de un PDF a 90°, 180° o 270°.',     cat:'pdf',   file:'rotar-pdf.html',            badge:'b-free', badgeTxt:'Gratis' },
-  { id:'numerar-pdf',         name:'Numerar páginas PDF',     icon:'🔢', desc:'Añade números de página a cualquier PDF.',            cat:'pdf',   file:'numerar-pdf.html',          badge:'b-new',  badgeTxt:'Nuevo' },
-  { id:'pdf-a-imagenes',      name:'PDF a imágenes',          icon:'🖼️', desc:'Convierte cada página de un PDF en JPG o PNG.',      cat:'pdf',   file:'pdf-a-imagenes.html',       badge:'b-pop',  badgeTxt:'Popular' },
-  { id:'proteger-pdf',        name:'Proteger PDF',            icon:'🔒', desc:'Añade contraseña a tu PDF en segundos.',              cat:'pdf',   file:'proteger-pdf.html',         badge:'b-new',  badgeTxt:'Nuevo' },
-  { id:'marca-agua-pdf',      name:'Marca de agua en PDF',   icon:'💧', desc:'Añade texto como marca de agua en todas las páginas.',cat:'pdf',   file:'marca-agua-pdf.html',       badge:'b-free', badgeTxt:'Gratis' },
   { id:'excel-a-pdf',         name:'Excel / CSV a PDF',       icon:'📊', desc:'Convierte tablas CSV o Excel a PDF bien maquetado.',   cat:'conv', file:'excel-a-pdf.html',          badge:'b-pop',  badgeTxt:'Popular' },
-  { id:'pdf-a-excel',         name:'PDF a Excel / CSV',       icon:'📊', desc:'Extrae tablas de un PDF y descárgalas como CSV.',      cat:'conv', file:'pdf-a-excel.html',          badge:'b-pop',  badgeTxt:'Popular' },
-  { id:'ppt-a-pdf',           name:'PowerPoint a PDF',        icon:'🗂️', desc:'Convierte presentaciones .pptx a PDF al instante.',   cat:'conv', file:'ppt-a-pdf.html',            badge:'b-new',  badgeTxt:'Nuevo' },
-  { id:'pdf-a-ppt',           name:'PDF a PowerPoint',        icon:'🗂️', desc:'Convierte páginas PDF en diapositivas exportables.',  cat:'conv', file:'pdf-a-ppt.html',            badge:'b-new',  badgeTxt:'Nuevo' },
-  { id:'html-a-pdf',          name:'HTML a PDF',              icon:'🌐', desc:'Convierte código HTML en un archivo PDF listo.',        cat:'conv', file:'html-a-pdf.html',           badge:'b-hot',  badgeTxt:'Muy usado' },
   { id:'contar-palabras',     name:'Contador de palabras',    icon:'📝', desc:'Palabras, caracteres, párrafos y keywords.',           cat:'texto', file:'contar-palabras.html',      badge:'b-free', badgeTxt:'Gratis' },
-  { id:'cambiar-mayusculas',  name:'Cambiar mayúsculas',      icon:'🔤', desc:'Convierte texto a MAYÚSCULAS, minúsculas o Título.',   cat:'texto', file:'cambiar-mayusculas.html',   badge:'b-free', badgeTxt:'Gratis' },
-  { id:'eliminar-espacios',   name:'Eliminar espacios extra', icon:'⎵',  desc:'Limpia espacios dobles y saltos innecesarios.',        cat:'texto', file:'eliminar-espacios.html',    badge:'b-free', badgeTxt:'Gratis' },
-  { id:'texto-a-slug',        name:'Texto a Slug URL',        icon:'🔗', desc:'Convierte cualquier texto en un slug para URLs SEO.',  cat:'texto', file:'texto-a-slug.html',         badge:'b-new',  badgeTxt:'Nuevo' },
-  { id:'invertir-texto',      name:'Invertir texto',          icon:'↩️', desc:'Invierte el orden de los caracteres de tu texto.',     cat:'texto', file:'invertir-texto.html',       badge:'b-free', badgeTxt:'Gratis' },
-  { id:'lorem-ipsum',         name:'Generador Lorem Ipsum',  icon:'📖', desc:'Genera texto de relleno Lorem Ipsum al instante.',     cat:'texto', file:'lorem-ipsum.html',          badge:'b-new',  badgeTxt:'Nuevo' },
-  { id:'json-formateador',    name:'Formateador JSON',        icon:'{}', desc:'Formatea, valida y embellece código JSON.',            cat:'util',  file:'json-formateador.html',     badge:'b-new',  badgeTxt:'Nuevo' },
-  { id:'color-picker',        name:'Selector de color',       icon:'🎨', desc:'Elige colores y obtén HEX, RGB y HSL.',                cat:'util',  file:'color-picker.html',         badge:'b-pop',  badgeTxt:'Popular' },
   { id:'generador-qr',        name:'Generador de QR',         icon:'📱', desc:'Crea códigos QR para cualquier URL o texto.',          cat:'util',  file:'generador-qr.html',         badge:'b-hot',  badgeTxt:'Útil' },
-  { id:'conversor-unidades',  name:'Conversor de unidades',   icon:'📏', desc:'Convierte longitud, peso, temperatura y más.',         cat:'util',  file:'conversor-unidades.html',   badge:'b-free', badgeTxt:'Gratis' },
-  { id:'calculadora-imc',     name:'Calculadora de IMC',      icon:'⚖️', desc:'Calcula tu índice de masa corporal al instante.',      cat:'util',  file:'calculadora-imc.html',      badge:'b-free', badgeTxt:'Gratis' },
-  { id:'generador-contrasena',name:'Generador de contraseña', icon:'🔑', desc:'Genera contraseñas seguras y aleatorias.',             cat:'util',  file:'generador-contrasena.html', badge:'b-hot',  badgeTxt:'Útil' },
-  { id:'codificador-url',     name:'Codificador URL',         icon:'🌐', desc:'Codifica y decodifica URLs y parámetros.',              cat:'util',  file:'codificador-url.html',      badge:'b-free', badgeTxt:'Gratis' },
-  { id:'temporizador',        name:'Temporizador online',     icon:'⏱️', desc:'Cronómetro y cuenta atrás en el navegador.',           cat:'util',  file:'temporizador.html',         badge:'b-free', badgeTxt:'Gratis' },
 ];
 
 function initPage(currentId) {
