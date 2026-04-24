@@ -264,3 +264,27 @@ footer{background:var(--text);padding:36px 24px 20px;}
 @media(max-width:768px){.nav-links{display:none;}.tools-grid{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:400px){.tools-grid{grid-template-columns:1fr;}}
 @media(max-width:480px){.footer-top{flex-direction:column;gap:20px;}}
+
+.preview-item {
+  position: relative;
+}
+
+.preview-item img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.remove-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+}

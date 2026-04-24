@@ -1,4 +1,4 @@
-/* ===== TOOLSPARK shared.js — 8 tools ===== */
+/* ===== TOOLSPARK shared.js — 9 tools ===== */
 
 const TOOLS = [
   { id:'comprimir-imagenes',  name:'Comprimir imágenes',    icon:'🖼️', desc:'Reduce el peso de JPG y PNG hasta un 90%.',            cat:'imagen', file:'comprimir-imagenes.html',   badge:'b-pop',  badgeTxt:'Popular' },
@@ -9,6 +9,7 @@ const TOOLS = [
   { id:'excel-a-pdf',         name:'Excel / CSV a PDF',       icon:'📊', desc:'Convierte tablas CSV o Excel a PDF bien maquetado.',   cat:'conv', file:'excel-a-pdf.html',          badge:'b-pop',  badgeTxt:'Popular' },
   { id:'contar-palabras',     name:'Contador de palabras',    icon:'📝', desc:'Palabras, caracteres, párrafos y keywords.',           cat:'texto', file:'contar-palabras.html',      badge:'b-free', badgeTxt:'Gratis' },
   { id:'generador-qr',        name:'Generador de QR',         icon:'📱', desc:'Crea códigos QR para cualquier URL o texto.',          cat:'util',  file:'generador-qr.html',         badge:'b-hot',  badgeTxt:'Útil' },
+   { id:'jpg-a-pdf', name:'JPG a PDF',                                         icon:'🖼️', desc:'Convierte imágenes JPG o PNG a PDF fácilmente.', cat:'conv', file:'jpg-a-pdf.html', badge:'b-pop', badgeTxt:'Popular' },
 ];
 
 function initPage(currentId) {
